@@ -1,0 +1,5 @@
+# Normalise line endings so Windows checkouts don't show every file as changed
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.htm text eol=lf

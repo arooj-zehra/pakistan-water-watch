@@ -1,0 +1,24 @@
+# Pipeline (Phases 0-1)
+requests>=2.31
+beautifulsoup4>=4.12
+lxml>=5.0
+pydantic>=2.6
+SQLAlchemy>=2.0
+psycopg[binary]>=3.1
+python-dotenv>=1.0
+pandas>=2.1
+
+# Notebooks / reports
+matplotlib>=3.8
+nbformat>=5.9
+jupyter
+
+# Tests
+pytest>=8.0
+
+# Phase 2+ (uncomment when you get there)
+# fastapi>=0.110
+# uvicorn[standard]>=0.29
+# lightgbm>=4.3
+# shap>=0.45
+# mapie>=0.8

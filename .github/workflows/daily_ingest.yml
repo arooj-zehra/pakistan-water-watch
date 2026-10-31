@@ -1,0 +1,65 @@
+name: daily_ingest
+
+# 05:00 UTC = 10:00 PKT, after WAPDA's morning release is out.
+on:
+  schedule:
+    - cron: "0 5 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write   # commit raw snapshots back to the repo (audit trail)
+  issues: write     # open an issue when a parser breaks
+
+concurrency:
+  group: daily_ingest
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    env:
+      # Settings > Secrets and variables > Actions. Without DATABASE_URL the job
+      # runs against a throwaway SQLite file, which is only useful as a smoke test.
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      PRESS_RELEASE_URL: ${{ vars.PRESS_RELEASE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: Run daily pipeline
+        id: run
+        shell: bash  # explicit bash enables pipefail, so tee doesn't hide a failure
+        run: python -m pipeline.daily 2>&1 | tee ingest.log
+
+      - name: Commit raw snapshots
+        if: always()
+        run: |
+          git config user.name "pww-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/raw || true
+          git diff --cached --quiet || git commit -m "data: raw snapshots $(date -u +%F)"
+          git push || echo "nothing to push"
+
+      - name: Open an issue on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const log = fs.existsSync('ingest.log') ? fs.readFileSync('ingest.log', 'utf8').slice(-6000) : '(no log)';
+            const title = `Daily ingest failed ${new Date().toISOString().slice(0, 10)}`;
+            const open = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo, state: 'open', labels: 'ingest-failure'
+            });
+            if (open.data.some(i => i.title === title)) return;
+            await github.rest.issues.create({
+              owner: context.repo.owner, repo: context.repo.repo, title,
+              labels: ['ingest-failure'],
+              body: `The daily pipeline failed. A source format may have changed.\n\n` +
+                    `Run: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}\n\n` +
+                    '```\n' + log + '\n```'
+            });

@@ -1,0 +1,2 @@
+SYNTHETIC FIXTURE - storage given in acre-feet. Replace with real releases (real_*.txt).
+WAPDA releases report on water situation. River flows: Indus at Tarbela inflow 63,000 cusecs, outflow 52,100 cusecs. Jhelum at Mangla inflow 48,700 cusecs, outflow 32,000 cusecs. Indus at Chashma inflow 76,500 cusecs. Reservoirs: Tarbela: 1,432.04 feet, 560,000 acre-feet; Mangla: 1,132.70 feet, 1,095,000 acre-feet; Chashma: 643.80 feet, 107,000 acre-feet.
