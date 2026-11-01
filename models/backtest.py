@@ -212,6 +212,17 @@ def model_card(summary: dict, meta: dict, data_through: str, path: Path):
          "## What it forecasts", "",
          "Daily mean inflow (cusecs, 24 hours to 06:00 PKT) at Tarbela (Indus) and Mangla (Jhelum), "
          f"{', '.join(map(str, hs))} days ahead, with calibrated 50%, 80% and 90% intervals.", "",
+         "## Intended use", "",
+         "- **For:** a public, independent view of where inflows are likely heading over the next ten days, with honest "
+         "uncertainty; research and teaching about forecasting snow- and glacier-fed rivers; a worked example of "
+         "prospective, tamper-evident forecast evaluation.",
+         "- **Not for:** operational reservoir management, flood warning or any safety decision. Use WAPDA, IRSA and the "
+         "PMD Flood Forecasting Division. The model forecasts inflow only, not levels or releases.",
+         "- **Users should know:** the ranges are calibrated on past years; in conditions unlike any training year they "
+         "can be too narrow (the drift monitor flags such periods on the Accuracy page).", "",
+         "## Data", "",
+         "Daily history rebuilt from news reports of the WAPDA/IRSA release, 2015 to today, with gaps; see the "
+         "[data card](DATA_CARD.md). Weather: Open-Meteo ERA5 at 10 points in the upper Indus and Jhelum basins.", "",
          "## Model", "",
          "- LightGBM quantile regression, one set of models per horizon, both dams pooled (a station feature).",
          "- Target: log(inflow on the target day) minus log(inflow today), so predicting zero is the persistence forecast.",
@@ -263,17 +274,52 @@ def model_card(summary: dict, meta: dict, data_through: str, path: Path):
     for h in (hs[0], hs[-1]):
         top = list(meta["importance"][str(h)].items())[:6]
         L.append(f"- **{h} day{'s' if h > 1 else ''}:** " + ", ".join(f"`{k}`" for k, _ in top))
-    L += ["", "## Limitations", "",
+    L += ["", "## Live evaluation and versioning", "",
+          "- Every live forecast is stored once in a database table that rejects edits and deletions, and appended to "
+          "[`data/forecasts/issued.csv`](../data/forecasts/issued.csv), whose git history timestamps it.",
+          "- Forecasts are scored automatically when their day's figures are published, against the reported value and "
+          "against persistence; results are on the [Accuracy page](https://pakistan-water-watch.vercel.app/accuracy).",
+          "- Alerts open a GitHub issue if the 90% intervals catch under 75% of outcomes, the model does worse than "
+          "persistence over 60 days, or recent inputs are far more unusual than the same season in any training year.",
+          "- A candidate model is retrained monthly and replaces this one only if it beats persistence at 3+ days, keeps "
+          "holdout 90% coverage within 80-97%, and is not more than 2 points of skill worse; decisions are logged in "
+          "`models/results/retrain_log.json`. Each version's files and metadata are kept in `models/artifacts/`.", "",
+          "## Limitations", "",
           "- History is rebuilt from news stories: 2024 Q1, February 2025, October to December 2025, and Tarbela "
-          "from February to July 2022 are missing (see docs/data_inventory.md).",
+          "from February to July 2022 are missing (see the [data card](DATA_CARD.md)).",
           "- ERA5 runs about 5 days behind real time. Live forecasts fill the newest days from Open-Meteo's forecast API, "
           "bias-corrected against ERA5 over the last 60 days; the backtest used ERA5 only, so live skill may be a little lower.",
           "- Weather comes from 10 grid points (~25 km), not from stations on the glaciers.",
           "- Outflow decisions (dam operations) are not modelled; inflow is a natural flow and is not affected by them.",
-          "- On the 2026 holdout the 50% intervals held 42-53% of outcomes: slightly narrow at some horizons.",
+          f"- On the {HOLDOUT_YEAR} holdout the 50% intervals held {cov50_range(live)} of outcomes; the 50% and 80% "
+          "intervals were calibrated the same way as the 90% ones but are less stable with a year of calibration data.",
+          "- Training spans about eight usable years; floods or droughts beyond that range may be badly under-forecast, "
+          "and the intervals would not know it.",
+          "- Glacier melt in the upper Indus is changing over time; monthly retraining limits but does not remove the "
+          "risk that the past is a poor guide.",
           "- Prospective scoring of live forecasts starts in November 2026, in the low-flow season; the melt season from "
-          "April onward is the real test.", ""]
+          "April onward is the real test.", "",
+          "## Responsible use", "",
+          "This is an independent student project, not an official forecast. It publishes its full track record, "
+          "including misses, so its reliability can be judged rather than assumed. Report problems on "
+          "[GitHub](https://github.com/arooj-zehra/pakistan-water-watch/issues).", ""]
     path.write_text("\n".join(L), encoding="utf-8")
+
+
+def cov50_range(live: dict) -> str:
+    vals = [d["holdout"]["coverage50"] for d in live.values() if d.get("holdout")]
+    return f"{min(vals) * 100:.0f}-{max(vals) * 100:.0f}%" if vals else "–"
+
+
+def regenerate_card(root: Path = ROOT) -> Path:
+    """Rebuild docs/MODEL_CARD.md from the saved results and production meta (no retraining)."""
+    res = json.loads((root / "models" / "results" / "backtest_summary.json").read_text(encoding="utf-8"))
+    summary = {v: {int(h): d for h, d in hs.items()} for v, hs in res["summary"].items()}
+    version = (root / "models" / "artifacts" / "LATEST").read_text().strip()
+    meta = json.loads((root / "models" / "artifacts" / version / "meta.json").read_text(encoding="utf-8"))
+    path = root / "docs" / "MODEL_CARD.md"
+    model_card(summary, meta, res["data_through"], path)
+    return path
 
 
 def main(argv=None) -> int:
@@ -283,7 +329,11 @@ def main(argv=None) -> int:
     ap.add_argument("--root", type=Path, default=ROOT, help="where results/, artifacts/ and docs/ are written")
     ap.add_argument("--quick", action="store_true", help="horizons 1 and 5, no oracle variant")
     ap.add_argument("--no-production", action="store_true")
+    ap.add_argument("--card-only", action="store_true", help="rebuild docs/MODEL_CARD.md from saved results")
     args = ap.parse_args(argv)
+    if args.card_only:
+        print(f"Wrote {regenerate_card(args.root)}")
+        return 0
 
     results_dir = args.root / "models" / "results"
     artifacts_dir = args.root / "models" / "artifacts"
