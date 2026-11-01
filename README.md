@@ -10,7 +10,6 @@
 
 **→ [pakistan-water-watch.vercel.app](https://pakistan-water-watch.vercel.app)**
 
-![A tour of the site: today's levels, this year against the usual range, the 10-day forecast, live accuracy, and the data review queue](docs/img/tour.gif)
 
 ## Results at a glance
 
