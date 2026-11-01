@@ -1,0 +1,13 @@
+[
+ {
+  "at": "2026-11-01T18:03:27+00:00",
+  "candidate": "v20261030",
+  "current": "v20261030",
+  "promoted": false,
+  "reasons": [
+   "no new data since v20261030"
+  ],
+  "candidate_mean_skill": 0.19883331408055274,
+  "current_mean_skill": 0.19883331408055277
+ }
+]
