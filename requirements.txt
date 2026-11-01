@@ -14,9 +14,12 @@ matplotlib>=3.8
 # Tests
 pytest>=8.0
 
-# Phase 2+ (uncomment when you get there)
-# fastapi>=0.110
-# uvicorn[standard]>=0.29
+# API (Phase 2)
+fastapi>=0.110
+uvicorn[standard]>=0.29
+httpx>=0.27
+
+# Phase 3+ (uncomment when you get there)
 # lightgbm>=4.3
 # shap>=0.45
 # mapie>=0.8

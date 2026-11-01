@@ -85,7 +85,9 @@ Probed 203 months, 2010-01 to 2026-11. Sheets found: 4; missing or failed: 199.
 
 ### All sources in the database (auto-generated)
 
-**NO-GO (all sources, gaps <= 3 days filled): 2 complete year(s) with <10% missing for both dams (need 5). Longest consecutive run: 2021-2021 (1 yrs).**
+**GO (revised gate): backtest years under 10% missing: 2021, 2023 (need 2); training years with 75%+ present: 2020, 2021, 2023, 2024, 2025 (need 5).**
+
+Original gate (5 years under 10% missing), for reference: NO-GO (all sources, gaps <= 3 days filled): 2 complete year(s) with <10% missing for both dams (need 5). Longest consecutive run: 2021-2021 (1 yrs).
 
 As recorded, without filling: NO-GO (all sources, as recorded): 0 complete year(s) with <10% missing for both dams (need 5). Longest consecutive run: none.
 

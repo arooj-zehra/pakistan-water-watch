@@ -29,11 +29,22 @@ def test_db_report_verdict_with_and_without_filling(engine, tmp_path, monkeypatc
     skip = {i for i in range(n) if i % 10 in (4, 5)}
     for sid in ("tarbela", "mangla"):
         _load(engine, sid, n, skip=skip)
-    section, v_raw, v_fill = cr.db_report(engine)
+    section, v_raw, v_fill, v_rev = cr.db_report(engine)
     assert not v_raw.passed and v_raw.good_years == []
     assert v_fill.passed and v_fill.good_years == [2021, 2022, 2023, 2024, 2025]
     assert "| app |" in section and "2021" in section
     assert (tmp_path / "db.png").exists()
+    assert v_rev.passed and "GO (revised gate)" in section
+
+
+def test_revised_gate_needs_both_parts():
+    import pandas as pd
+    def years(missing):  # {year: worst_missing}
+        return pd.DataFrame({"months_probed": 12, "worst_missing": list(missing.values())}, index=list(missing))
+    ok = cr.revised_verdict(years({2020: 0.21, 2021: 0.08, 2022: 0.43, 2023: 0.04, 2024: 0.25, 2025: 0.25}))
+    assert ok.passed and ok.good_years == [2021, 2023] and ok.best_run == [2020, 2021, 2023, 2024, 2025]
+    assert not cr.revised_verdict(years({2021: 0.08, 2023: 0.04, 2024: 0.25})).passed      # too few training years
+    assert not cr.revised_verdict(years({y: 0.2 for y in range(2019, 2026)})).passed       # no backtest years
 
 
 def test_db_report_empty(engine):

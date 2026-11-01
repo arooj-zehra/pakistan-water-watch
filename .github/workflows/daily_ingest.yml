@@ -35,14 +35,21 @@ jobs:
         shell: bash  # explicit bash enables pipefail, so tee doesn't hide a failure
         run: python -m pipeline.daily 2>&1 | tee ingest.log
 
-      - name: Commit raw snapshots
+      # Only with the real database: a run without the secret uses an empty
+      # throwaway SQLite file, and must not overwrite the website's data.
+      - name: Export the website's data files
+        if: always() && env.DATABASE_URL != ''
+        run: python -m pipeline.export_static
+
+      - name: Commit raw snapshots and website data
         if: always()
         run: |
           git config user.name "pww-bot"
           git config user.email "actions@users.noreply.github.com"
           git add data/raw || true
           git add data/inventory/news || true
-          git diff --cached --quiet || git commit -m "data: raw snapshots $(date -u +%F)"
+          git add web/public/data || true
+          git diff --cached --quiet || git commit -m "data: daily update $(date -u +%F)"
           git push || echo "nothing to push"
 
       - name: Open an issue on failure

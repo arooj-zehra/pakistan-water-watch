@@ -136,3 +136,23 @@ def test_fetch_batches():
 
     out = wp.fetch(get, "https://e", list(range(230)))
     assert sizes == [100, 100, 30] and out[0]["content"] == "c"
+
+
+def test_derive_dead_levels_ignores_one_off_typos():
+    from datetime import timedelta
+    start = date(2021, 1, 1)
+    rows = [{"station_id": "tarbela", "date": start + timedelta(days=i), "dead_level_ft": 1398.0} for i in range(10)]
+    rows += [{"station_id": "tarbela", "date": start + timedelta(days=10), "dead_level_ft": 1428.27}]  # typo
+    rows += [{"station_id": "tarbela", "date": start + timedelta(days=11 + i), "dead_level_ft": 1402.0} for i in range(6)]
+    rows += [{"station_id": "tarbela", "date": start + timedelta(days=20 + i), "dead_level_ft": 1398.0} for i in range(6)]  # stale template
+    rows += [{"station_id": "mangla", "date": start, "dead_level_ft": None}]
+    levels = bn.derive_dead_levels(rows)
+    assert [(lv["level_ft"], lv["valid_from"]) for lv in levels] == [(1398.0, start), (1402.0, start + timedelta(days=11))]
+
+
+def test_load_dead_levels_replaces_seed(engine):
+    with engine.begin() as c:
+        bn.load_dead_levels(c, [{"station_id": "tarbela", "valid_from": date(2022, 3, 1), "level_ft": 1398.0, "source": "news"}])
+        assert db.dead_level_on(c, "tarbela", date(2026, 1, 1)) == 1398.0   # seed 1402 from 2024 removed
+        assert db.dead_level_on(c, "tarbela", date(2020, 1, 1)) is None
+        assert db.dead_level_on(c, "mangla", date(2026, 1, 1)) == 1050.0    # other dam untouched

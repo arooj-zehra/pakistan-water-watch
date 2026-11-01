@@ -149,10 +149,31 @@ def db_monthly(daily: pd.DataFrame, fill: bool, today=None) -> pd.DataFrame:
     return out
 
 
+# Revised gate (plan revision of 1 Nov 2026), scored after filling gaps of up to 3 days:
+# at least 2 complete years under 10% missing (backtest years) and at least
+# 5 complete years with 75% or more of days present (training history).
+REVISED_BACKTEST_YEARS, REVISED_BACKTEST_MAX_MISSING = 2, 0.10
+REVISED_TRAINING_YEARS, REVISED_TRAINING_MAX_MISSING = 5, 0.25
+
+
+def revised_verdict(filled_y: pd.DataFrame) -> Verdict:
+    full = filled_y[filled_y["months_probed"] == 12]
+    backtest = [int(y) for y in full.index[full["worst_missing"] < REVISED_BACKTEST_MAX_MISSING]]
+    training = [int(y) for y in full.index[full["worst_missing"] <= REVISED_TRAINING_MAX_MISSING]]
+    passed = len(backtest) >= REVISED_BACKTEST_YEARS and len(training) >= REVISED_TRAINING_YEARS
+    s = (f"{'GO' if passed else 'NO-GO'} (revised gate): backtest years under 10% missing: "
+         f"{', '.join(map(str, backtest)) or 'none'} (need {REVISED_BACKTEST_YEARS}); "
+         f"training years with 75%+ present: {', '.join(map(str, training)) or 'none'} "
+         f"(need {REVISED_TRAINING_YEARS}).")
+    return Verdict(passed, backtest, training, s)
+
+
 def render_db_section(daily: pd.DataFrame, raw_y, filled_y, v_raw: Verdict, v_fill: Verdict) -> str:
     by_src = daily.groupby("source")["date"].agg(["count", "min", "max"])
     lines = ["", "### All sources in the database (auto-generated)", "",
-             f"**{v_fill.summary}**", "", f"As recorded, without filling: {v_raw.summary}", "",
+             f"**{revised_verdict(filled_y).summary}**", "",
+             f"Original gate (5 years under 10% missing), for reference: {v_fill.summary}", "",
+             f"As recorded, without filling: {v_raw.summary}", "",
              "| Source | Dam-days with inflow | First | Last |", "| --- | --- | --- | --- |"]
     for src, r in by_src.iterrows():
         lines.append(f"| {src} | {r['count']} | {r['min']:%Y-%m-%d} | {r['max']:%Y-%m-%d} |")
@@ -248,7 +269,7 @@ def db_report(engine=None):
     plot_heatmap(fill_m, DB_HEATMAP_PNG,
                  title=f"All sources: share of days with no inflow after filling gaps of "
                        f"<= {MAX_FILL_GAP_DAYS} days")
-    return render_db_section(daily, raw_y, fill_y, v_raw, v_fill), v_raw, v_fill
+    return render_db_section(daily, raw_y, fill_y, v_raw, v_fill), v_raw, v_fill, revised_verdict(fill_y)
 
 
 def main() -> int:
@@ -265,10 +286,11 @@ def main() -> int:
     if dbr:
         print(dbr[1].summary)
         print(dbr[2].summary)
+        print(dbr[3].summary)
     else:
         print("Database is empty: run python -m pipeline.backfill / backfill_app for the all-sources verdict.")
     print(f"Updated {INVENTORY_MD}")
-    passed = v.passed or (dbr is not None and dbr[2].passed)
+    passed = v.passed or (dbr is not None and (dbr[2].passed or dbr[3].passed))
     return 0 if passed else 2
 
 

@@ -1,0 +1,162 @@
+/* Pakistan Water Watch: colours from the rivers themselves.
+   Glacial teal = melt-fed water, silt khaki = dead storage (sediment), gauge red = warnings only. */
+:root {
+  --ink: #1c2b33;
+  --ink-soft: #4d5e66;
+  --paper: #f2f5f4;
+  --paper-raised: #ffffff;
+  --rule: #d3dbd8;
+  --water: #3e8e98;
+  --water-soft: rgba(62, 142, 152, 0.16);
+  --silt: #b5a27f;
+  --silt-soft: rgba(181, 162, 127, 0.28);
+  --gauge-red: #c2412d;
+  --focus: #1f6f7a;
+
+  --display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --body: 'Atkinson Hyperlegible', system-ui, sans-serif;
+
+  --step--1: 0.875rem;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-2: 1.6rem;
+  --step-3: 2.4rem;
+  --step-4: 3.4rem;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #e3eae8;
+    --ink-soft: #9fb0b5;
+    --paper: #0f1a20;
+    --paper-raised: #16242b;
+    --rule: #2a3b43;
+    --water: #6fbfc8;
+    --water-soft: rgba(111, 191, 200, 0.18);
+    --silt: #9c8b6b;
+    --silt-soft: rgba(156, 139, 107, 0.3);
+    --gauge-red: #ef7a62;
+    --focus: #8fd3db;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: var(--step-0);
+  line-height: 1.55;
+}
+a { color: var(--water); text-underline-offset: 0.18em; }
+a:hover { color: var(--ink); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 2px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.1; margin: 0; letter-spacing: 0.005em; }
+p { margin: 0 0 0.9em; max-width: 68ch; }
+
+.shell { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+
+/* Header: name and the five places, nothing else */
+.masthead { border-bottom: 1px solid var(--rule); background: var(--paper); }
+.masthead .shell { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 28px; padding-top: 18px; padding-bottom: 0; }
+.brand { font-family: var(--display); font-size: var(--step-2); font-weight: 600; color: var(--ink); text-decoration: none; margin-right: auto; }
+.nav { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 16px; width: calc(100% + 32px); }
+.nav::-webkit-scrollbar { display: none; }
+.nav a {
+  font-family: var(--display); font-size: var(--step-1); font-weight: 500;
+  color: var(--ink-soft); text-decoration: none; padding: 10px 12px 12px;
+  border-bottom: 3px solid transparent; white-space: nowrap;
+}
+.nav a:hover { color: var(--ink); }
+.nav a.active { color: var(--ink); border-bottom-color: var(--water); }
+@media (min-width: 760px) {
+  .nav { width: auto; margin: 0; padding: 0; }
+}
+
+main { padding: 28px 0 56px; }
+.page-title { font-size: var(--step-3); margin-bottom: 6px; }
+.lede { color: var(--ink-soft); font-size: var(--step-1); margin-bottom: 28px; }
+.updated { font-size: var(--step--1); color: var(--ink-soft); }
+
+/* Today: two dams side by side, a rule between them, no boxes */
+.dams { display: grid; gap: 40px; }
+@media (min-width: 900px) {
+  .dams { grid-template-columns: 1fr 1fr; gap: 0; }
+  .dam + .dam { border-left: 1px solid var(--rule); padding-left: 40px; }
+  .dam:first-child { padding-right: 40px; }
+}
+.dam-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.dam-head h2 { font-size: var(--step-3); }
+.river { color: var(--ink-soft); font-size: var(--step--1); }
+.dam-body { display: grid; grid-template-columns: 112px 1fr; gap: 20px; align-items: start; }
+.level-figure { font-family: var(--display); font-size: var(--step-4); font-weight: 600; line-height: 0.95; font-variant-numeric: tabular-nums; }
+.level-figure small { font-size: var(--step-1); font-weight: 500; color: var(--ink-soft); margin-left: 4px; }
+.level-sub { color: var(--ink-soft); margin: 6px 0 18px; }
+.readings { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px; margin: 0; }
+.readings dt { font-size: var(--step--1); color: var(--ink-soft); }
+.readings dd { margin: 0; font-family: var(--display); font-size: var(--step-2); font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.readings dd small { font-family: var(--body); font-size: var(--step--1); font-weight: 400; color: var(--ink-soft); margin-left: 3px; }
+.delta { display: block; font-family: var(--body); font-size: var(--step--1); font-weight: 400; color: var(--ink-soft); margin-top: 2px; }
+.delta-up::before { content: '▲ '; font-size: 0.7em; }
+.delta-down::before { content: '▼ '; font-size: 0.7em; }
+.dam-foot { margin-top: 18px; font-size: var(--step--1); color: var(--ink-soft); }
+.spark-label { font-size: var(--step--1); color: var(--ink-soft); margin: 22px 0 4px; }
+
+.warning {
+  border-left: 4px solid var(--gauge-red); padding: 8px 12px; margin: 0 0 16px;
+  background: color-mix(in srgb, var(--gauge-red) 9%, transparent); color: var(--ink);
+}
+.notice { border-left: 4px solid var(--silt); padding: 8px 12px; margin: 0 0 16px; background: var(--silt-soft); }
+
+/* Controls */
+.controls { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: end; margin: 0 0 18px; }
+.field { display: grid; gap: 4px; font-size: var(--step--1); color: var(--ink-soft); }
+select, input[type='date'], button {
+  font: inherit; font-size: var(--step-0); color: var(--ink); background: var(--paper-raised);
+  border: 1px solid var(--rule); border-radius: 6px; padding: 7px 10px; min-height: 40px;
+}
+.segmented { display: inline-flex; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+.segmented button { border: 0; border-radius: 0; background: transparent; color: var(--ink-soft); padding: 7px 14px; cursor: pointer; }
+.segmented button + button { border-left: 1px solid var(--rule); }
+.segmented button[aria-pressed='true'] { background: var(--water); color: var(--paper); }
+.button-primary { background: var(--water); color: var(--paper); border-color: var(--water); cursor: pointer; font-weight: 700; }
+.button-primary:hover { filter: brightness(1.08); }
+.button-quiet { cursor: pointer; }
+
+.chart-wrap { width: 100%; height: 360px; }
+.chart-note { font-size: var(--step--1); color: var(--ink-soft); margin-top: 8px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: var(--step--1); color: var(--ink-soft); margin: 4px 0 10px; padding: 0; list-style: none; }
+.legend span { display: inline-block; width: 22px; height: 10px; margin-right: 6px; vertical-align: middle; border-radius: 2px; }
+
+/* Tables */
+.table-scroll { overflow-x: auto; border-top: 1px solid var(--rule); }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th, td { padding: 8px 10px; text-align: right; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+th:first-child, td:first-child, th.text, td.text { text-align: left; }
+th { font-size: var(--step--1); color: var(--ink-soft); font-weight: 700; }
+tbody tr:hover { background: var(--water-soft); }
+
+/* Prose pages */
+.prose h2 { font-size: var(--step-2); margin: 36px 0 10px; }
+.prose ul { padding-left: 1.2em; max-width: 68ch; }
+.prose li { margin-bottom: 6px; }
+.two-col { display: grid; gap: 32px; }
+@media (min-width: 900px) { .two-col { grid-template-columns: 1fr 1fr; } }
+
+.status { padding: 48px 0; color: var(--ink-soft); }
+.status-error { color: var(--ink); border-left: 4px solid var(--gauge-red); padding: 12px 16px; }
+
+footer { border-top: 1px solid var(--rule); padding: 18px 0 32px; font-size: var(--step--1); color: var(--ink-soft); }
+footer p { max-width: none; margin: 0 0 4px; }
+
+@media (max-width: 480px) {
+  :root { --step-3: 2rem; --step-4: 2.6rem; }
+  .dam-body { grid-template-columns: 84px 1fr; gap: 14px; }
+  .readings { gap: 12px 12px; }
+  .readings dd small { display: block; margin-left: 0; }   /* the unit drops below the figure */
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }

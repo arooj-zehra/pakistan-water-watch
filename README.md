@@ -11,9 +11,9 @@
 
 | Phase | What | Status |
 | --- | --- | --- |
-| 0 | Data feasibility: PMD archive probe, ERA5 weather, coverage report | Code ready, run pending |
-| 1 | Scraper, validation, database, daily GitHub Actions job | Code ready, needs DB + first runs |
-| 2 | FastAPI + React dashboard | Not started |
+| 0 | Data feasibility: 18 sources probed, coverage report, revised gate met | Done |
+| 1 | Scrapers, validation, database, daily GitHub Actions job | Done locally; cloud database next |
+| 2 | FastAPI + React website, static JSON export | Code ready, deploy pending |
 | 3 | LightGBM forecasts with conformal 90% intervals | Not started |
 | 4 | Live prospective scoring, model versioning, drift monitoring | Not started |
 | 5 | Data-quality anomaly detection (+ optional bilingual ask-the-data) | Not started |
@@ -94,6 +94,22 @@ python -m pipeline.backfill           # loads cached PMD sheets + ERA5 CSVs
 python -m pipeline.daily              # what GitHub Actions runs every morning
 python -m pipeline.daily --skip-news --skip-weather --press-file release.txt --date 2026-10-31
                                       # parse a saved WAPDA release by hand
+```
+
+**Phase 2: the website and the API on your computer**
+
+```cmd
+pip install -r requirements.txt
+python -m pipeline.export_static      # writes web/public/data/*.json from the database
+uvicorn api.main:app --reload         # API at http://127.0.0.1:8000/docs (leave running)
+```
+
+In a second Command Prompt window:
+
+```cmd
+cd web
+npm install
+npm run dev                           # website at http://localhost:5173
 ```
 
 ## Repo layout

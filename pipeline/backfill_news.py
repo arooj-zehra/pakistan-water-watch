@@ -200,6 +200,44 @@ def best_rows(posts_by_outlet: dict[str, list[dict]]) -> tuple[list[dict], dict,
     return rows, stats, conflicts
 
 
+DEAD_LEVEL_MIN_REPORTS = 5  # a value must be reported this many times in a row to count
+
+
+def derive_dead_levels(rows: list[dict]) -> list[dict]:
+    """Dead-level change dates learned from the stories ("dead level of 1,398 feet").
+
+    Runs of the same reported value (at least DEAD_LEVEL_MIN_REPORTS in a row)
+    become dead_levels rows dated from the run's first report; one-off values
+    (typos) are ignored. A dead level only ever rises (sediment builds up), and
+    some outlets keep quoting an old value in their templates after WAPDA
+    raises it, so a run only counts if it is higher than the last accepted one.
+    """
+    out = []
+    for sid in sorted({r["station_id"] for r in rows}):
+        reports = sorted((r["date"], r["dead_level_ft"]) for r in rows
+                         if r["station_id"] == sid and r.get("dead_level_ft"))
+        runs = []  # [value, first_date, count]
+        for d, v in reports:
+            if runs and runs[-1][0] == v:
+                runs[-1][2] += 1
+            else:
+                runs.append([v, d, 1])
+        last = None
+        for v, first, n in runs:
+            if n >= DEAD_LEVEL_MIN_REPORTS and (last is None or v > last):
+                out.append({"station_id": sid, "valid_from": first, "level_ft": v, "source": "news"})
+                last = v
+    return out
+
+
+def load_dead_levels(conn, levels: list[dict]) -> int:
+    """Replace guessed seed rows with dates learned from the stories."""
+    for sid in {lv["station_id"] for lv in levels}:
+        conn.execute(db.dead_levels.delete().where(db.dead_levels.c.station_id == sid,
+                                                   db.dead_levels.c.source.in_(["seed", "news"])))
+    return db.upsert(conn, db.dead_levels, levels, keys=["station_id", "valid_from"], overwrite_nulls=True)
+
+
 def write_csv(path, rows: list[dict], cols: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="", encoding="utf-8") as f:
@@ -287,11 +325,15 @@ def main(argv: list[str] | None = None) -> int:
 
     eng = db.get_engine()
     db.init_db(eng)
+    levels = derive_dead_levels(rows)
     with eng.begin() as conn:
+        load_dead_levels(conn, levels)  # first, so validation uses the learned dates
         ok, bad = load_rows(conn, rows)
         db.log_run(conn, "news_backfill", "ok" if ok else "failed", ok,
                    f"{bad} quarantined" if bad else None)
     print(f"\n3) Loaded {ok} rows into observations, {bad} quarantined")
+    for lv in levels:
+        print(f"   dead level {lv['station_id']:<8} {lv['level_ft']:.0f} ft from {lv['valid_from']}")
 
     per_year = defaultdict(Counter)
     for r in rows:
