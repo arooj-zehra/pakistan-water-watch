@@ -88,10 +88,17 @@ def fetch_archive(point: WeatherPoint, start: date, end: date, sleep=None) -> li
     return rows
 
 
-def fetch_forecast(point: WeatherPoint, days: int = 16, sleep=None) -> list[dict]:
+def fetch_forecast(point: WeatherPoint, days: int = 16, past_days: int = 0, sleep=None) -> list[dict]:
+    """Forecast API ("best match" model). With past_days, the response also
+    holds the last past_days days (analyses), which cover ERA5's ~5 day lag.
+    Rows before today get kind "past", the rest "forecast"."""
     payload = _get_with_retry(FORECAST_URL, {
         "latitude": point.lat, "longitude": point.lon,
         "daily": ",".join(WEATHER_DAILY_VARS), "timezone": TZ,
-        "forecast_days": days,
+        "forecast_days": days, "past_days": past_days,
     }, timeout=30, sleep=sleep)
-    return _rows_from_payload(payload, point, "forecast")
+    rows = _rows_from_payload(payload, point, "forecast")
+    today = date.today()
+    for r in rows:
+        r["kind"] = "past" if r["date"] < today else "forecast"
+    return rows
