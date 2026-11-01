@@ -85,17 +85,17 @@ Probed 203 months, 2010-01 to 2026-11. Sheets found: 4; missing or failed: 199.
 
 ### All sources in the database (auto-generated)
 
-**NO-GO (all sources, gaps <= 3 days filled): 1 complete year(s) with <10% missing for both dams (need 5). Longest consecutive run: 2023-2023 (1 yrs).**
+**NO-GO (all sources, gaps <= 3 days filled): 0 complete year(s) with <10% missing for both dams (need 5). Longest consecutive run: none.**
 
 As recorded, without filling: NO-GO (all sources, as recorded): 0 complete year(s) with <10% missing for both dams (need 5). Longest consecutive run: none.
 
 | Source | Dam-days with inflow | First | Last |
 | --- | --- | --- | --- |
-| app | 1688 | 2017-07-22 | 2026-10-30 |
-| customstoday | 219 | 2015-01-23 | 2018-07-26 |
+| app | 1686 | 2017-07-22 | 2026-10-30 |
+| customstoday | 217 | 2015-01-23 | 2018-07-25 |
 | dailyausaf | 1 | 2025-05-17 | 2025-05-17 |
 | energyupdate | 3 | 2021-09-07 | 2025-04-03 |
-| pakobserver | 839 | 2019-07-30 | 2026-08-01 |
+| pakobserver | 785 | 2019-07-29 | 2026-08-01 |
 | pmd | 182 | 2015-09-01 | 2015-12-02 |
 
 Gaps of up to 3 days between two known values are filled by linear interpolation for the second set of columns; longer gaps stay empty.
@@ -107,12 +107,12 @@ Gaps of up to 3 days between two known values are filled by linear interpolation
 | 2015 | 96/365 | 96/365 | 74% | 74% |
 | 2016 | 0/366 | 0/366 | 100% | 100% |
 | 2017 | 62/365 | 63/365 | 83% | 74% |
-| 2018 | 46/365 | 46/365 | 87% | 81% |
+| 2018 | 45/365 | 45/365 | 88% | 81% |
 | 2019 | 6/365 | 4/365 | 99% | 99% |
-| 2020 | 57/366 | 58/366 | 84% | 74% |
-| 2021 | 111/365 | 111/365 | 70% | 53% |
-| 2022 | 148/365 | 218/365 | 59% | 50% |
-| 2023 | 279/365 | 295/365 | 24% | 9% ✅ |
+| 2020 | 56/366 | 57/366 | 85% | 73% |
+| 2021 | 108/365 | 109/365 | 70% | 54% |
+| 2022 | 140/365 | 204/365 | 62% | 50% |
+| 2023 | 266/365 | 281/365 | 27% | 11% |
 | 2024 | 239/366 | 242/366 | 35% | 25% |
 | 2025 | 199/365 | 197/365 | 46% | 26% |
 | 2026 (year so far) | 179/305 | 180/305 | 41% | 13% |

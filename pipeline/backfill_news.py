@@ -99,10 +99,20 @@ _MONTHS["sept"] = 9
 _MON = "|".join(sorted(_MONTHS, key=len, reverse=True))
 DATELINE_RE = re.compile(r"\b[A-Z][A-Za-z]{2,}\s*,\s*(" + _MON + r")\.?\s+(\d{1,2})\s*\(", re.I)
 FULL_DATE_RE = re.compile(r"\b(" + _MON + r")\.?\s+(\d{1,2})(?:st|nd|rd|th)?,?\s+(\d{4})\b", re.I)
+WEEKDAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+WEEKDAY_RE = re.compile(r"\b(" + "|".join(WEEKDAYS) + r")\b", re.I)
 
 
 def release_date(post: dict, text: str) -> date:
-    """Date the figures refer to: dateline/title date if plausible, else post date."""
+    """Date the figures refer to.
+
+    In order: an explicit dateline ("ISLAMABAD, Mar 4 (APP)") or title date
+    ("Report – April 3, 2025"); else the weekday named near the top ("IRSA
+    Wednesday released ..."), taken as the most recent such day; else the post
+    date. Each must fall 0-3 days before the post date. The weekday rule
+    matters: Pakistan Observer reprints APP's story in the next morning's
+    paper, so its post date is one day after the release it reports.
+    """
     posted = date.fromisoformat(post["date"][:10])
     candidates = []
     if m := DATELINE_RE.search(text[:300]):
@@ -118,6 +128,10 @@ def release_date(post: dict, text: str) -> date:
             continue
         if 0 <= (posted - cand).days <= MAX_DATELINE_LAG_DAYS:
             return cand
+    if m := WEEKDAY_RE.search(text[:300]):
+        lag = (posted.weekday() - WEEKDAYS.index(m.group(1).lower())) % 7
+        if lag <= MAX_DATELINE_LAG_DAYS:
+            return posted - timedelta(days=lag)
     return posted
 
 

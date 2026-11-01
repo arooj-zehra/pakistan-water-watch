@@ -30,6 +30,18 @@ def test_release_date_from_dateline_and_title():
     assert bn.release_date(post(5, "2024-06-10", ""), "LAHORE, Jun 12 (APP)") == date(2024, 6, 10)
 
 
+def test_release_date_from_weekday_for_next_morning_reprints():
+    # Pakistan Observer, posted Thursday 27 Jan 2022 at 05:28: "IRSA Wednesday released ..."
+    p = post(6, "2022-01-27", "")
+    assert bn.release_date(p, "Indus River System Authority (IRSA) Wednesday released 42919 cusecs") == date(2022, 1, 26)
+    # APP, same-day story: weekday matches the post date
+    assert bn.release_date(post(7, "2023-11-18", ""), "The IRSA on Saturday released 89,400 cusecs") == date(2023, 11, 18)
+    # a weekday more than 3 days back is ignored
+    assert bn.release_date(post(8, "2022-01-27", ""), "IRSA on Friday released") == date(2022, 1, 27)
+    # an explicit dateline beats the weekday
+    assert bn.release_date(post(9, "2022-01-27", ""), "LAHORE, Jan 27 (APP): IRSA on Tuesday released") == date(2022, 1, 27)
+
+
 # --- combining outlets ---------------------------------------------------------
 def test_best_rows_combines_outlets_and_logs_conflicts():
     partial = "Indus at Tarbela: Inflows 24,200 cusecs. Jhelum at Mangla: Inflows 6,800 cusecs."
