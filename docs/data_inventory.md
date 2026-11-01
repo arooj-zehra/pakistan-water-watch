@@ -85,18 +85,22 @@ Probed 203 months, 2010-01 to 2026-11. Sheets found: 4; missing or failed: 199.
 
 ### All sources in the database (auto-generated)
 
-**NO-GO (all sources, gaps <= 3 days filled): 0 complete year(s) with <10% missing for both dams (need 5). Longest consecutive run: none.**
+**NO-GO (all sources, gaps <= 3 days filled): 2 complete year(s) with <10% missing for both dams (need 5). Longest consecutive run: 2021-2021 (1 yrs).**
 
 As recorded, without filling: NO-GO (all sources, as recorded): 0 complete year(s) with <10% missing for both dams (need 5). Longest consecutive run: none.
 
 | Source | Dam-days with inflow | First | Last |
 | --- | --- | --- | --- |
-| app | 1686 | 2017-07-22 | 2026-10-30 |
-| customstoday | 217 | 2015-01-23 | 2018-07-25 |
+| app | 1685 | 2017-07-22 | 2026-10-30 |
+| customstoday | 210 | 2015-01-23 | 2018-07-25 |
 | dailyausaf | 1 | 2025-05-17 | 2025-05-17 |
+| dailytimes | 9 | 2017-01-30 | 2022-08-20 |
 | energyupdate | 3 | 2021-09-07 | 2025-04-03 |
-| pakobserver | 785 | 2019-07-29 | 2026-08-01 |
+| pakobserver | 783 | 2019-07-29 | 2026-08-01 |
 | pmd | 182 | 2015-09-01 | 2015-12-02 |
+| profit | 1 | 2018-08-21 | 2018-08-21 |
+| tribune | 8 | 2018-03-23 | 2025-08-17 |
+| urdupoint | 1609 | 2016-07-22 | 2026-10-28 |
 
 Gaps of up to 3 days between two known values are filled by linear interpolation for the second set of columns; longer gaps stay empty.
 
@@ -105,16 +109,16 @@ Gaps of up to 3 days between two known values are filled by linear interpolation
 | Year | Tarbela days | Mangla days | Worst % missing | After filling short gaps |
 | --- | --- | --- | --- | --- |
 | 2015 | 96/365 | 96/365 | 74% | 74% |
-| 2016 | 0/366 | 0/366 | 100% | 100% |
-| 2017 | 62/365 | 63/365 | 83% | 74% |
-| 2018 | 45/365 | 45/365 | 88% | 81% |
-| 2019 | 6/365 | 4/365 | 99% | 99% |
-| 2020 | 56/366 | 57/366 | 85% | 73% |
-| 2021 | 108/365 | 109/365 | 70% | 54% |
-| 2022 | 140/365 | 204/365 | 62% | 50% |
-| 2023 | 266/365 | 281/365 | 27% | 11% |
-| 2024 | 239/366 | 242/366 | 35% | 25% |
-| 2025 | 199/365 | 197/365 | 46% | 26% |
-| 2026 (year so far) | 179/305 | 180/305 | 41% | 13% |
+| 2016 | 15/366 | 13/366 | 96% | 96% |
+| 2017 | 150/365 | 150/365 | 59% | 39% |
+| 2018 | 170/365 | 166/365 | 55% | 34% |
+| 2019 | 118/365 | 114/365 | 69% | 51% |
+| 2020 | 234/366 | 233/366 | 36% | 21% |
+| 2021 | 270/365 | 273/365 | 26% | 8% ✅ |
+| 2022 | 171/365 | 261/365 | 53% | 43% |
+| 2023 | 306/365 | 324/365 | 16% | 4% ✅ |
+| 2024 | 262/366 | 263/366 | 28% | 25% |
+| 2025 | 210/365 | 206/365 | 44% | 25% |
+| 2026 (year so far) | 195/305 | 195/305 | 36% | 10% |
 
 <!-- AUTO-END -->

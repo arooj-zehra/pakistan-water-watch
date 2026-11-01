@@ -52,8 +52,10 @@ python -m pipeline.probe_pmd          # ~7 min: downloads every monthly PMD shee
 python -m pipeline.fetch_weather      # ERA5 history for 10 upper-basin points
 python -m pipeline.probe_sources      # Internet Archive copies of PMD (found little)
 python -m pipeline.probe_news         # which news outlets carry the daily IRSA/WAPDA figures
+python -m pipeline.probe_sitemaps     # other sites, found through their sitemaps
+python -m pipeline.backfill_html      # download those articles' text into the news cache
 python -m pipeline.backfill --pmd     # load the PMD sheets into the database
-python -m pipeline.backfill_news      # download + parse every outlet's stories, combine, load
+python -m pipeline.backfill_news      # parse every source's stories, combine, load
 python -m pipeline.coverage_report    # GO / NO-GO: PMD alone, and all sources combined
 ```
 

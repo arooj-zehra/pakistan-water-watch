@@ -4,6 +4,9 @@
     python -m pipeline.backfill_news   # downloads, parses, combines, loads
     python -m pipeline.backfill_news --outlets app,profit
 
+Sites reached through sitemaps (probe_sitemaps + backfill_html) are merged too,
+after the WordPress outlets in priority.
+
 Steps:
   1. For every outlet with a post list in data/inventory/news/<outlet>_posts.csv,
      download the posts not yet cached (100 per request through the outlet's
@@ -235,8 +238,19 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--outlets", help="comma-separated outlet keys (default: all with a post list)")
     args = ap.parse_args(argv)
     keys = args.outlets.split(",") if args.outlets else [o.key for o in wp.OUTLETS]
-    keys = [k for k in (o.key for o in wp.OUTLETS) if k in keys and wanted_ids(k)]
-    if not keys:
+    if not args.outlets:
+        from .sources import sitemaps as sm
+
+        keys += [s.key for s in sm.SITES]
+    wanted = keys
+    keys = [k for k in (o.key for o in wp.OUTLETS) if k in wanted and wanted_ids(k)]
+    # Sites reached through their sitemaps (backfill_html) are already cached;
+    # they come after the WordPress outlets in priority.
+    from .sources import sitemaps as sm
+
+    html_keys = [s.key for s in sm.SITES
+                 if s.key not in keys and (not args.outlets or s.key in wanted) and load_cache(s.key)]
+    if not keys and not html_keys:
         print("No post lists found. Run: python -m pipeline.probe_news")
         return 1
 
@@ -253,6 +267,9 @@ def main(argv: list[str] | None = None) -> int:
             cache = load_cache(k)
         posts_by_outlet[k] = [cache[i] for i in ids if i in cache]
         print(f"     {k}: {len(posts_by_outlet[k])}/{len(ids)} posts available")
+    for k in html_keys:
+        posts_by_outlet[k] = list(load_cache(k).values())
+        print(f"     {k}: {len(posts_by_outlet[k])} cached articles (from backfill_html)")
 
     rows, stats, conflicts = best_rows(posts_by_outlet)
     write_csv(PARSED_CSV, sorted(rows, key=lambda r: (r["date"], r["station_id"])),
@@ -261,7 +278,7 @@ def main(argv: list[str] | None = None) -> int:
                                          "other_source", "other_inflow", "other_link"])
     print("\n2) Parsed")
     used = Counter(r["source"] for r in rows)
-    for k in keys:
+    for k in posts_by_outlet:
         s = stats[k]
         print(f"     {k:<14} {s['releases']:>4} daily releases, {s['not_a_release']:>4} other articles; "
               f"chosen for {used[k]} dam-days")
