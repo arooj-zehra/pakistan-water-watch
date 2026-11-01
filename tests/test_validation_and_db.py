@@ -19,6 +19,7 @@ def obs(**kw):
 @pytest.mark.parametrize("bad,reason", [
     (obs(inflow_cusecs=-5), "flow"),
     (obs(inflow_cusecs=15_000_000), "flow"),               # extra zero
+    (obs(inflow_cusecs=224), "below plausible minimum"),   # "224, 700" misread
     (obs(level_ft=1193.0), "level"),                        # Mangla value in Tarbela column
     (obs(station_id="mangla", level_ft=1499.5), "level"),  # swapped dams
     (obs(station_id="warsak"), "unknown station"),
@@ -34,7 +35,7 @@ def test_hard_rules_quarantine(bad, reason):
 def test_conflicting_duplicates_and_identical_duplicates():
     good, bad = validate_rows([obs(), obs()])
     assert len(good) == 1 and bad == []
-    good, bad = validate_rows([obs(), obs(inflow_cusecs=1.0)])
+    good, bad = validate_rows([obs(), obs(inflow_cusecs=151000.0)])
     assert len(good) == 1 and "conflicting duplicate" in bad[0][1]
 
 

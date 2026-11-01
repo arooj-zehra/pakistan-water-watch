@@ -41,6 +41,7 @@ jobs:
           git config user.name "pww-bot"
           git config user.email "actions@users.noreply.github.com"
           git add data/raw || true
+          git add data/inventory/news || true
           git diff --cached --quiet || git commit -m "data: raw snapshots $(date -u +%F)"
           git push || echo "nothing to push"
 

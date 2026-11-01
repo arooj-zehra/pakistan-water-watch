@@ -28,16 +28,38 @@ PLACES = [
     "Tarbela", "Mangla", "Chashma", "Nowshera", "Marala", "Jinnah", "Taunsa",
     "Panjnad", "Guddu", "Sukkur", "Kotri", "Kabul", "Chenab", "Jhelum", "Indus",
     "Islam", "Trimmu", "Balloki", "Sulemanki", "Ravi", "Sutlej",
+    "Kalabagh", "Khanki", "Qadirabad", "Rasul", "Warsak", "Munda",
 ]
 _PLACE_RE = re.compile(r"\b(" + "|".join(PLACES) + r")\b", re.I)
-NUM = r"(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?)"
+# A number: "42,000", "1508.41", "15400". It must not run straight into more
+# digits, so a typo like "4,8461" (real APP text) is rejected instead of being
+# read as 4 or 4,846.
+NUM = r"(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?)(?!\d)(?!,\d)"
 GAP = r"[^\d;]{0,40}?"  # short run of words/punctuation between label and number
 
+# IRSA style, checked before the single patterns (which would read the first
+# number twice):
+#   "inflow and outflow ... recorded 6,800 cusecs and 32,000 cusecs, respectively"
+#   "inflow and outflow ... recorded a 20588 and 36757 cusecs respectively"
+#   "inflow and outflow ... recorded as 57,000 cusecs each"
+_IN_AND_OUT = r"in-?flows?\s+and\s+out-?flows?"
+PAIR_PAT = re.compile(_IN_AND_OUT + GAP + NUM + r"(?:\s*cu-?secs\s*(?:and|,|&)|\s*(?:and|&))\s*" + NUM, re.I)
+EACH_PAT = re.compile(_IN_AND_OUT + GAP + NUM + r"\s*(?:cu-?secs\s*)?each\b", re.I)
 INFLOW_PATS = [re.compile(r"in-?flows?" + GAP + NUM, re.I)]
-OUTFLOW_PATS = [re.compile(r"out-?flows?" + GAP + NUM, re.I)]
-LEVEL_PATS = [
+# Prefer an "outflow" that isn't part of "inflow and outflow ...": in
+# "inflow and outflow ... 22,500 cusecs while outflow as 46,000 cusecs" the
+# outflow is 46,000. Fall back to any "outflow" if that's all there is.
+OUTFLOW_PATS = [re.compile(r"(?<!and )out-?flows?" + GAP + NUM, re.I),
+                re.compile(r"out-?flows?" + GAP + NUM, re.I)]
+# Specific patterns name the present level outright, so a full dam reading
+# exactly its maximum (e.g. Tarbela at 1550.00 ft in Sep 2015) is accepted.
+LEVEL_PATS_SPECIFIC = [
     re.compile(r"(?:present|current|existing)\s+(?:reservoir\s+)?level" + GAP + NUM, re.I),
     re.compile(r"(?:stood|stands|was|is)\s+at" + GAP + NUM + r"\s*(?:ft|feet)", re.I),
+    re.compile(r"\b(?:dam|reservoir)\s+(?:was|is|stood|remained)\s+(?:at\s+)?" + NUM + r"\s*(?:ft|feet)", re.I),
+]
+# Fallbacks could hit "maximum conservation level 1550", so they skip the max value.
+LEVEL_PATS_FALLBACK = [
     re.compile(r"(?<!maximum )(?<!minimum )(?<!conservation )(?<!operating )(?<!dead )"
                r"level" + GAP + NUM + r"\s*(?:ft|feet)", re.I),
     re.compile(NUM + r"\s*(?:ft|feet)", re.I),  # bare "1,432.04 feet" (range check picks it)
@@ -112,6 +134,8 @@ def _first(windows: list[str], pats: list[re.Pattern], ok) -> float | None:
 
 def parse_release(text: str, release_date: date) -> Release:
     text = re.sub(r"\s+", " ", text)
+    # "224, 700 cusecs" (stray space after the thousands comma, real APP text)
+    text = re.sub(r"\b(\d{1,3}), (\d{3})(?=\s*cu-?secs)", r"\1,\2", text)
     rel = Release(date=release_date)
     for sid in ("tarbela", "mangla"):
         st = STATIONS[sid]
@@ -119,7 +143,8 @@ def parse_release(text: str, release_date: date) -> Release:
         if not wins:
             rel.missing.append(f"{sid}: not mentioned")
             continue
-        level_ok = lambda v, st=st: st.plausible_min_ft <= v <= st.plausible_max_ft and abs(v - st.max_level_ft) > 0.001
+        level_ok = lambda v, st=st: st.plausible_min_ft <= v <= st.plausible_max_ft
+        not_max = lambda v, st=st: abs(v - st.max_level_ft) > 0.001
         flow_ok = lambda v: 0 <= v <= 1_500_000
         sr = StationRelease(
             inflow_cusecs=_first(wins, INFLOW_PATS, flow_ok),
@@ -127,8 +152,17 @@ def parse_release(text: str, release_date: date) -> Release:
             dead_level_ft=_first(wins, DEAD_PATS, lambda v, st=st: st.plausible_min_ft <= v <= st.plausible_max_ft),
             live_storage_maf=_first(wins, STORAGE_MAF_PATS, lambda v: 0 <= v <= 15),
         )
+        pair = next((m for w in wins for m in PAIR_PAT.finditer(w)), None)
+        each = next((m for w in wins for m in EACH_PAT.finditer(w)), None)
+        if pair:
+            sr.inflow_cusecs, sr.outflow_cusecs = _f(pair.group(1)), _f(pair.group(2))
+        elif each:
+            sr.inflow_cusecs = sr.outflow_cusecs = _f(each.group(1))
         # Level: exclude the dead level value from the bare-number fallback
-        sr.level_ft = _first(wins, LEVEL_PATS, lambda v: level_ok(v) and v != sr.dead_level_ft)
+        sr.level_ft = _first(wins, LEVEL_PATS_SPECIFIC, lambda v: level_ok(v) and v != sr.dead_level_ft)
+        if sr.level_ft is None:
+            sr.level_ft = _first(wins, LEVEL_PATS_FALLBACK,
+                                 lambda v: level_ok(v) and not_max(v) and v != sr.dead_level_ft)
         if sr.live_storage_maf is None:
             af = _first(wins, STORAGE_AF_PATS, lambda v: 1_000 <= v <= 15_000_000)
             sr.live_storage_maf = round(af / 1e6, 3) if af is not None else None

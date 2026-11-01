@@ -24,3 +24,6 @@ web/dist/
 Thumbs.db
 .vscode/
 .idea/
+
+# Files Claude copies in from its workspace (safe to delete)
+_transfer/

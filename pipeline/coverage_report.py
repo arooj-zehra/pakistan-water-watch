@@ -1,9 +1,15 @@
-"""Phase 0 deliverable: turn pmd_coverage.csv into a go/no-go verdict.
+"""Phase 0 deliverable: the go/no-go verdict on how much daily history we have.
 
     python -m pipeline.coverage_report
 
+Two verdicts:
+  * PMD archive only, from data/inventory/pmd_coverage.csv
+  * all sources combined, from the `observations` table (PMD + APP + WAPDA),
+    both as recorded and with gaps of up to 3 days filled by interpolation
+
 Writes:
   docs/img/pmd_coverage.png     missing-days heatmap (year x month, per dam)
+  docs/img/db_coverage.png      same, for all sources in the database
   docs/data_inventory.md        the auto-generated block between the
                                 AUTO-START / AUTO-END markers is replaced;
                                 everything you write outside it is kept.
@@ -39,7 +45,10 @@ class Verdict:
 
 
 def load_coverage(path=COVERAGE_CSV) -> pd.DataFrame:
-    df = pd.read_csv(path, dtype={"month": str})
+    # Read text columns as text: an all-empty "problems" column would otherwise
+    # load as float NaN, and fillna("") on floats warns under pandas 3.
+    df = pd.read_csv(path, dtype={"month": str, "status": str, "url": str, "problems": str})
+    df["problems"] = df["problems"].fillna("")
     df["year"] = df["month"].str[:4].astype(int)
     df["mon"] = df["month"].str[5:7].astype(int)
     # Missing months (404 etc.) have no days_in_month: fill from the calendar
@@ -63,7 +72,7 @@ def yearly(df: pd.DataFrame) -> pd.DataFrame:
     return g
 
 
-def verdict(y: pd.DataFrame) -> Verdict:
+def verdict(y: pd.DataFrame, label: str = "") -> Verdict:
     # Only judge complete calendar years (12 months probed)
     full = y[y["months_probed"] == 12]
     good = [int(yr) for yr in full.index[full["worst_missing"] < GATE_MAX_MISSING]]
@@ -73,39 +82,122 @@ def verdict(y: pd.DataFrame) -> Verdict:
         run = run + [yr] if run and yr == run[-1] + 1 else [yr]
         best = max(best, run, key=len)
     passed = len(good) >= GATE_YEARS
-    s = (f"{'GO' if passed else 'NO-GO'}: {len(good)} complete year(s) with <10% missing "
+    s = (f"{'GO' if passed else 'NO-GO'}{label}: {len(good)} complete year(s) with <10% missing "
          f"for both dams (need {GATE_YEARS}). Longest consecutive run: "
          + (f"{best[0]}-{best[-1]} ({len(best)} yrs)." if best else "none."))
     return Verdict(passed, good, best, s)
 
 
-def plot_heatmap(df: pd.DataFrame, path=HEATMAP_PNG):
-    import matplotlib
+# ---------------------------------------------------------------------------
+# Coverage from the database: every source combined (PMD, APP, WAPDA, ...)
+# ---------------------------------------------------------------------------
+MAX_FILL_GAP_DAYS = 3
+DB_HEATMAP_PNG = DOCS_DIR / "img" / "db_coverage.png"
 
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
+
+def db_daily(engine) -> pd.DataFrame:
+    """date, station_id, inflow_cusecs, source for every observation with inflow."""
+    from sqlalchemy import select
+
+    from . import db
+
+    with engine.connect() as c:
+        rows = c.execute(select(db.observations.c.date, db.observations.c.station_id,
+                                db.observations.c.inflow_cusecs, db.observations.c.source)
+                         .where(db.observations.c.inflow_cusecs.is_not(None))).all()
+    df = pd.DataFrame(rows, columns=["date", "station_id", "inflow_cusecs", "source"])
+    df["date"] = pd.to_datetime(df["date"])
+    return df
+
+
+def fill_short_gaps(s: pd.Series, max_gap: int = MAX_FILL_GAP_DAYS) -> pd.Series:
+    """Linearly fill runs of up to `max_gap` missing days that sit between two
+    known values. Longer gaps are left completely empty (pandas' `limit` would
+    half-fill them, which hides how big the gap really is)."""
+    s = s.astype(float)
+    isna = s.isna()
+    run_id = (isna != isna.shift()).cumsum()
+    run_len = isna.groupby(run_id).transform("sum")
+    inside = s.ffill().notna() & s.bfill().notna()
+    fillable = isna & (run_len <= max_gap) & inside
+    out = s.copy()
+    out[fillable] = s.interpolate(limit_area="inside")[fillable]
+    return out
+
+
+def db_monthly(daily: pd.DataFrame, fill: bool, today=None) -> pd.DataFrame:
+    """Same columns as the PMD coverage frame, so yearly/verdict/heatmap reuse."""
+    today = pd.Timestamp(today or pd.Timestamp.today().normalize())
+    start = pd.Timestamp(daily["date"].min().year, 1, 1)
+    idx = pd.date_range(start, today, freq="D")
+    counts = {}
+    for sid in ("tarbela", "mangla"):
+        s = (daily[daily.station_id == sid].drop_duplicates("date").set_index("date")["inflow_cusecs"]
+             .reindex(idx))
+        if fill:
+            s = fill_short_gaps(s)
+        counts[sid] = s.notna().groupby(s.index.to_period("M")).sum()
+    months = pd.period_range(start, today, freq="M")
+    out = pd.DataFrame({"month": months.strftime("%Y-%m")})
+    out["year"], out["mon"] = months.year, months.month
+    # The current month only counts days up to today
+    out["days_in_month"] = [min(p.days_in_month, today.day) if p == today.to_period("M") else p.days_in_month
+                            for p in months]
+    for sid in ("tarbela", "mangla"):
+        out[f"{sid}_days"] = [int(counts[sid].get(p, 0)) for p in months]
+    out["status"], out["problems"] = "db", ""
+    return out
+
+
+def render_db_section(daily: pd.DataFrame, raw_y, filled_y, v_raw: Verdict, v_fill: Verdict) -> str:
+    by_src = daily.groupby("source")["date"].agg(["count", "min", "max"])
+    lines = ["", "### All sources in the database (auto-generated)", "",
+             f"**{v_fill.summary}**", "", f"As recorded, without filling: {v_raw.summary}", "",
+             "| Source | Dam-days with inflow | First | Last |", "| --- | --- | --- | --- |"]
+    for src, r in by_src.iterrows():
+        lines.append(f"| {src} | {r['count']} | {r['min']:%Y-%m-%d} | {r['max']:%Y-%m-%d} |")
+    lines += ["", f"Gaps of up to {MAX_FILL_GAP_DAYS} days between two known values are filled by "
+              "linear interpolation for the second set of columns; longer gaps stay empty.", "",
+              "![database coverage heatmap](img/db_coverage.png)", "",
+              "| Year | Tarbela days | Mangla days | Worst % missing | After filling short gaps |",
+              "| --- | --- | --- | --- | --- |"]
+    for (yr, r), (_, f) in zip(raw_y.iterrows(), filled_y.iterrows()):
+        partial = " (year so far)" if r["months_probed"] < 12 else ""
+        mark = " ✅" if yr in v_fill.good_years else ""
+        lines.append(f"| {yr}{partial} | {int(r['tarbela_days'])}/{int(r['days'])} | "
+                     f"{int(r['mangla_days'])}/{int(r['days'])} | {r['worst_missing']:.0%} | "
+                     f"{f['worst_missing']:.0%}{mark} |")
+    return "\n".join(lines)
+
+
+def plot_heatmap(df: pd.DataFrame, path=HEATMAP_PNG,
+                 title="PMD FFD archive: share of days with no inflow value (grey = month not probed)"):
+    # Build the figure without pyplot, so this never changes the plotting
+    # backend: charts drawn later in a Colab notebook still show inline.
+    import matplotlib
     import numpy as np
+    from matplotlib.figure import Figure
 
     path.parent.mkdir(parents=True, exist_ok=True)
-    fig, axes = plt.subplots(1, 2, figsize=(12, max(3, 0.32 * df["year"].nunique() + 1.5)), sharey=True)
+    fig = Figure(figsize=(12, max(3, 0.32 * df["year"].nunique() + 1.5)))
+    axes = fig.subplots(1, 2, sharey=True)
     for ax, sid in zip(axes, ("tarbela", "mangla")):
         frac = (1 - df[f"{sid}_days"] / df["days_in_month"]).clip(0, 1)
         grid = df.assign(missing=frac).pivot(index="year", columns="mon", values="missing")
         grid = grid.reindex(columns=range(1, 13))
-        cmap = matplotlib.colormaps["Reds"].copy()
-        cmap.set_bad("#d9d9d9")  # grey = month not probed, so it can't pass for "complete"
+        # grey = month not probed, so it can't pass for "complete"
+        cmap = matplotlib.colormaps["Reds"].with_extremes(bad="#d9d9d9")
         im = ax.imshow(np.ma.masked_invalid(grid.values.astype(float)), aspect="auto", cmap=cmap, vmin=0, vmax=1)
         ax.set_title(sid.title())
         ax.set_xticks(range(12), ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"])
         ax.set_yticks(range(len(grid.index)), grid.index)
     fig.colorbar(im, ax=axes, shrink=0.8, label="fraction missing (1 = whole month)")
-    fig.suptitle("PMD FFD archive: share of days with no inflow value (grey = month not probed)")
+    fig.suptitle(title)
     fig.savefig(path, dpi=120, bbox_inches="tight")
-    plt.close(fig)
     return path
 
 
-def render_block(df: pd.DataFrame, y: pd.DataFrame, v: Verdict) -> str:
+def render_block(df: pd.DataFrame, y: pd.DataFrame, v: Verdict, db_section: str = "") -> str:
     lines = [AUTO_START, "", "### PMD archive coverage (auto-generated)", "",
              f"**{v.summary}**", "",
              f"Probed {len(df)} months, {df['month'].min()} to {df['month'].max()}. "
@@ -123,6 +215,8 @@ def render_block(df: pd.DataFrame, y: pd.DataFrame, v: Verdict) -> str:
     if len(probs):
         lines += ["", "**Parser notes** (check these by eye):", ""]
         lines += [f"- {r.month}: {r.problems}" for r in probs.itertuples()]
+    if db_section:
+        lines.append(db_section)
     lines += ["", AUTO_END]
     return "\n".join(lines)
 
@@ -138,18 +232,44 @@ def write_inventory(block: str, path=INVENTORY_MD):
     path.write_text(text, encoding="utf-8")
 
 
+def db_report(engine=None):
+    """(section_markdown, raw_verdict, filled_verdict) or None if the DB is empty."""
+    from . import db
+
+    engine = engine or db.get_engine()
+    db.init_db(engine)
+    daily = db_daily(engine)
+    if daily.empty:
+        return None
+    raw_m, fill_m = db_monthly(daily, fill=False), db_monthly(daily, fill=True)
+    raw_y, fill_y = yearly(raw_m), yearly(fill_m)
+    v_raw = verdict(raw_y, label=" (all sources, as recorded)")
+    v_fill = verdict(fill_y, label=f" (all sources, gaps <= {MAX_FILL_GAP_DAYS} days filled)")
+    plot_heatmap(fill_m, DB_HEATMAP_PNG,
+                 title=f"All sources: share of days with no inflow after filling gaps of "
+                       f"<= {MAX_FILL_GAP_DAYS} days")
+    return render_db_section(daily, raw_y, fill_y, v_raw, v_fill), v_raw, v_fill
+
+
 def main() -> int:
     if not COVERAGE_CSV.exists():
         print(f"{COVERAGE_CSV} not found. Run: python -m pipeline.probe_pmd")
         return 1
     df = load_coverage()
     y = yearly(df)
-    v = verdict(y)
+    v = verdict(y, label=" (PMD archive only)")
     plot_heatmap(df)
-    write_inventory(render_block(df, y, v))
+    dbr = db_report()
+    write_inventory(render_block(df, y, v, dbr[0] if dbr else ""))
     print(v.summary)
-    print(f"Updated {INVENTORY_MD} and {HEATMAP_PNG}")
-    return 0 if v.passed else 2
+    if dbr:
+        print(dbr[1].summary)
+        print(dbr[2].summary)
+    else:
+        print("Database is empty: run python -m pipeline.backfill / backfill_app for the all-sources verdict.")
+    print(f"Updated {INVENTORY_MD}")
+    passed = v.passed or (dbr is not None and dbr[2].passed)
+    return 0 if passed else 2
 
 
 if __name__ == "__main__":

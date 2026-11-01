@@ -3,6 +3,7 @@
 Hard rules (quarantine):
   * level inside the station's physical bounds (catches typos, swapped dams)
   * flows non-negative and below a plausible ceiling (catches an extra zero)
+  * inflow above a per-dam floor (catches "224, 700" read as 224)
   * date not in the future
   * no conflicting duplicates for the same (date, station) in one batch
   * day-to-day level jump no larger than MAX_LEVEL_JUMP_FT
@@ -19,7 +20,7 @@ from typing import Callable, Optional
 
 from pydantic import BaseModel, ValidationError, field_validator, model_validator
 
-from .config import MAX_PLAUSIBLE_FLOW_CUSECS, STATIONS
+from .config import MAX_PLAUSIBLE_FLOW_CUSECS, MIN_PLAUSIBLE_INFLOW_CUSECS, STATIONS
 
 MAX_LEVEL_JUMP_FT = 15.0  # Tarbela/Mangla rarely move more than a few ft/day
 
@@ -67,6 +68,9 @@ class Observation(BaseModel):
         if self.level_ft is not None and not (s.plausible_min_ft <= self.level_ft <= s.plausible_max_ft):
             raise ValueError(
                 f"{s.name} level {self.level_ft} ft outside {s.plausible_min_ft}-{s.plausible_max_ft}")
+        floor = MIN_PLAUSIBLE_INFLOW_CUSECS.get(self.station_id, 0)
+        if self.inflow_cusecs is not None and self.inflow_cusecs < floor:
+            raise ValueError(f"{s.name} inflow {self.inflow_cusecs} below plausible minimum {floor}")
         if self.level_ft is None and self.inflow_cusecs is None and self.outflow_cusecs is None:
             raise ValueError("row has no level, inflow or outflow")
         return self

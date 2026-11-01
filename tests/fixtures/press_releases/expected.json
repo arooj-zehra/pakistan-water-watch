@@ -1,19 +1,83 @@
 {
   "_comment": "Expected values per fixture. Add an entry for every real_*.txt you save (null = not stated).",
   "synthetic_app_summer.txt": {
-    "tarbela": {"level_ft": 1512.64, "inflow_cusecs": 312400, "outflow_cusecs": 275000, "live_storage_maf": 4.118, "dead_level_ft": 1402.0},
-    "mangla":  {"level_ft": 1201.35, "inflow_cusecs": 72300, "outflow_cusecs": 40000, "live_storage_maf": 3.871, "dead_level_ft": 1050.0}
+    "tarbela": {
+      "level_ft": 1512.64,
+      "inflow_cusecs": 312400,
+      "outflow_cusecs": 275000,
+      "live_storage_maf": 4.118,
+      "dead_level_ft": 1402.0
+    },
+    "mangla": {
+      "level_ft": 1201.35,
+      "inflow_cusecs": 72300,
+      "outflow_cusecs": 40000,
+      "live_storage_maf": 3.871,
+      "dead_level_ft": 1050.0
+    }
   },
   "synthetic_app_winter.txt": {
-    "tarbela": {"level_ft": 1418.27, "inflow_cusecs": 18600, "outflow_cusecs": 30000, "live_storage_maf": 0.244, "dead_level_ft": 1402.0},
-    "mangla":  {"level_ft": 1086.40, "inflow_cusecs": 9800, "outflow_cusecs": 22000, "live_storage_maf": 0.402, "dead_level_ft": 1050.0}
+    "tarbela": {
+      "level_ft": 1418.27,
+      "inflow_cusecs": 18600,
+      "outflow_cusecs": 30000,
+      "live_storage_maf": 0.244,
+      "dead_level_ft": 1402.0
+    },
+    "mangla": {
+      "level_ft": 1086.4,
+      "inflow_cusecs": 9800,
+      "outflow_cusecs": 22000,
+      "live_storage_maf": 0.402,
+      "dead_level_ft": 1050.0
+    }
   },
   "synthetic_narrative.txt": {
-    "tarbela": {"level_ft": 1439.76, "inflow_cusecs": 20700, "outflow_cusecs": 30000, "live_storage_maf": 1.261, "dead_level_ft": null},
-    "mangla":  {"level_ft": 1103.70, "inflow_cusecs": 22100, "outflow_cusecs": 60000, "live_storage_maf": 0.680, "dead_level_ft": null}
+    "tarbela": {
+      "level_ft": 1439.76,
+      "inflow_cusecs": 20700,
+      "outflow_cusecs": 30000,
+      "live_storage_maf": 1.261,
+      "dead_level_ft": null
+    },
+    "mangla": {
+      "level_ft": 1103.7,
+      "inflow_cusecs": 22100,
+      "outflow_cusecs": 60000,
+      "live_storage_maf": 0.68,
+      "dead_level_ft": null
+    }
   },
   "synthetic_acrefeet.txt": {
-    "tarbela": {"level_ft": 1432.04, "inflow_cusecs": 63000, "outflow_cusecs": 52100, "live_storage_maf": 0.560, "dead_level_ft": null},
-    "mangla":  {"level_ft": 1132.70, "inflow_cusecs": 48700, "outflow_cusecs": 32000, "live_storage_maf": 1.095, "dead_level_ft": null}
+    "tarbela": {
+      "level_ft": 1432.04,
+      "inflow_cusecs": 63000,
+      "outflow_cusecs": 52100,
+      "live_storage_maf": 0.56,
+      "dead_level_ft": null
+    },
+    "mangla": {
+      "level_ft": 1132.7,
+      "inflow_cusecs": 48700,
+      "outflow_cusecs": 32000,
+      "live_storage_maf": 1.095,
+      "dead_level_ft": null
+    }
+  },
+  "synthetic_irsa.txt": {
+    "tarbela": {
+      "level_ft": 1508.41,
+      "inflow_cusecs": 24200,
+      "outflow_cusecs": 42000,
+      "live_storage_maf": null,
+      "dead_level_ft": 1398.0
+    },
+    "mangla": {
+      "level_ft": 1187.05,
+      "inflow_cusecs": 6800,
+      "outflow_cusecs": 32000,
+      "live_storage_maf": null,
+      "dead_level_ft": 1050.0
+    }
   }
 }

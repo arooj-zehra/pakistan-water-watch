@@ -64,6 +64,10 @@ STATIONS: dict[str, Station] = {
 # Max plausible daily mean flow, cusecs. Tarbela's 2010 flood peak was in the
 # 800k range; 1.5M leaves headroom while still catching an extra zero.
 MAX_PLAUSIBLE_FLOW_CUSECS = 1_500_000
+# Lowest plausible daily mean INFLOW. Winter lows are roughly 10-15k cusecs at
+# Tarbela and a few thousand at Mangla, so anything below these is a parsing
+# error (e.g. "224, 700" read as 224). Outflow has no floor: gates can be shut.
+MIN_PLAUSIBLE_INFLOW_CUSECS = {"tarbela": 5_000, "mangla": 500}
 
 # Dead level (minimum operating level) by date. VALUES/DATES NEED VERIFYING
 # against archived WAPDA releases in Phase 0 task 5: the daily press release
@@ -74,9 +78,10 @@ DEAD_LEVELS_SEED: list[tuple[str, date, float]] = [
     ("tarbela", date(2000, 1, 1), 1369.0),  # TODO verify valid_from
     ("tarbela", date(2015, 1, 1), 1380.0),  # TODO verify valid_from
     ("tarbela", date(2018, 1, 1), 1392.0),  # TODO verify valid_from
-    ("tarbela", date(2021, 1, 1), 1398.0),  # TODO verify valid_from
+    ("tarbela", date(2021, 1, 1), 1398.0),  # TODO verify valid_from; APP confirms 1398 in Dec 2022 and Nov 2023
     ("tarbela", date(2024, 1, 1), 1402.0),  # TODO verify valid_from
-    ("mangla", date(2000, 1, 1), 1040.0),  # TODO verify (releases quote 1040/1050)
+    ("mangla", date(2000, 1, 1), 1040.0),  # TODO verify
+    ("mangla", date(2022, 1, 1), 1050.0),  # TODO verify valid_from; APP confirms 1050 in Dec 2022 and Nov 2023
 ]
 
 

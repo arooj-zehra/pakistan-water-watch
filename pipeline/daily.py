@@ -4,12 +4,16 @@
     python -m pipeline.daily --skip-weather
     python -m pipeline.daily --press-file release.txt --date 2026-10-31
                                              # parse a saved release by hand
+    python -m pipeline.daily --with-pmd      # also try PMD's monthly sheet
 
 Steps, each logged to ingest_log:
-  1. PMD: refresh this month's sheet (and last month's in the first 3 days)
+  1. News: the last few days' IRSA/WAPDA stories from every outlet that has a
+     post list (APP first), through their WordPress APIs. New posts are added
+     to the raw cache and post lists, so the history keeps growing.
   2. WAPDA press release: if PRESS_RELEASE_URL is set (or --press-file given)
   3. Weather: last 14 days of ERA5 + today's 16-day forecast for every point
   4. Freshness check: newest inflow must be at most 3 days old
+  PMD's monthly sheets stopped in 2015, so that step only runs with --with-pmd.
 
 Exit code 1 means a parser broke or data is stale; the workflow then opens a
 GitHub issue so a format change never goes unnoticed.
@@ -47,6 +51,75 @@ def step_pmd(conn, today: date) -> tuple[str, int, str | None]:
         return "failed", 0, "; ".join(errors)
     ok, bad = load_pmd_files(conn, paths)
     return ("partial" if errors or bad else "ok"), ok, ("; ".join(errors) or None)
+
+
+NEWS_LOOKBACK_DAYS = 4
+
+
+def daily_outlets() -> list[str]:
+    """Outlets with a post list (i.e. that probe_news found usable), APP first."""
+    from .backfill_news import wanted_ids
+    from .sources import wordpress as wp
+
+    keys = [o.key for o in wp.OUTLETS if wanted_ids(o.key)]
+    return keys or ["app"]
+
+
+def _append_post_list(outlet: str, posts: list[dict]) -> None:
+    import csv
+
+    from .backfill_news import posts_csv
+
+    path = posts_csv(outlet)
+    known = set()
+    if path.exists():
+        with path.open(encoding="utf-8") as f:
+            known = {r["id"] for r in csv.DictReader(f)}
+    new = [p for p in posts if str(p["id"]) not in known]
+    if not new:
+        return
+    path.parent.mkdir(parents=True, exist_ok=True)
+    write_header = not path.exists()
+    with path.open("a", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=["id", "date", "title", "link"], extrasaction="ignore")
+        if write_header:
+            w.writeheader()
+        w.writerows(new)
+
+
+def step_news(conn, today: date, get=None) -> tuple[str, int, str | None]:
+    from . import backfill_news as bn
+    from .sources import wordpress as wp
+
+    if get is None:
+        from . import http
+
+        get = http.get
+    after = (today - timedelta(days=NEWS_LOOKBACK_DAYS)).isoformat() + "T00:00:00"
+    recent, errors = {}, []
+    for key in daily_outlets():
+        try:
+            endpoint = wp.find_endpoint(get, wp.OUTLET_BY_KEY[key].site)
+            listed = {}
+            for q in wp.SEARCH_QUERIES:
+                for p in wp.search(get, endpoint, q, after=after, max_pages=2):
+                    listed.setdefault(p["id"], p)
+            cache = bn.load_cache(key)
+            missing = [i for i in listed if i not in cache]
+            if missing:
+                for p in wp.fetch(get, endpoint, missing):
+                    cache[p["id"]] = p
+                bn.save_cache(key, cache)
+            _append_post_list(key, list(listed.values()))
+            recent[key] = [cache[i] for i in listed if i in cache]
+        except Exception as e:
+            errors.append(f"{key}: {e}")
+    rows, _, conflicts = bn.best_rows(recent)
+    ok, bad = bn.load_rows(conn, rows) if rows else (0, 0)
+    notes = errors + ([f"{bad} quarantined"] if bad else []) + \
+        ([f"{len(conflicts)} outlet disagreements"] if conflicts else [])
+    status = "ok" if ok and not errors and not bad else ("partial" if ok else "failed")
+    return status, ok, "; ".join(notes) or None
 
 
 def step_press(conn, today: date, *, url: str | None, text_file: str | None) -> tuple[str, int, str | None]:
@@ -98,10 +171,10 @@ def step_weather(conn, today: date) -> tuple[str, int, str | None]:
         try:
             era = openmeteo.fetch_archive(p, today - timedelta(days=14), today - timedelta(days=1))
             # ERA5's newest days come back as nulls until processed: skip them
-            era = [{k: v for k, v in r.items() if k != "kind"} | {"fetched_at": db.utcnow()}
+            era = [{k: v for k, v in r.items() if k not in ("kind", "model")} | {"fetched_at": db.utcnow()}
                    for r in era if r["tmean_c"] is not None]
             n += db.upsert(conn, db.weather, era, keys=["date", "point_id"])
-            fc = [{k: v for k, v in r.items() if k != "kind"} | {"issued_on": today, "fetched_at": db.utcnow()}
+            fc = [{k: v for k, v in r.items() if k not in ("kind", "model")} | {"issued_on": today, "fetched_at": db.utcnow()}
                   for r in openmeteo.fetch_forecast(p)]
             n += db.upsert(conn, db.weather_forecast, fc, keys=["issued_on", "date", "point_id"])
         except Exception as e:
@@ -110,7 +183,7 @@ def step_weather(conn, today: date) -> tuple[str, int, str | None]:
     return status, n, "; ".join(errors) or None
 
 
-def run(today: date | None = None, *, skip_weather=False, skip_pmd=False,
+def run(today: date | None = None, *, skip_weather=False, with_pmd=False, skip_news=False,
         press_url: str | None = PRESS_RELEASE_URL, press_file: str | None = None) -> int:
     today = today or date.today()
     eng = db.get_engine()
@@ -118,7 +191,9 @@ def run(today: date | None = None, *, skip_weather=False, skip_pmd=False,
     broken = []
 
     steps = []
-    if not skip_pmd:
+    if not skip_news:
+        steps.append(("news", lambda c: step_news(c, today)))
+    if with_pmd:
         steps.append(("pmd", lambda c: step_pmd(c, today)))
     if press_url or press_file:
         steps.append(("wapda_press", lambda c: step_press(c, today, url=press_url, text_file=press_file)))
@@ -152,12 +227,13 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--date", help="override today (YYYY-MM-DD)")
     ap.add_argument("--skip-weather", action="store_true")
-    ap.add_argument("--skip-pmd", action="store_true")
+    ap.add_argument("--with-pmd", action="store_true", help="also try PMD (archive stopped in 2015)")
+    ap.add_argument("--skip-news", action="store_true")
     ap.add_argument("--press-file", help="parse a saved release (text or HTML)")
     args = ap.parse_args(argv)
     today = date.fromisoformat(args.date) if args.date else None
-    return run(today, skip_weather=args.skip_weather, skip_pmd=args.skip_pmd,
-               press_file=args.press_file)
+    return run(today, skip_weather=args.skip_weather, with_pmd=args.with_pmd,
+               skip_news=args.skip_news, press_file=args.press_file)
 
 
 if __name__ == "__main__":
