@@ -6,9 +6,10 @@ import Accuracy from './pages/Accuracy.jsx';
 import Data from './pages/Data.jsx';
 import Forecast from './pages/Forecast.jsx';
 import History from './pages/History.jsx';
+import Review from './pages/Review.jsx';
 import Today from './pages/Today.jsx';
 
-const TITLES = { '/': 'Today', '/history': 'History', '/forecast': 'Forecast', '/accuracy': 'Forecast accuracy', '/data': 'Data', '/about': 'About' };
+const TITLES = { '/': 'Today', '/history': 'History', '/forecast': 'Forecast', '/accuracy': 'Forecast accuracy', '/data': 'Data', '/review': 'Review queue', '/about': 'About' };
 
 function NotFound() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
         <Route path="/forecast" element={<Forecast />} />
         <Route path="/accuracy" element={<Accuracy />} />
         <Route path="/data" element={<Data />} />
+        <Route path="/review" element={<Review />} />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -95,9 +95,13 @@ def scored_forecasts(engine) -> pd.DataFrame:
     """
     with engine.connect() as conn:
         fc = pd.DataFrame(conn.execute(select(db.forecasts)).mappings().all())
-        obs = pd.DataFrame(conn.execute(
+        rows = [dict(r) for r in conn.execute(
             select(db.observations.c.station_id, db.observations.c.date, db.observations.c.inflow_cusecs)
-            .where(db.observations.c.inflow_cusecs.is_not(None))).mappings().all())
+            .where(db.observations.c.inflow_cusecs.is_not(None))).mappings().all()]
+    from pipeline.queries import apply_review  # reviewed corrections (Phase 5) count when scoring
+
+    obs = pd.DataFrame([r for r in apply_review(rows) if r.get("inflow_cusecs") is not None],
+                       columns=["station_id", "date", "inflow_cusecs"])
     if fc.empty:
         return fc
     fc = (fc.sort_values("created_at")

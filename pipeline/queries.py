@@ -48,7 +48,20 @@ def _rows(conn, station: str | None = None, start: date | None = None, end: date
         q = q.where(o.date >= start)
     if end:
         q = q.where(o.date <= end)
-    return conn.execute(q).mappings().all()
+    rows = [dict(r) for r in conn.execute(q).mappings().all()]
+    return apply_review(rows, station, start, end)
+
+
+def apply_review(rows: list[dict], station=None, start=None, end=None) -> list[dict]:
+    """Apply the decisions in data/review/decisions.csv (Phase 5) to rows read
+    from the database, so every reader sees the same corrected history."""
+    from . import anomaly
+
+    dec = [d for d in anomaly.read_decisions()
+           if (not station or d.get("station_id") == station)
+           and (not start or d.get("date", "") >= start.isoformat())
+           and (not end or d.get("date", "") <= end.isoformat())]
+    return anomaly.apply_corrections(rows, dec) if dec else rows
 
 
 def latest(conn, today: date | None = None) -> dict:
@@ -57,10 +70,13 @@ def latest(conn, today: date | None = None) -> dict:
     o = db.observations.c
     out = []
     for sid, st in STATIONS.items():
-        recent = conn.execute(
+        rows = [dict(r, station_id=sid) for r in conn.execute(
             select(o.date, o.level_ft, o.inflow_cusecs, o.outflow_cusecs, o.live_storage_maf, o.source)
             .where(o.station_id == sid, (o.inflow_cusecs.is_not(None)) | (o.level_ft.is_not(None)))
-            .order_by(o.date.desc()).limit(2)).mappings().all()
+            .order_by(o.date.desc()).limit(10)).mappings().all()]
+        rows = apply_review(rows, sid, rows[-1]["date"] if rows else None)
+        recent = sorted((r for r in rows if r["inflow_cusecs"] is not None or r["level_ft"] is not None),
+                        key=lambda r: r["date"], reverse=True)[:2]
         if not recent:
             continue
         cur = recent[0]

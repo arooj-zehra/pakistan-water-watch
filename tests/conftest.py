@@ -15,3 +15,11 @@ def engine():
     eng = db.get_engine("sqlite:///:memory:")
     db.init_db(eng)
     return eng
+
+
+@pytest.fixture(autouse=True)
+def _no_real_review_decisions(tmp_path, monkeypatch):
+    """Tests never read or write the repo's data/review/decisions.csv."""
+    from pipeline import anomaly
+
+    monkeypatch.setattr(anomaly, "DECISIONS_CSV", tmp_path / "decisions.csv")

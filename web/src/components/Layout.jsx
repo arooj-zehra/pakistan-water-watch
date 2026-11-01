@@ -36,7 +36,8 @@ export default function Layout({ children }) {
             others; PMD Flood Forecasting Division. Weather data by <a href="https://open-meteo.com/">Open-Meteo.com</a> (CC BY 4.0).
           </p>
           <p>
-            A student project, not an official source. See the <Link to="/about">sources and methods</Link>, or
+            A student project, not an official source. See the <Link to="/about">sources and methods</Link>,
+            the <Link to="/review">data review queue</Link>, or
             the <a href="https://github.com/arooj-zehra/pakistan-water-watch">code on GitHub</a>.
           </p>
         </div>

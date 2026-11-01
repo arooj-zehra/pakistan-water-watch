@@ -1,0 +1,8 @@
+kind,ref,station_id,date,field,decision,value,note,decided_on
+anomaly,a2026-10-22-mangla-inflow_cusecs,mangla,2026-10-22,inflow_cusecs,ok,,,2026-11-01
+anomaly,a2026-08-13-tarbela-level_ft,tarbela,2026-08-13,level_ft,bad,,was 1546.5,2026-11-01
+anomaly,a2026-06-24-mangla-inflow_cusecs,mangla,2026-06-24,inflow_cusecs,ok,,,2026-11-01
+anomaly,a2026-05-25-tarbela-level_ft,tarbela,2026-05-25,level_ft,ok,,,2026-11-01
+anomaly,a2026-04-29-mangla-outflow_cusecs,mangla,2026-04-29,outflow_cusecs,set,40000.0,was 40.0,2026-11-01
+anomaly,a2026-04-27-mangla-outflow_cusecs,mangla,2026-04-27,outflow_cusecs,set,35000.0,was 35.0,2026-11-01
+anomaly,a2026-04-03-tarbela-level_ft,tarbela,2026-04-03,level_ft,ok,,,2026-11-01

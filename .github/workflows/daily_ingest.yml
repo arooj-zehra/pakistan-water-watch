@@ -41,6 +41,12 @@ jobs:
         if: always() && env.DATABASE_URL != ''
         run: python -m pipeline.export_static
 
+      # Phase 5: queue suspicious values for review (web/public/data/review.json).
+      - name: Check for suspicious values
+        if: always() && env.DATABASE_URL != ''
+        continue-on-error: true
+        run: python -m pipeline.anomaly
+
       # Phase 4: forecasts. ERA5 runs ~5 days behind, so the newest days come
       # from Open-Meteo's forecast API (bias-corrected against ERA5 in models.data).
       - name: Update weather for the forecasts

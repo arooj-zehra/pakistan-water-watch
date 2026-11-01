@@ -1,0 +1,2299 @@
+{
+ "flagged": 126,
+ "station_days": 4549,
+ "trials": 10,
+ "recall_big": 0.7621951219512195,
+ "recall": 0.625,
+ "recall_min": 0.45,
+ "recall_max": 0.8,
+ "side_flags_mean": 3.3,
+ "planted": [
+  {
+   "kind": "digit_wrong",
+   "station_id": "mangla",
+   "date": "2020-11-13",
+   "field": "inflow_cusecs",
+   "was": "8,700",
+   "now": "8,780",
+   "change": 0.009153381986487201,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "tarbela",
+   "date": "2021-11-11",
+   "field": "inflow_cusecs",
+   "was": "24,700",
+   "now": "26,700",
+   "change": 0.07786032177227242,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "mangla",
+   "date": "2026-05-19",
+   "field": "inflow_cusecs",
+   "was": "38,000",
+   "now": "68,000",
+   "change": 0.581921545449721,
+   "caught": true
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "tarbela",
+   "date": "2018-05-10",
+   "field": "inflow_cusecs",
+   "was": "35,900",
+   "now": "31,900",
+   "change": 0.11813128570343429,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "tarbela",
+   "date": "2017-04-26",
+   "field": "inflow_cusecs",
+   "was": "58,400",
+   "now": "54,800",
+   "change": 0.06362569588021155,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "tarbela",
+   "date": "2026-10-02",
+   "field": "inflow_cusecs",
+   "was": "53,600",
+   "now": "56,300",
+   "change": 0.0491454670688884,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "mangla",
+   "date": "2026-02-17",
+   "field": "inflow_cusecs",
+   "was": "7,400",
+   "now": "7,040",
+   "change": 0.04987183004017298,
+   "caught": false
+  },
+  {
+   "kind": "drop_digit",
+   "station_id": "tarbela",
+   "date": "2026-06-15",
+   "field": "inflow_cusecs",
+   "was": "128,500",
+   "now": "12,850",
+   "change": 2.3025850929940455,
+   "caught": true
+  },
+  {
+   "kind": "drop_digit",
+   "station_id": "mangla",
+   "date": "2021-10-27",
+   "field": "inflow_cusecs",
+   "was": "15,597",
+   "now": "1,557",
+   "change": 2.304317695217827,
+   "caught": true
+  },
+  {
+   "kind": "extra_digit",
+   "station_id": "mangla",
+   "date": "2021-07-06",
+   "field": "inflow_cusecs",
+   "was": "38,900",
+   "now": "389,000",
+   "change": 2.302585092994046,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "mangla",
+   "date": "2023-11-02",
+   "field": "inflow/outflow",
+   "was": "8,600 / 40,000",
+   "now": "40,000 / 8,600",
+   "change": 1.5371172508544744,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "mangla",
+   "date": "2019-11-20",
+   "field": "inflow/outflow",
+   "was": "19,600 / 35,000",
+   "now": "35,000 / 19,600",
+   "change": 0.5798184952529422,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "tarbela",
+   "date": "2021-03-26",
+   "field": "inflow/outflow",
+   "was": "25,000 / 5,000",
+   "now": "5,000 / 25,000",
+   "change": 1.6094379124341003,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "tarbela",
+   "date": "2026-02-09",
+   "field": "inflow_cusecs",
+   "was": "14,500",
+   "now": "10,700",
+   "change": 0.3039049079586682,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "tarbela",
+   "date": "2017-08-24",
+   "field": "inflow_cusecs",
+   "was": "160,700",
+   "now": "20,200",
+   "change": 2.0738566683363078,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "mangla",
+   "date": "2020-07-05",
+   "field": "inflow_cusecs",
+   "was": "44,600",
+   "now": "160,800",
+   "change": 1.2824274977188477,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2021-02-20",
+   "field": "level_ft",
+   "was": "1,154.50",
+   "now": "1,164.50",
+   "change": 10.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2023-05-13",
+   "field": "level_ft",
+   "was": "1,119.85",
+   "now": "1,191.85",
+   "change": 72.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "tarbela",
+   "date": "2019-10-14",
+   "field": "level_ft",
+   "was": "1,525.70",
+   "now": "1,505.70",
+   "change": 20.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "tarbela",
+   "date": "2022-12-01",
+   "field": "level_ft",
+   "was": "1,508.53",
+   "now": "1,580.53",
+   "change": 72.0,
+   "caught": true
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "tarbela",
+   "date": "2017-09-14",
+   "field": "inflow_cusecs",
+   "was": "87,200",
+   "now": "88,200",
+   "change": 0.01140263209781177,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "tarbela",
+   "date": "2023-07-29",
+   "field": "inflow_cusecs",
+   "was": "283,200",
+   "now": "383,200",
+   "change": 0.3024036842771408,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "tarbela",
+   "date": "2024-10-07",
+   "field": "inflow_cusecs",
+   "was": "71,100",
+   "now": "71,000",
+   "change": 0.0014074597678797173,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "tarbela",
+   "date": "2021-01-12",
+   "field": "inflow_cusecs",
+   "was": "16,900",
+   "now": "16,300",
+   "change": 0.03614851411631109,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "mangla",
+   "date": "2022-03-07",
+   "field": "inflow_cusecs",
+   "was": "20,070",
+   "now": "20,700",
+   "change": 0.030907537463076704,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "mangla",
+   "date": "2023-08-11",
+   "field": "inflow_cusecs",
+   "was": "31,500",
+   "now": "31,050",
+   "change": 0.014388737452099556,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "mangla",
+   "date": "2024-07-11",
+   "field": "inflow_cusecs",
+   "was": "40,600",
+   "now": "46,000",
+   "change": 0.124873329881408,
+   "caught": false
+  },
+  {
+   "kind": "drop_digit",
+   "station_id": "mangla",
+   "date": "2024-11-18",
+   "field": "inflow_cusecs",
+   "was": "5,700",
+   "now": "570",
+   "change": 2.3025850929940455,
+   "caught": true
+  },
+  {
+   "kind": "drop_digit",
+   "station_id": "mangla",
+   "date": "2022-10-24",
+   "field": "inflow_cusecs",
+   "was": "7,900",
+   "now": "700",
+   "change": 2.423537703411708,
+   "caught": true
+  },
+  {
+   "kind": "extra_digit",
+   "station_id": "mangla",
+   "date": "2025-05-15",
+   "field": "inflow_cusecs",
+   "was": "40,045",
+   "now": "400,045",
+   "change": 2.301573219004686,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "mangla",
+   "date": "2024-05-24",
+   "field": "inflow/outflow",
+   "was": "65,700 / 40,000",
+   "now": "40,000 / 65,700",
+   "change": 0.4962194713766286,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "mangla",
+   "date": "2019-03-25",
+   "field": "inflow/outflow",
+   "was": "25,300 / 45,000",
+   "now": "45,000 / 25,300",
+   "change": 0.5758580940368452,
+   "caught": false
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "tarbela",
+   "date": "2017-10-09",
+   "field": "inflow/outflow",
+   "was": "45,900 / 70,000",
+   "now": "70,000 / 45,900",
+   "change": 0.4220301249828596,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "tarbela",
+   "date": "2026-06-13",
+   "field": "inflow_cusecs",
+   "was": "140,700",
+   "now": "34,600",
+   "change": 1.4027762820566647,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "mangla",
+   "date": "2021-11-12",
+   "field": "inflow_cusecs",
+   "was": "10,411",
+   "now": "25,400",
+   "change": 0.891886234531875,
+   "caught": false
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "tarbela",
+   "date": "2024-05-09",
+   "field": "inflow_cusecs",
+   "was": "42,400",
+   "now": "65,000",
+   "change": 0.427238907657725,
+   "caught": false
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2023-04-18",
+   "field": "level_ft",
+   "was": "1,106.30",
+   "now": "1,160.30",
+   "change": 54.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "tarbela",
+   "date": "2023-05-16",
+   "field": "level_ft",
+   "was": "1,429.47",
+   "now": "1,427.47",
+   "change": 2.0,
+   "caught": false
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2021-12-24",
+   "field": "level_ft",
+   "was": "1,118.75",
+   "now": "1,112.75",
+   "change": 6.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2020-04-07",
+   "field": "level_ft",
+   "was": "1,194.15",
+   "now": "1,196.15",
+   "change": 2.0,
+   "caught": true
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "mangla",
+   "date": "2023-02-27",
+   "field": "inflow_cusecs",
+   "was": "17,400",
+   "now": "67,400",
+   "change": 1.3541748116977779,
+   "caught": true
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "tarbela",
+   "date": "2019-10-27",
+   "field": "inflow_cusecs",
+   "was": "30,500",
+   "now": "30,000",
+   "change": 0.016529301951210582,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "mangla",
+   "date": "2024-09-20",
+   "field": "inflow_cusecs",
+   "was": "15,300",
+   "now": "15,700",
+   "change": 0.025807883955872503,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "tarbela",
+   "date": "2025-01-14",
+   "field": "inflow_cusecs",
+   "was": "15,100",
+   "now": "15,500",
+   "change": 0.026145280104322207,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "tarbela",
+   "date": "2025-06-27",
+   "field": "inflow_cusecs",
+   "was": "279,200",
+   "now": "297,200",
+   "change": 0.062476941955386674,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "tarbela",
+   "date": "2024-07-24",
+   "field": "inflow_cusecs",
+   "was": "198,000",
+   "now": "190,800",
+   "change": 0.0370412716803491,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "mangla",
+   "date": "2020-03-26",
+   "field": "inflow_cusecs",
+   "was": "37,900",
+   "now": "73,900",
+   "change": 0.6677617158657755,
+   "caught": true
+  },
+  {
+   "kind": "drop_digit",
+   "station_id": "mangla",
+   "date": "2018-02-15",
+   "field": "inflow_cusecs",
+   "was": "3,500",
+   "now": "350",
+   "change": 2.3025850929940455,
+   "caught": true
+  },
+  {
+   "kind": "drop_digit",
+   "station_id": "tarbela",
+   "date": "2023-03-25",
+   "field": "inflow_cusecs",
+   "was": "19,600",
+   "now": "1,960",
+   "change": 2.3025850929940455,
+   "caught": true
+  },
+  {
+   "kind": "extra_digit",
+   "station_id": "tarbela",
+   "date": "2020-08-31",
+   "field": "inflow_cusecs",
+   "was": "184,000",
+   "now": "1,840,000",
+   "change": 2.302585092994046,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "tarbela",
+   "date": "2026-03-26",
+   "field": "inflow/outflow",
+   "was": "16,800 / 20,000",
+   "now": "20,000 / 16,800",
+   "change": 0.17435338714477774,
+   "caught": false
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "tarbela",
+   "date": "2025-04-04",
+   "field": "inflow/outflow",
+   "was": "16,800 / 20,000",
+   "now": "20,000 / 16,800",
+   "change": 0.17435338714477774,
+   "caught": false
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "tarbela",
+   "date": "2022-12-05",
+   "field": "inflow/outflow",
+   "was": "22,500 / 46,000",
+   "now": "46,000 / 22,500",
+   "change": 0.7151260872787205,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "tarbela",
+   "date": "2025-12-22",
+   "field": "inflow_cusecs",
+   "was": "18,600",
+   "now": "3,300",
+   "change": 1.729239112246721,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "mangla",
+   "date": "2021-01-27",
+   "field": "inflow_cusecs",
+   "was": "9,100",
+   "now": "15,500",
+   "change": 0.5325656104023966,
+   "caught": false
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "tarbela",
+   "date": "2026-05-15",
+   "field": "inflow_cusecs",
+   "was": "59,600",
+   "now": "40,000",
+   "change": 0.3987761199573677,
+   "caught": false
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "tarbela",
+   "date": "2022-01-20",
+   "field": "level_ft",
+   "was": "1,445.25",
+   "now": "1,454.25",
+   "change": 9.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2024-07-18",
+   "field": "level_ft",
+   "was": "1,196.15",
+   "now": "1,169.15",
+   "change": 27.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2017-08-23",
+   "field": "level_ft",
+   "was": "1,233.55",
+   "now": "1,203.55",
+   "change": 30.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "tarbela",
+   "date": "2020-10-17",
+   "field": "level_ft",
+   "was": "1,528.95",
+   "now": "1,538.95",
+   "change": 10.0,
+   "caught": true
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "tarbela",
+   "date": "2025-09-10",
+   "field": "inflow_cusecs",
+   "was": "147,700",
+   "now": "141,700",
+   "change": 0.041471042840699406,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "mangla",
+   "date": "2025-08-01",
+   "field": "inflow_cusecs",
+   "was": "25,200",
+   "now": "29,200",
+   "change": 0.14732471475685852,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "mangla",
+   "date": "2018-06-18",
+   "field": "inflow_cusecs",
+   "was": "36,800",
+   "now": "36,600",
+   "change": 0.005449604767564703,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "tarbela",
+   "date": "2024-08-20",
+   "field": "inflow_cusecs",
+   "was": "257,100",
+   "now": "287,100",
+   "change": 0.11036547285517448,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "mangla",
+   "date": "2023-04-05",
+   "field": "inflow_cusecs",
+   "was": "24,600",
+   "now": "42,600",
+   "change": 0.5491078103370076,
+   "caught": true
+  },
+  {
+   "kind": "transpose",
+   "station_id": "mangla",
+   "date": "2018-02-09",
+   "field": "inflow_cusecs",
+   "was": "3,700",
+   "now": "3,070",
+   "change": 0.18665525805107303,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "mangla",
+   "date": "2020-11-05",
+   "field": "inflow_cusecs",
+   "was": "6,900",
+   "now": "6,090",
+   "change": 0.12487332988140804,
+   "caught": false
+  },
+  {
+   "kind": "drop_digit",
+   "station_id": "tarbela",
+   "date": "2024-07-04",
+   "field": "inflow_cusecs",
+   "was": "278,000",
+   "now": "27,800",
+   "change": 2.3025850929940455,
+   "caught": false
+  },
+  {
+   "kind": "drop_digit",
+   "station_id": "tarbela",
+   "date": "2022-12-06",
+   "field": "inflow_cusecs",
+   "was": "21,600",
+   "now": "2,160",
+   "change": 2.3025850929940455,
+   "caught": true
+  },
+  {
+   "kind": "extra_digit",
+   "station_id": "mangla",
+   "date": "2022-05-19",
+   "field": "inflow_cusecs",
+   "was": "32,243",
+   "now": "322,433",
+   "change": 2.3025943972958896,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "mangla",
+   "date": "2019-10-18",
+   "field": "inflow/outflow",
+   "was": "8,300 / 10,000",
+   "now": "10,000 / 8,300",
+   "change": 0.18632957819149354,
+   "caught": false
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "tarbela",
+   "date": "2021-06-14",
+   "field": "inflow/outflow",
+   "was": "216,600 / 130,000",
+   "now": "130,000 / 216,600",
+   "change": 0.5105178841113077,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "mangla",
+   "date": "2022-10-11",
+   "field": "inflow/outflow",
+   "was": "9,200 / 32,900",
+   "now": "32,900 / 9,200",
+   "change": 1.2742691737163316,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "mangla",
+   "date": "2024-04-07",
+   "field": "inflow_cusecs",
+   "was": "33,200",
+   "now": "19,200",
+   "change": 0.547639596888707,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "tarbela",
+   "date": "2018-07-25",
+   "field": "inflow_cusecs",
+   "was": "279,600",
+   "now": "51,800",
+   "change": 1.685969861094218,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "mangla",
+   "date": "2022-09-06",
+   "field": "inflow_cusecs",
+   "was": "33,900",
+   "now": "155,900",
+   "change": 1.5257997616773262,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "tarbela",
+   "date": "2023-02-20",
+   "field": "level_ft",
+   "was": "1,472.08",
+   "now": "1,462.08",
+   "change": 10.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "tarbela",
+   "date": "2025-05-21",
+   "field": "level_ft",
+   "was": "1,468.70",
+   "now": "1,469.70",
+   "change": 1.0,
+   "caught": false
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2026-06-07",
+   "field": "level_ft",
+   "was": "1,171.60",
+   "now": "1,117.60",
+   "change": 54.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "tarbela",
+   "date": "2020-11-07",
+   "field": "level_ft",
+   "was": "1,518.83",
+   "now": "1,510.83",
+   "change": 8.0,
+   "caught": true
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "mangla",
+   "date": "2021-11-11",
+   "field": "inflow_cusecs",
+   "was": "9,270",
+   "now": "7,270",
+   "change": 0.24302708803233572,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "tarbela",
+   "date": "2018-07-15",
+   "field": "inflow_cusecs",
+   "was": "221,500",
+   "now": "321,500",
+   "change": 0.3725749541924837,
+   "caught": true
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "mangla",
+   "date": "2024-01-25",
+   "field": "inflow_cusecs",
+   "was": "4,400",
+   "now": "4,450",
+   "change": 0.011299555253933466,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "mangla",
+   "date": "2020-01-15",
+   "field": "inflow_cusecs",
+   "was": "23,900",
+   "now": "23,800",
+   "change": 0.004192878260035927,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "tarbela",
+   "date": "2021-04-07",
+   "field": "inflow_cusecs",
+   "was": "24,400",
+   "now": "42,400",
+   "change": 0.5525652299387559,
+   "caught": true
+  },
+  {
+   "kind": "transpose",
+   "station_id": "tarbela",
+   "date": "2021-02-26",
+   "field": "inflow_cusecs",
+   "was": "18,100",
+   "now": "81,100",
+   "change": 1.4997710228495873,
+   "caught": true
+  },
+  {
+   "kind": "transpose",
+   "station_id": "mangla",
+   "date": "2022-01-04",
+   "field": "inflow_cusecs",
+   "was": "7,565",
+   "now": "7,655",
+   "change": 0.011826681869327942,
+   "caught": false
+  },
+  {
+   "kind": "drop_digit",
+   "station_id": "tarbela",
+   "date": "2023-10-05",
+   "field": "inflow_cusecs",
+   "was": "44,500",
+   "now": "4,400",
+   "change": 2.313884648247979,
+   "caught": true
+  },
+  {
+   "kind": "drop_digit",
+   "station_id": "mangla",
+   "date": "2020-08-10",
+   "field": "inflow_cusecs",
+   "was": "31,500",
+   "now": "3,150",
+   "change": 2.3025850929940455,
+   "caught": true
+  },
+  {
+   "kind": "extra_digit",
+   "station_id": "mangla",
+   "date": "2024-05-06",
+   "field": "inflow_cusecs",
+   "was": "58,500",
+   "now": "585,000",
+   "change": 2.302585092994046,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "tarbela",
+   "date": "2024-09-23",
+   "field": "inflow/outflow",
+   "was": "83,400 / 130,000",
+   "now": "130,000 / 83,400",
+   "change": 0.44388614109088137,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "tarbela",
+   "date": "2021-05-08",
+   "field": "inflow/outflow",
+   "was": "64,300 / 45,000",
+   "now": "45,000 / 64,300",
+   "change": 0.35689714147325396,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "mangla",
+   "date": "2024-12-14",
+   "field": "inflow/outflow",
+   "was": "5,500 / 25,000",
+   "now": "25,000 / 5,500",
+   "change": 1.5141277326297755,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "tarbela",
+   "date": "2024-11-02",
+   "field": "inflow_cusecs",
+   "was": "32,500",
+   "now": "5,900",
+   "change": 1.706287738424018,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "tarbela",
+   "date": "2017-04-29",
+   "field": "inflow_cusecs",
+   "was": "44,700",
+   "now": "63,000",
+   "change": 0.3431612247720095,
+   "caught": false
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "tarbela",
+   "date": "2020-05-20",
+   "field": "inflow_cusecs",
+   "was": "52,500",
+   "now": "53,800",
+   "change": 0.02446029757016067,
+   "caught": false
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2022-06-27",
+   "field": "level_ft",
+   "was": "1,097.15",
+   "now": "1,079.15",
+   "change": 18.0,
+   "caught": false
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2022-04-20",
+   "field": "level_ft",
+   "was": "1,076.60",
+   "now": "1,067.60",
+   "change": 9.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2024-04-07",
+   "field": "level_ft",
+   "was": "1,101.50",
+   "now": "1,110.50",
+   "change": 9.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2025-01-08",
+   "field": "level_ft",
+   "was": "1,133.30",
+   "now": "1,137.30",
+   "change": 4.0,
+   "caught": true
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "mangla",
+   "date": "2025-07-03",
+   "field": "inflow_cusecs",
+   "was": "29,295",
+   "now": "19,295",
+   "change": 0.4175708580071698,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "tarbela",
+   "date": "2025-07-31",
+   "field": "inflow_cusecs",
+   "was": "294,800",
+   "now": "894,800",
+   "change": 1.110303069300793,
+   "caught": true
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "mangla",
+   "date": "2020-08-26",
+   "field": "inflow_cusecs",
+   "was": "31,500",
+   "now": "51,500",
+   "change": 0.49159426183810306,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "tarbela",
+   "date": "2021-04-30",
+   "field": "inflow_cusecs",
+   "was": "30,500",
+   "now": "80,500",
+   "change": 0.9705305008111518,
+   "caught": true
+  },
+  {
+   "kind": "transpose",
+   "station_id": "mangla",
+   "date": "2025-01-14",
+   "field": "inflow_cusecs",
+   "was": "5,900",
+   "now": "9,500",
+   "change": 0.47633944769482134,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "mangla",
+   "date": "2019-10-04",
+   "field": "inflow_cusecs",
+   "was": "15,800",
+   "now": "51,800",
+   "change": 1.1873802092325163,
+   "caught": true
+  },
+  {
+   "kind": "transpose",
+   "station_id": "tarbela",
+   "date": "2022-02-04",
+   "field": "inflow_cusecs",
+   "was": "18,100",
+   "now": "81,100",
+   "change": 1.4997710228495873,
+   "caught": true
+  },
+  {
+   "kind": "drop_digit",
+   "station_id": "mangla",
+   "date": "2023-08-28",
+   "field": "inflow_cusecs",
+   "was": "21,700",
+   "now": "2,170",
+   "change": 2.3025850929940455,
+   "caught": true
+  },
+  {
+   "kind": "drop_digit",
+   "station_id": "mangla",
+   "date": "2023-02-28",
+   "field": "inflow_cusecs",
+   "was": "18,100",
+   "now": "1,810",
+   "change": 2.3025850929940455,
+   "caught": true
+  },
+  {
+   "kind": "extra_digit",
+   "station_id": "mangla",
+   "date": "2018-04-30",
+   "field": "inflow_cusecs",
+   "was": "33,200",
+   "now": "332,200",
+   "change": 2.3031873212567517,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "tarbela",
+   "date": "2025-11-04",
+   "field": "inflow/outflow",
+   "was": "29,200 / 52,000",
+   "now": "52,000 / 29,200",
+   "change": 0.5770750093071912,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "tarbela",
+   "date": "2024-02-16",
+   "field": "inflow/outflow",
+   "was": "13,800 / 35,000",
+   "now": "35,000 / 13,800",
+   "change": 0.9306794693262548,
+   "caught": false
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "mangla",
+   "date": "2024-06-15",
+   "field": "inflow/outflow",
+   "was": "44,000 / 65,000",
+   "now": "65,000 / 44,000",
+   "change": 0.39019763597737595,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "tarbela",
+   "date": "2023-07-03",
+   "field": "inflow_cusecs",
+   "was": "201,200",
+   "now": "68,800",
+   "change": 1.0730956932862863,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "mangla",
+   "date": "2025-03-20",
+   "field": "inflow_cusecs",
+   "was": "18,400",
+   "now": "17,100",
+   "change": 0.07327220110632575,
+   "caught": false
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "mangla",
+   "date": "2025-06-05",
+   "field": "inflow_cusecs",
+   "was": "33,826",
+   "now": "76,800",
+   "change": 0.8199749026017762,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "tarbela",
+   "date": "2026-07-22",
+   "field": "level_ft",
+   "was": "1,514.11",
+   "now": "1,515.11",
+   "change": 1.0,
+   "caught": false
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2024-10-08",
+   "field": "level_ft",
+   "was": "1,208.25",
+   "now": "1,280.25",
+   "change": 72.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "tarbela",
+   "date": "2018-05-21",
+   "field": "level_ft",
+   "was": "1,395.78",
+   "now": "1,359.78",
+   "change": 36.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2022-01-25",
+   "field": "level_ft",
+   "was": "1,138.50",
+   "now": "1,183.50",
+   "change": 45.0,
+   "caught": true
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "mangla",
+   "date": "2025-12-09",
+   "field": "inflow_cusecs",
+   "was": "3,400",
+   "now": "3,000",
+   "change": 0.12516314295400605,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "tarbela",
+   "date": "2023-06-06",
+   "field": "inflow_cusecs",
+   "was": "59,800",
+   "now": "50,800",
+   "change": 0.16310930637214985,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "tarbela",
+   "date": "2026-01-09",
+   "field": "inflow_cusecs",
+   "was": "17,500",
+   "now": "87,500",
+   "change": 1.6094379124341003,
+   "caught": true
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "mangla",
+   "date": "2019-05-22",
+   "field": "inflow_cusecs",
+   "was": "49,900",
+   "now": "49,800",
+   "change": 0.002006018726865743,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "tarbela",
+   "date": "2022-08-03",
+   "field": "inflow_cusecs",
+   "was": "228,000",
+   "now": "282,000",
+   "change": 0.21256144198367288,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "tarbela",
+   "date": "2024-04-03",
+   "field": "inflow_cusecs",
+   "was": "26,100",
+   "now": "21,600",
+   "change": 0.18924199963852842,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "mangla",
+   "date": "2021-08-04",
+   "field": "inflow_cusecs",
+   "was": "49,323",
+   "now": "94,323",
+   "change": 0.6483345586422223,
+   "caught": true
+  },
+  {
+   "kind": "drop_digit",
+   "station_id": "mangla",
+   "date": "2019-07-26",
+   "field": "inflow_cusecs",
+   "was": "60,400",
+   "now": "6,040",
+   "change": 2.3025850929940455,
+   "caught": true
+  },
+  {
+   "kind": "drop_digit",
+   "station_id": "tarbela",
+   "date": "2019-05-28",
+   "field": "inflow_cusecs",
+   "was": "68,000",
+   "now": "6,000",
+   "change": 2.4277482359480516,
+   "caught": true
+  },
+  {
+   "kind": "extra_digit",
+   "station_id": "tarbela",
+   "date": "2020-07-21",
+   "field": "inflow_cusecs",
+   "was": "181,700",
+   "now": "1,817,000",
+   "change": 2.302585092994046,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "tarbela",
+   "date": "2017-09-28",
+   "field": "inflow/outflow",
+   "was": "59,800 / 90,000",
+   "now": "90,000 / 59,800",
+   "change": 0.4088040093736791,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "mangla",
+   "date": "2017-09-06",
+   "field": "inflow/outflow",
+   "was": "13,300 / 30,000",
+   "now": "30,000 / 13,300",
+   "change": 0.8134333464344473,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "tarbela",
+   "date": "2022-01-24",
+   "field": "inflow/outflow",
+   "was": "14,600 / 5,000",
+   "now": "5,000 / 14,600",
+   "change": 1.0715836162801904,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "mangla",
+   "date": "2023-07-31",
+   "field": "inflow_cusecs",
+   "was": "54,600",
+   "now": "252,100",
+   "change": 1.5297919514430147,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "tarbela",
+   "date": "2020-01-21",
+   "field": "inflow_cusecs",
+   "was": "17,800",
+   "now": "14,800",
+   "change": 0.18457127652797004,
+   "caught": false
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "tarbela",
+   "date": "2023-07-11",
+   "field": "inflow_cusecs",
+   "was": "152,800",
+   "now": "53,900",
+   "change": 1.0419993988174687,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "tarbela",
+   "date": "2021-07-18",
+   "field": "level_ft",
+   "was": "1,460.44",
+   "now": "1,480.44",
+   "change": 20.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2024-12-15",
+   "field": "level_ft",
+   "was": "1,141.55",
+   "now": "1,111.55",
+   "change": 30.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "tarbela",
+   "date": "2025-08-15",
+   "field": "level_ft",
+   "was": "1,546.50",
+   "now": "1,547.50",
+   "change": 1.0,
+   "caught": false
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "tarbela",
+   "date": "2019-04-08",
+   "field": "level_ft",
+   "was": "1,402.12",
+   "now": "1,406.12",
+   "change": 4.0,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "tarbela",
+   "date": "2018-06-11",
+   "field": "inflow_cusecs",
+   "was": "167,000",
+   "now": "107,000",
+   "change": 0.44516497795484883,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "mangla",
+   "date": "2024-10-14",
+   "field": "inflow_cusecs",
+   "was": "8,600",
+   "now": "8,100",
+   "change": 0.05989814158106896,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "mangla",
+   "date": "2023-12-16",
+   "field": "inflow_cusecs",
+   "was": "4,800",
+   "now": "5,800",
+   "change": 0.18924199963852834,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "mangla",
+   "date": "2018-01-17",
+   "field": "inflow_cusecs",
+   "was": "4,800",
+   "now": "4,600",
+   "change": 0.04255961441879589,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "tarbela",
+   "date": "2022-02-08",
+   "field": "inflow_cusecs",
+   "was": "19,200",
+   "now": "12,900",
+   "change": 0.39768296766610944,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "tarbela",
+   "date": "2020-08-19",
+   "field": "inflow_cusecs",
+   "was": "250,000",
+   "now": "520,000",
+   "change": 0.7323678937132266,
+   "caught": true
+  },
+  {
+   "kind": "transpose",
+   "station_id": "mangla",
+   "date": "2026-07-17",
+   "field": "inflow_cusecs",
+   "was": "22,600",
+   "now": "22,060",
+   "change": 0.024183892452883774,
+   "caught": false
+  },
+  {
+   "kind": "drop_digit",
+   "station_id": "mangla",
+   "date": "2022-09-25",
+   "field": "inflow_cusecs",
+   "was": "12,400",
+   "now": "1,200",
+   "change": 2.3353749158170367,
+   "caught": true
+  },
+  {
+   "kind": "drop_digit",
+   "station_id": "tarbela",
+   "date": "2024-07-08",
+   "field": "inflow_cusecs",
+   "was": "261,100",
+   "now": "21,100",
+   "change": 2.5156304352230623,
+   "caught": true
+  },
+  {
+   "kind": "extra_digit",
+   "station_id": "tarbela",
+   "date": "2022-11-30",
+   "field": "inflow_cusecs",
+   "was": "22,800",
+   "now": "228,000",
+   "change": 2.302585092994046,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "tarbela",
+   "date": "2025-04-17",
+   "field": "inflow/outflow",
+   "was": "39,300 / 20,000",
+   "now": "20,000 / 39,300",
+   "change": 0.6754922453212245,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "tarbela",
+   "date": "2023-09-18",
+   "field": "inflow/outflow",
+   "was": "146,500 / 130,000",
+   "now": "130,000 / 146,500",
+   "change": 0.11949097800153959,
+   "caught": false
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "mangla",
+   "date": "2017-09-08",
+   "field": "inflow/outflow",
+   "was": "15,900 / 40,000",
+   "now": "40,000 / 15,900",
+   "change": 0.9225603448877504,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "mangla",
+   "date": "2021-07-04",
+   "field": "inflow_cusecs",
+   "was": "44,300",
+   "now": "151,600",
+   "change": 1.2302607961571814,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "mangla",
+   "date": "2020-08-12",
+   "field": "inflow_cusecs",
+   "was": "25,600",
+   "now": "249,200",
+   "change": 2.275663435427781,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "tarbela",
+   "date": "2023-10-30",
+   "field": "inflow_cusecs",
+   "was": "28,500",
+   "now": "8,500",
+   "change": 1.209837923778334,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "tarbela",
+   "date": "2021-04-17",
+   "field": "level_ft",
+   "was": "1,406.23",
+   "now": "1,496.23",
+   "change": 90.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "tarbela",
+   "date": "2024-05-17",
+   "field": "level_ft",
+   "was": "1,469.18",
+   "now": "1,466.18",
+   "change": 3.0,
+   "caught": false
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2018-06-12",
+   "field": "level_ft",
+   "was": "1,109.60",
+   "now": "1,190.60",
+   "change": 81.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2025-12-08",
+   "field": "level_ft",
+   "was": "1,212.10",
+   "now": "1,221.10",
+   "change": 9.0,
+   "caught": true
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "mangla",
+   "date": "2023-05-15",
+   "field": "inflow_cusecs",
+   "was": "39,300",
+   "now": "32,300",
+   "change": 0.19615728864660473,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "mangla",
+   "date": "2026-06-02",
+   "field": "inflow_cusecs",
+   "was": "41,000",
+   "now": "81,000",
+   "change": 0.680877087968131,
+   "caught": true
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "mangla",
+   "date": "2025-12-09",
+   "field": "inflow_cusecs",
+   "was": "3,400",
+   "now": "1,400",
+   "change": 0.8873031950009028,
+   "caught": true
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "tarbela",
+   "date": "2025-09-12",
+   "field": "inflow_cusecs",
+   "was": "146,900",
+   "now": "116,900",
+   "change": 0.22843321470180894,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "mangla",
+   "date": "2023-09-23",
+   "field": "inflow_cusecs",
+   "was": "14,500",
+   "now": "14,050",
+   "change": 0.031526253646773895,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "mangla",
+   "date": "2022-08-26",
+   "field": "inflow_cusecs",
+   "was": "36,400",
+   "now": "63,400",
+   "change": 0.5548950868004853,
+   "caught": true
+  },
+  {
+   "kind": "transpose",
+   "station_id": "tarbela",
+   "date": "2019-05-30",
+   "field": "inflow_cusecs",
+   "was": "64,800",
+   "now": "46,800",
+   "change": 0.325422400434628,
+   "caught": true
+  },
+  {
+   "kind": "drop_digit",
+   "station_id": "tarbela",
+   "date": "2025-01-16",
+   "field": "inflow_cusecs",
+   "was": "14,800",
+   "now": "1,480",
+   "change": 2.3025850929940455,
+   "caught": true
+  },
+  {
+   "kind": "drop_digit",
+   "station_id": "tarbela",
+   "date": "2024-08-13",
+   "field": "inflow_cusecs",
+   "was": "283,600",
+   "now": "28,600",
+   "change": 2.2941580768321654,
+   "caught": true
+  },
+  {
+   "kind": "extra_digit",
+   "station_id": "tarbela",
+   "date": "2023-01-25",
+   "field": "inflow_cusecs",
+   "was": "16,500",
+   "now": "165,000",
+   "change": 2.302585092994046,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "mangla",
+   "date": "2023-01-15",
+   "field": "inflow/outflow",
+   "was": "8,700 / 100",
+   "now": "100 / 8,700",
+   "change": 4.465908118654584,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "tarbela",
+   "date": "2026-06-30",
+   "field": "inflow/outflow",
+   "was": "207,900 / 148,300",
+   "now": "148,300 / 207,900",
+   "change": 0.3378199457200808,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "mangla",
+   "date": "2022-10-12",
+   "field": "inflow/outflow",
+   "was": "8,600 / 38,000",
+   "now": "38,000 / 8,600",
+   "change": 1.4858239564669238,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "tarbela",
+   "date": "2022-10-04",
+   "field": "inflow_cusecs",
+   "was": "61,600",
+   "now": "12,000",
+   "change": 1.6357552207514738,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "mangla",
+   "date": "2021-01-16",
+   "field": "inflow_cusecs",
+   "was": "9,500",
+   "now": "15,900",
+   "change": 0.5150273106196908,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "mangla",
+   "date": "2024-07-22",
+   "field": "inflow_cusecs",
+   "was": "22,600",
+   "now": "171,000",
+   "change": 2.0237136502244195,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "tarbela",
+   "date": "2023-07-07",
+   "field": "level_ft",
+   "was": "1,515.24",
+   "now": "1,517.24",
+   "change": 2.0,
+   "caught": false
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2023-12-13",
+   "field": "level_ft",
+   "was": "1,165.00",
+   "now": "1,156.00",
+   "change": 9.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2021-10-15",
+   "field": "level_ft",
+   "was": "1,180.50",
+   "now": "1,108.50",
+   "change": 72.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2024-10-30",
+   "field": "level_ft",
+   "was": "1,188.90",
+   "now": "1,178.90",
+   "change": 10.0,
+   "caught": true
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "tarbela",
+   "date": "2023-06-08",
+   "field": "inflow_cusecs",
+   "was": "66,400",
+   "now": "62,400",
+   "change": 0.06213178110700616,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "tarbela",
+   "date": "2026-05-03",
+   "field": "inflow_cusecs",
+   "was": "41,400",
+   "now": "42,400",
+   "change": 0.023867481406643486,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "tarbela",
+   "date": "2024-07-15",
+   "field": "inflow_cusecs",
+   "was": "180,000",
+   "now": "480,000",
+   "change": 0.9808292530117262,
+   "caught": true
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "mangla",
+   "date": "2021-08-04",
+   "field": "inflow_cusecs",
+   "was": "49,323",
+   "now": "59,323",
+   "change": 0.1846065854566108,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "tarbela",
+   "date": "2026-02-02",
+   "field": "inflow_cusecs",
+   "was": "17,000",
+   "now": "71,000",
+   "change": 1.4294665329850995,
+   "caught": true
+  },
+  {
+   "kind": "transpose",
+   "station_id": "mangla",
+   "date": "2020-05-15",
+   "field": "inflow_cusecs",
+   "was": "78,100",
+   "now": "71,800",
+   "change": 0.08410558079146181,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "mangla",
+   "date": "2024-06-25",
+   "field": "inflow_cusecs",
+   "was": "39,900",
+   "now": "93,900",
+   "change": 0.8558540623183996,
+   "caught": true
+  },
+  {
+   "kind": "drop_digit",
+   "station_id": "tarbela",
+   "date": "2019-05-16",
+   "field": "inflow_cusecs",
+   "was": "52,700",
+   "now": "5,700",
+   "change": 2.224149280706812,
+   "caught": true
+  },
+  {
+   "kind": "drop_digit",
+   "station_id": "tarbela",
+   "date": "2018-05-30",
+   "field": "inflow_cusecs",
+   "was": "62,400",
+   "now": "6,240",
+   "change": 2.3025850929940455,
+   "caught": true
+  },
+  {
+   "kind": "extra_digit",
+   "station_id": "mangla",
+   "date": "2017-10-12",
+   "field": "inflow_cusecs",
+   "was": "6,000",
+   "now": "60,000",
+   "change": 2.302585092994046,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "mangla",
+   "date": "2023-04-08",
+   "field": "inflow/outflow",
+   "was": "20,800 / 10,000",
+   "now": "10,000 / 20,800",
+   "change": 0.7323678937132265,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "mangla",
+   "date": "2022-11-06",
+   "field": "inflow/outflow",
+   "was": "9,500 / 35,000",
+   "now": "35,000 / 9,500",
+   "change": 1.3040562628829184,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "mangla",
+   "date": "2023-07-24",
+   "field": "inflow/outflow",
+   "was": "80,300 / 10,000",
+   "now": "10,000 / 80,300",
+   "change": 2.0831845279586703,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "tarbela",
+   "date": "2017-07-26",
+   "field": "inflow_cusecs",
+   "was": "253,500",
+   "now": "32,300",
+   "change": 2.060296592802627,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "mangla",
+   "date": "2020-01-13",
+   "field": "inflow_cusecs",
+   "was": "8,000",
+   "now": "17,000",
+   "change": 0.7537718023763802,
+   "caught": false
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "tarbela",
+   "date": "2021-02-08",
+   "field": "inflow_cusecs",
+   "was": "11,700",
+   "now": "7,000",
+   "change": 0.5136786927483972,
+   "caught": false
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "tarbela",
+   "date": "2021-06-13",
+   "field": "level_ft",
+   "was": "1,454.52",
+   "now": "1,404.52",
+   "change": 50.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "tarbela",
+   "date": "2020-08-17",
+   "field": "level_ft",
+   "was": "1,530.93",
+   "now": "1,503.93",
+   "change": 27.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "tarbela",
+   "date": "2026-06-30",
+   "field": "level_ft",
+   "was": "1,448.28",
+   "now": "1,449.28",
+   "change": 1.0,
+   "caught": false
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2018-05-22",
+   "field": "level_ft",
+   "was": "1,093.10",
+   "now": "1,039.10",
+   "change": 54.0,
+   "caught": true
+  }
+ ],
+ "first_draw": [
+  {
+   "kind": "digit_wrong",
+   "station_id": "mangla",
+   "date": "2020-11-13",
+   "field": "inflow_cusecs",
+   "was": "8,700",
+   "now": "8,780",
+   "change": 0.009153381986487201,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "tarbela",
+   "date": "2021-11-11",
+   "field": "inflow_cusecs",
+   "was": "24,700",
+   "now": "26,700",
+   "change": 0.07786032177227242,
+   "caught": false
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "mangla",
+   "date": "2026-05-19",
+   "field": "inflow_cusecs",
+   "was": "38,000",
+   "now": "68,000",
+   "change": 0.581921545449721,
+   "caught": true
+  },
+  {
+   "kind": "digit_wrong",
+   "station_id": "tarbela",
+   "date": "2018-05-10",
+   "field": "inflow_cusecs",
+   "was": "35,900",
+   "now": "31,900",
+   "change": 0.11813128570343429,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "tarbela",
+   "date": "2017-04-26",
+   "field": "inflow_cusecs",
+   "was": "58,400",
+   "now": "54,800",
+   "change": 0.06362569588021155,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "tarbela",
+   "date": "2026-10-02",
+   "field": "inflow_cusecs",
+   "was": "53,600",
+   "now": "56,300",
+   "change": 0.0491454670688884,
+   "caught": false
+  },
+  {
+   "kind": "transpose",
+   "station_id": "mangla",
+   "date": "2026-02-17",
+   "field": "inflow_cusecs",
+   "was": "7,400",
+   "now": "7,040",
+   "change": 0.04987183004017298,
+   "caught": false
+  },
+  {
+   "kind": "drop_digit",
+   "station_id": "tarbela",
+   "date": "2026-06-15",
+   "field": "inflow_cusecs",
+   "was": "128,500",
+   "now": "12,850",
+   "change": 2.3025850929940455,
+   "caught": true
+  },
+  {
+   "kind": "drop_digit",
+   "station_id": "mangla",
+   "date": "2021-10-27",
+   "field": "inflow_cusecs",
+   "was": "15,597",
+   "now": "1,557",
+   "change": 2.304317695217827,
+   "caught": true
+  },
+  {
+   "kind": "extra_digit",
+   "station_id": "mangla",
+   "date": "2021-07-06",
+   "field": "inflow_cusecs",
+   "was": "38,900",
+   "now": "389,000",
+   "change": 2.302585092994046,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "mangla",
+   "date": "2023-11-02",
+   "field": "inflow/outflow",
+   "was": "8,600 / 40,000",
+   "now": "40,000 / 8,600",
+   "change": 1.5371172508544744,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "mangla",
+   "date": "2019-11-20",
+   "field": "inflow/outflow",
+   "was": "19,600 / 35,000",
+   "now": "35,000 / 19,600",
+   "change": 0.5798184952529422,
+   "caught": true
+  },
+  {
+   "kind": "swap_in_out",
+   "station_id": "tarbela",
+   "date": "2021-03-26",
+   "field": "inflow/outflow",
+   "was": "25,000 / 5,000",
+   "now": "5,000 / 25,000",
+   "change": 1.6094379124341003,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "tarbela",
+   "date": "2026-02-09",
+   "field": "inflow_cusecs",
+   "was": "14,500",
+   "now": "10,700",
+   "change": 0.3039049079586682,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "tarbela",
+   "date": "2017-08-24",
+   "field": "inflow_cusecs",
+   "was": "160,700",
+   "now": "20,200",
+   "change": 2.0738566683363078,
+   "caught": true
+  },
+  {
+   "kind": "wrong_dam",
+   "station_id": "mangla",
+   "date": "2020-07-05",
+   "field": "inflow_cusecs",
+   "was": "44,600",
+   "now": "160,800",
+   "change": 1.2824274977188477,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2021-02-20",
+   "field": "level_ft",
+   "was": "1,154.50",
+   "now": "1,164.50",
+   "change": 10.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "mangla",
+   "date": "2023-05-13",
+   "field": "level_ft",
+   "was": "1,119.85",
+   "now": "1,191.85",
+   "change": 72.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "tarbela",
+   "date": "2019-10-14",
+   "field": "level_ft",
+   "was": "1,525.70",
+   "now": "1,505.70",
+   "change": 20.0,
+   "caught": true
+  },
+  {
+   "kind": "level_typo",
+   "station_id": "tarbela",
+   "date": "2022-12-01",
+   "field": "level_ft",
+   "was": "1,508.53",
+   "now": "1,580.53",
+   "change": 72.0,
+   "caught": true
+  }
+ ],
+ "quarantine": [
+  {
+   "station_id": "mangla",
+   "date": "2017-10-23",
+   "reason": "Mangla inflow 1.0 below plausible minimum 500",
+   "caught": true
+  },
+  {
+   "station_id": "tarbela",
+   "date": "2017-07-04",
+   "reason": "Tarbela inflow 2785.0 below plausible minimum 5000",
+   "caught": true
+  },
+  {
+   "station_id": "tarbela",
+   "date": "2017-07-27",
+   "reason": "level jumped +24.00 ft in one day",
+   "caught": true
+  },
+  {
+   "station_id": "tarbela",
+   "date": "2019-12-08",
+   "reason": "Tarbela inflow 11.0 below plausible minimum 5000",
+   "caught": false
+  },
+  {
+   "station_id": "tarbela",
+   "date": "2019-12-19",
+   "reason": "Tarbela inflow 12.0 below plausible minimum 5000",
+   "caught": false
+  },
+  {
+   "station_id": "tarbela",
+   "date": "2020-01-03",
+   "reason": "Tarbela inflow 13.0 below plausible minimum 5000",
+   "caught": true
+  },
+  {
+   "station_id": "tarbela",
+   "date": "2020-02-29",
+   "reason": "Tarbela inflow 14.0 below plausible minimum 5000",
+   "caught": true
+  },
+  {
+   "station_id": "tarbela",
+   "date": "2020-07-18",
+   "reason": "level jumped +94.61 ft in one day",
+   "caught": true
+  },
+  {
+   "station_id": "tarbela",
+   "date": "2020-07-30",
+   "reason": "level jumped -84.65 ft in one day",
+   "caught": false
+  },
+  {
+   "station_id": "tarbela",
+   "date": "2021-08-24",
+   "reason": "Tarbela inflow 1324.0 below plausible minimum 5000",
+   "caught": true
+  },
+  {
+   "station_id": "tarbela",
+   "date": "2022-01-03",
+   "reason": "Tarbela inflow 1431.4 below plausible minimum 5000",
+   "caught": true
+  }
+ ],
+ "conflicts": [
+  {
+   "bin": "under 5%",
+   "n": 23,
+   "caught": 1
+  },
+  {
+   "bin": "5% to 20%",
+   "n": 35,
+   "caught": 0
+  },
+  {
+   "bin": "over 20%",
+   "n": 15,
+   "caught": 4
+  }
+ ]
+}
