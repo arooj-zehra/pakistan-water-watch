@@ -1,6 +1,6 @@
 {
  "model_version": "v20261030",
- "issued_at": "2026-11-01T17:54:19+00:00",
+ "issued_at": "2026-11-01T18:00:15+00:00",
  "horizons": [
   1,
   3,
@@ -16,84 +16,84 @@
  "units": "cusecs",
  "weather_adjustments": {
   "gilgit": {
-   "tmax_c": -3.24,
-   "tmin_c": -3.39,
-   "tmean_c": -3.39,
-   "precip_mm": 1.37,
+   "tmax_c": -2.82,
+   "tmin_c": -2.55,
+   "tmean_c": -2.79,
+   "precip_mm": 1.42,
    "snowfall_cm": 1.0,
-   "overlap_days": 46
+   "overlap_days": 55
   },
   "skardu": {
-   "tmax_c": -1.53,
-   "tmin_c": -4.62,
-   "tmean_c": -3.09,
-   "precip_mm": 1.12,
+   "tmax_c": -1.06,
+   "tmin_c": -3.68,
+   "tmean_c": -2.41,
+   "precip_mm": 1.19,
    "snowfall_cm": 1.0,
-   "overlap_days": 46
+   "overlap_days": 55
   },
   "astore": {
-   "tmax_c": 0.08,
-   "tmin_c": 1.85,
-   "tmean_c": 0.49,
-   "precip_mm": 1.82,
+   "tmax_c": 0.17,
+   "tmin_c": 2.2,
+   "tmean_c": 0.72,
+   "precip_mm": 1.97,
    "snowfall_cm": 0.5,
-   "overlap_days": 46
+   "overlap_days": 55
   },
   "hunza": {
-   "tmax_c": -0.3,
-   "tmin_c": -2.94,
-   "tmean_c": -1.74,
-   "precip_mm": 0.86,
+   "tmax_c": 0.0,
+   "tmin_c": -2.14,
+   "tmean_c": -1.17,
+   "precip_mm": 0.94,
    "snowfall_cm": 0.5,
-   "overlap_days": 46
+   "overlap_days": 55
   },
   "leh": {
-   "tmax_c": 1.8,
-   "tmin_c": -1.1,
-   "tmean_c": 0.12,
-   "precip_mm": 1.83,
+   "tmax_c": 2.03,
+   "tmin_c": -0.72,
+   "tmean_c": 0.36,
+   "precip_mm": 2.0,
    "snowfall_cm": 0.5,
-   "overlap_days": 46
+   "overlap_days": 55
   },
   "srinagar": {
-   "tmax_c": 0.29,
-   "tmin_c": 1.18,
-   "tmean_c": 0.37,
-   "precip_mm": 1.74,
+   "tmax_c": 0.15,
+   "tmin_c": 1.1,
+   "tmean_c": 0.27,
+   "precip_mm": 2.0,
    "snowfall_cm": 1.0,
-   "overlap_days": 46
+   "overlap_days": 55
   },
   "pahalgam": {
-   "tmax_c": 0.5,
-   "tmin_c": 1.04,
-   "tmean_c": 0.64,
-   "precip_mm": 1.12,
+   "tmax_c": 0.59,
+   "tmin_c": 1.22,
+   "tmean_c": 0.78,
+   "precip_mm": 1.19,
    "snowfall_cm": 1.0,
-   "overlap_days": 46
+   "overlap_days": 55
   },
   "muzaffarabad": {
-   "tmax_c": 0.28,
-   "tmin_c": 0.37,
-   "tmean_c": 0.95,
-   "precip_mm": 0.61,
+   "tmax_c": 0.25,
+   "tmin_c": 0.33,
+   "tmean_c": 0.91,
+   "precip_mm": 0.6,
    "snowfall_cm": 1.0,
-   "overlap_days": 46
+   "overlap_days": 55
   },
   "naran": {
-   "tmax_c": 0.62,
-   "tmin_c": 1.6,
-   "tmean_c": 1.31,
-   "precip_mm": 1.37,
+   "tmax_c": 0.61,
+   "tmin_c": 1.65,
+   "tmean_c": 1.37,
+   "precip_mm": 1.47,
    "snowfall_cm": 1.0,
-   "overlap_days": 46
+   "overlap_days": 55
   },
   "kel": {
-   "tmax_c": 0.27,
-   "tmin_c": 3.24,
-   "tmean_c": 1.13,
-   "precip_mm": 0.97,
+   "tmax_c": 0.29,
+   "tmin_c": 3.33,
+   "tmean_c": 1.15,
+   "precip_mm": 1.17,
    "snowfall_cm": 1.0,
-   "overlap_days": 46
+   "overlap_days": 55
   }
  },
  "stations": {
@@ -109,12 +109,12 @@
      "h": 1,
      "target_date": "2026-10-31",
      "p05": 26180,
-     "p10": 27323,
+     "p10": 27311,
      "p25": 27914,
-     "p50": 28671,
-     "p75": 29673,
-     "p90": 31151,
-     "p95": 31841,
+     "p50": 28658,
+     "p75": 29684,
+     "p90": 31197,
+     "p95": 31847,
      "drivers": [
       {
        "feature": "doy",
@@ -132,12 +132,12 @@
     {
      "h": 3,
      "target_date": "2026-11-02",
-     "p05": 23265,
-     "p10": 25589,
-     "p25": 26853,
-     "p50": 30242,
-     "p75": 31810,
-     "p90": 34526,
+     "p05": 23277,
+     "p10": 25570,
+     "p25": 26847,
+     "p50": 30232,
+     "p75": 31684,
+     "p90": 34334,
      "p95": 36357,
      "drivers": [
       {
@@ -148,7 +148,7 @@
       {
        "feature": "precip3",
        "label": "rain and snow over 3 days",
-       "effect_pct": 4.1
+       "effect_pct": 4.0
       },
       {
        "feature": "rm30",
@@ -163,11 +163,11 @@
      "target_date": "2026-11-04",
      "p05": 21784,
      "p10": 23638,
-     "p25": 26902,
-     "p50": 28377,
+     "p25": 26896,
+     "p50": 28558,
      "p75": 29532,
-     "p90": 33496,
-     "p95": 41220,
+     "p90": 33577,
+     "p95": 41152,
      "drivers": [
       {
        "feature": "doy",
@@ -191,17 +191,17 @@
      "h": 7,
      "target_date": "2026-11-06",
      "p05": 19885,
-     "p10": 22363,
-     "p25": 26243,
-     "p50": 29167,
+     "p10": 22345,
+     "p25": 26311,
+     "p50": 29048,
      "p75": 31135,
-     "p90": 33901,
-     "p95": 38518,
+     "p90": 33884,
+     "p95": 38705,
      "drivers": [
       {
        "feature": "doy",
        "label": "the time of year",
-       "effect_pct": -8.7
+       "effect_pct": -8.6
       },
       {
        "feature": "rm30",
@@ -211,7 +211,7 @@
       {
        "feature": "precip3",
        "label": "rain and snow over 3 days",
-       "effect_pct": 3.0
+       "effect_pct": 2.6
       }
      ],
      "explanation": "Biggest influences: the time of year (\u22129%), the 30-day average (+5%), rain and snow over 3 days (+3%)"
@@ -220,12 +220,12 @@
      "h": 10,
      "target_date": "2026-11-09",
      "p05": 18768,
-     "p10": 21686,
+     "p10": 21642,
      "p25": 25578,
-     "p50": 28404,
-     "p75": 30596,
-     "p90": 36124,
-     "p95": 41431,
+     "p50": 28485,
+     "p75": 30329,
+     "p90": 36270,
+     "p95": 41319,
      "drivers": [
       {
        "feature": "doy",
@@ -375,7 +375,7 @@
      "p50": 7203,
      "p75": 7973,
      "p90": 10470,
-     "p95": 12927,
+     "p95": 12884,
      "drivers": [
       {
        "feature": "log_q0",
