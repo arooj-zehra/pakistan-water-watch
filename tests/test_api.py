@@ -62,8 +62,18 @@ def test_bundles_match_static_export_shapes(client):
     assert m["latest_date"] == "2026-10-30" and m["sources"][0]["dam_days"] == 30
 
 
-def test_placeholders_and_docs(client):
-    assert client.get("/api/forecast").json()["status"] == "not_started"
-    assert client.get("/api/accuracy").json()["scores"] == []
+def test_forecast_endpoints_and_docs(client, tmp_path, monkeypatch):
+    import json
+
+    from api import main
+
+    monkeypatch.setattr(main, "MODEL_FILES", tmp_path)
+    assert client.get("/api/forecast").status_code == 404
+    (tmp_path / "forecast.json").write_text(json.dumps({"model_version": "v1", "stations": {"tarbela": {"x": 1}, "mangla": {"x": 2}}}))
+    (tmp_path / "accuracy.json").write_text(json.dumps({"scored": 0}))
+    assert client.get("/api/forecast?station=mangla").json()["stations"] == {"mangla": {"x": 2}}
+    assert client.get("/api/accuracy").json() == {"scored": 0, "monitor": None}
+    assert client.get("/api/bundle/forecast").json()["model_version"] == "v1"
+    assert client.get("/api/bundle/monitor").status_code == 404
     assert client.get("/docs").status_code == 200
     assert "/api/latest" in client.get("/openapi.json").json()["paths"]

@@ -6,6 +6,7 @@ const PAGES = [
   ['/', 'Today'],
   ['/history', 'History'],
   ['/forecast', 'Forecast'],
+  ['/accuracy', 'Accuracy'],
   ['/data', 'Data'],
   ['/about', 'About'],
 ];

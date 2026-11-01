@@ -1,0 +1,47 @@
+name: monthly_retrain
+
+# 08:23 UTC (13:23 PKT) on the 2nd of each month, after the daily job has run.
+on:
+  schedule:
+    - cron: "23 8 2 * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Promote even if slightly worse (never if it fails the checks)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+# Same group as the daily job, so the two never commit at the same time.
+concurrency:
+  group: daily_ingest
+  cancel-in-progress: false
+
+jobs:
+  retrain:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: Update ERA5 weather
+        continue-on-error: true
+        run: python -m pipeline.fetch_weather --update
+
+      - name: Train a candidate and promote it if it passes
+        run: python -m models.retrain ${{ inputs.force && '--force' || '' }}
+
+      - name: Commit the model (or the decision log if it was kept)
+        run: |
+          git config user.name "pww-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A models docs data/weather
+          git diff --cached --quiet || git commit -m "model: monthly retrain $(date -u +%F)"
+          git pull --rebase --autostash || true
+          git push

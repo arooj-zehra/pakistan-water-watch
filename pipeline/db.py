@@ -92,7 +92,11 @@ forecasts = Table(
     Column("target_date", Date, nullable=False),
     Column("p05", Float), Column("p50", Float), Column("p95", Float),
     Column("created_at", DateTime, nullable=False, default=utcnow),
+    # Phase 4: the 50% and 80% intervals and the starting inflow (for persistence)
+    Column("p10", Float), Column("p25", Float), Column("p75", Float), Column("p90", Float),
+    Column("inflow_at_issue", Float),
 )
+FORECAST_ADDED_COLUMNS = ("p10", "p25", "p75", "p90", "inflow_at_issue")
 
 ingest_log = Table(
     "ingest_log", metadata,
@@ -143,8 +147,40 @@ def get_engine(url: str | None = None) -> Engine:
     return eng
 
 
+def migrate(engine: Engine) -> list[str]:
+    """Add columns introduced after a table was first created (ALTER TABLE ADD
+    COLUMN only: existing rows and the immutability triggers are untouched)."""
+    from sqlalchemy import inspect
+
+    insp = inspect(engine)
+    if "forecasts" not in insp.get_table_names():
+        return []
+    have = {c["name"] for c in insp.get_columns("forecasts")}
+    added = []
+    with engine.begin() as conn:
+        for col in FORECAST_ADDED_COLUMNS:
+            if col not in have:
+                conn.execute(text(f"ALTER TABLE forecasts ADD COLUMN {col} FLOAT"))
+                added.append(col)
+    return added
+
+
+def insert_new(conn: Connection, table: Table, rows: Iterable[dict], keys: list[str]) -> list[dict]:
+    """Insert only rows whose key is not in the table yet; return those rows.
+    Never updates, so it is safe on the write-once forecasts table."""
+    rows = list(rows)
+    if not rows:
+        return []
+    existing = {tuple(r) for r in conn.execute(select(*[table.c[k] for k in keys]))}
+    new = [r for r in rows if tuple(r[k] for k in keys) not in existing]
+    if new:
+        conn.execute(table.insert(), new)
+    return new
+
+
 def init_db(engine: Engine) -> None:
     metadata.create_all(engine)
+    migrate(engine)
     with engine.begin() as conn:
         for stmt in (_IMMUTABLE_PG if engine.dialect.name == "postgresql" else _IMMUTABLE_SQLITE):
             conn.execute(text(stmt))

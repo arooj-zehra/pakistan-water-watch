@@ -2,12 +2,13 @@ import { useEffect } from 'react';
 import { Route, Routes, useLocation, Link } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
 import About from './pages/About.jsx';
+import Accuracy from './pages/Accuracy.jsx';
 import Data from './pages/Data.jsx';
 import Forecast from './pages/Forecast.jsx';
 import History from './pages/History.jsx';
 import Today from './pages/Today.jsx';
 
-const TITLES = { '/': 'Today', '/history': 'History', '/forecast': 'Forecast', '/data': 'Data', '/about': 'About' };
+const TITLES = { '/': 'Today', '/history': 'History', '/forecast': 'Forecast', '/accuracy': 'Forecast accuracy', '/data': 'Data', '/about': 'About' };
 
 function NotFound() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
         <Route path="/" element={<Today />} />
         <Route path="/history" element={<History />} />
         <Route path="/forecast" element={<Forecast />} />
+        <Route path="/accuracy" element={<Accuracy />} />
         <Route path="/data" element={<Data />} />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />

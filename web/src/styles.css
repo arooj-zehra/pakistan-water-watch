@@ -8,6 +8,7 @@
   --rule: #d3dbd8;
   --water: #3e8e98;
   --water-soft: rgba(62, 142, 152, 0.16);
+  --water-mid: rgba(62, 142, 152, 0.34);
   --silt: #b5a27f;
   --silt-soft: rgba(181, 162, 127, 0.28);
   --gauge-red: #c2412d;
@@ -34,6 +35,7 @@
     --rule: #2a3b43;
     --water: #6fbfc8;
     --water-soft: rgba(111, 191, 200, 0.18);
+    --water-mid: rgba(111, 191, 200, 0.36);
     --silt: #9c8b6b;
     --silt-soft: rgba(156, 139, 107, 0.3);
     --gauge-red: #ef7a62;
@@ -84,6 +86,7 @@ main { padding: 28px 0 56px; }
 
 /* Today: two dams side by side, a rule between them, no boxes */
 .dams { display: grid; gap: 40px; }
+.dam { min-width: 0; }  /* let wide tables scroll inside instead of widening the page */
 @media (min-width: 900px) {
   .dams { grid-template-columns: 1fr 1fr; gap: 0; }
   .dam + .dam { border-left: 1px solid var(--rule); padding-left: 40px; }

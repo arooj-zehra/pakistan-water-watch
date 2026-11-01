@@ -20,7 +20,7 @@ def synthetic(tmp_path, gap_days=()):
     """Snowmelt-like flows driven by lagged warmth, plus ERA5 CSVs for every point."""
     rng = np.random.default_rng(0)
     idx = pd.date_range(START, END, freq="D")
-    doy = idx.dayofyear.to_numpy()
+    doy = idx.day_of_year.to_numpy()
     temp = 12 * np.sin(2 * np.pi * (doy - 110) / 365.25) + rng.normal(0, 2, len(idx))
     pdd = pd.Series(np.maximum(temp, 0), index=idx).rolling(10, min_periods=1).mean().to_numpy()
     stations = {}

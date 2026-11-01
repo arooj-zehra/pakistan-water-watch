@@ -53,7 +53,7 @@ def station_frame(sid: str, hist: pd.DataFrame, weather: pd.DataFrame | None) ->
     f["level0"] = lvl
     f["dl1"] = lvl - lvl.shift(1)
     f["dl7"] = lvl - lvl.shift(7)
-    doy = hist.index.dayofyear
+    doy = hist.index.day_of_year
     f["doy_sin"] = np.sin(2 * np.pi * doy / 365.25)
     f["doy_cos"] = np.cos(2 * np.pi * doy / 365.25)
 

@@ -148,6 +148,27 @@ def forecast(frames: dict, prod: Production, today: date | None = None) -> dict:
     return out
 
 
+def live_frames(history=HISTORY_JSON, weather_dir=WEATHER_DIR, recent: bool = True):
+    """Feature frames for live forecasts: history plus ERA5 topped up with recent days."""
+    adj: dict = {}
+    hist = load_history(history)
+    weather = load_weather(weather_dir, recent=recent, adjustments=adj)
+    return {sid: station_frame(sid, h, weather.get(sid)) for sid, h in hist.items()}, adj
+
+
+def build_doc(prod: Production, frames: dict, adj: dict | None = None, today: date | None = None) -> dict:
+    """The forecast.json document."""
+    stations = forecast(frames, prod, today)
+    return {"model_version": prod.meta["version"],
+            "issued_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+            "horizons": prod.horizons, "levels": [50, 80, 90], "units": "cusecs",
+            "weather_adjustments": adj or {}, "stations": stations,
+            "skill": {h: (prod.meta["horizons"][str(h)].get("backtest") or {}).get("skill_vs_persistence")
+                      for h in prod.horizons},
+            "coverage90": {h: (prod.meta["horizons"][str(h)].get("backtest") or {}).get("coverage90")
+                           for h in prod.horizons}}
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--history", type=Path, default=HISTORY_JSON)
@@ -159,17 +180,9 @@ def main(argv=None) -> int:
     args = ap.parse_args(argv)
 
     prod = Production(args.artifacts or latest_version())
-    adj: dict = {}
-    hist = load_history(args.history)
-    weather = load_weather(args.weather_dir, recent=not args.no_recent, adjustments=adj)
-    frames = {sid: station_frame(sid, h, weather.get(sid)) for sid, h in hist.items()}
-    stations = forecast(frames, prod)
-    doc = {"model_version": prod.meta["version"],
-           "issued_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
-           "horizons": prod.horizons, "levels": [50, 80, 90], "units": "cusecs",
-           "weather_adjustments": adj, "stations": stations,
-           "skill": {h: (prod.meta["horizons"][str(h)].get("backtest") or {}).get("skill_vs_persistence")
-                     for h in prod.horizons}}
+    frames, adj = live_frames(args.history, args.weather_dir, recent=not args.no_recent)
+    doc = build_doc(prod, frames, adj)
+    stations = doc["stations"]
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(doc, indent=1), encoding="utf-8")
     print(f"Model {prod.meta['version']}: forecasts written to {args.out}")

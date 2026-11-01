@@ -41,16 +41,63 @@ jobs:
         if: always() && env.DATABASE_URL != ''
         run: python -m pipeline.export_static
 
-      - name: Commit raw snapshots and website data
+      # Phase 4: forecasts. ERA5 runs ~5 days behind, so the newest days come
+      # from Open-Meteo's forecast API (bias-corrected against ERA5 in models.data).
+      - name: Update weather for the forecasts
+        if: always() && env.DATABASE_URL != ''
+        continue-on-error: true
+        run: python -m pipeline.fetch_weather --update --recent
+
+      # Issues forecasts (stored once, never changed), scores old ones, checks
+      # for drift. Exit code 2 = monitor alert: handled by the issue step below.
+      - name: Forecast, store and score
+        id: forecast
+        if: always() && env.DATABASE_URL != ''
+        shell: bash
+        run: |
+          set +e
+          python -m models.daily 2>&1 | tee forecast.log
+          code=${PIPESTATUS[0]}
+          if [ "$code" = "2" ]; then echo "alert=true" >> "$GITHUB_OUTPUT"; exit 0; fi
+          exit $code
+
+      - name: Commit raw snapshots, weather, forecasts and website data
         if: always()
         run: |
           git config user.name "pww-bot"
           git config user.email "actions@users.noreply.github.com"
           git add data/raw || true
           git add data/inventory/news || true
+          git add data/weather || true
+          git add data/forecasts || true
           git add web/public/data || true
           git diff --cached --quiet || git commit -m "data: daily update $(date -u +%F)"
+          git pull --rebase --autostash || true
           git push || echo "nothing to push"
+
+      - name: Open an issue on a model alert
+        if: always() && steps.forecast.outputs.alert == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const mon = JSON.parse(fs.readFileSync('web/public/data/monitor.json', 'utf8'));
+            const open = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo, state: 'open', labels: 'model-alert'
+            });
+            if (open.data.length) return;  // one open alert at a time; close it once handled
+            await github.rest.issues.create({
+              owner: context.repo.owner, repo: context.repo.repo,
+              title: `Model alert ${new Date().toISOString().slice(0, 10)}`,
+              labels: ['model-alert'],
+              body: 'The daily forecast monitor raised an alert:\n\n' +
+                    mon.alerts.map(a => `- ${a}`).join('\n') +
+                    `\n\nRun: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}` +
+                    '\n\nCoverage or skill alerts mean the forecasts are going wrong: consider running the monthly ' +
+                    'retrain now (Actions > monthly_retrain > Run workflow). Drift alerts mean conditions are unlike ' +
+                    'any training year, so forecasts may be less reliable until the model has seen such a season. ' +
+                    'Close this issue once handled; a new one opens only after that.'
+            });
 
       - name: Open an issue on failure
         if: failure()
@@ -58,7 +105,8 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const log = fs.existsSync('ingest.log') ? fs.readFileSync('ingest.log', 'utf8').slice(-6000) : '(no log)';
+            const read = (f) => fs.existsSync(f) ? fs.readFileSync(f, 'utf8') : '';
+            const log = ((read('ingest.log') + '\n' + read('forecast.log')).trim() || '(no log)').slice(-6000);
             const title = `Daily ingest failed ${new Date().toISOString().slice(0, 10)}`;
             const open = await github.rest.issues.listForRepo({
               owner: context.repo.owner, repo: context.repo.repo, state: 'open', labels: 'ingest-failure'

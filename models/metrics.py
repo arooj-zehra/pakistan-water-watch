@@ -26,7 +26,7 @@ def climatology_table(frames: dict, before: pd.Timestamp, window: int = 7) -> di
     out = {}
     for sid, f in frames.items():
         raw = f["_raw"][f.index < before].dropna()
-        doys = raw.index.dayofyear.to_numpy()
+        doys = raw.index.day_of_year.to_numpy()
         vals = raw.to_numpy()
         table = np.full(367, np.nan)
         for d in range(1, 367):
@@ -42,7 +42,7 @@ def baselines(rows: pd.DataFrame, frames: dict, clim: dict) -> pd.DataFrame:
     """Persistence, climatology and seasonal-naive forecasts (cusecs) for each row."""
     out = pd.DataFrame(index=rows.index)
     out["persistence"] = rows["q0"]
-    out["climatology"] = [clim[s][d] for s, d in zip(rows["sid"], rows["target_date"].dt.dayofyear)]
+    out["climatology"] = [clim[s][d] for s, d in zip(rows["sid"], rows["target_date"].dt.day_of_year)]
     last_year = []
     for s, t in zip(rows["sid"], rows["target_date"]):
         q = frames[s]["q0"]

@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import csv
 import io
+import json
 from datetime import date
 from functools import lru_cache
 from typing import Literal, Optional
@@ -21,13 +22,13 @@ from fastapi.responses import StreamingResponse
 from sqlalchemy import func, select
 
 from pipeline import db, queries
-from pipeline.config import STATIONS
+from pipeline.config import ROOT, STATIONS
 
 Station = Literal["tarbela", "mangla"]
 
 app = FastAPI(
     title="Pakistan Water Watch API",
-    version="0.2.0",
+    version="0.4.0",
     description=(
         "Daily level, inflow and outflow for Tarbela and Mangla reservoirs, reconstructed from "
         "WAPDA/IRSA daily releases as republished by APP, UrduPoint, Pakistan Observer and others, "
@@ -99,19 +100,39 @@ def export_csv(station: Optional[Station] = None, start: Optional[date] = Query(
                              headers={"Content-Disposition": f'attachment; filename="{name}"'})
 
 
-@app.get("/api/forecast", tags=["coming soon"], summary="Inflow forecasts (Phase 3)")
+MODEL_FILES = ROOT / "web" / "public" / "data"  # written by models.daily (the daily job)
+
+
+def _model_file(name: str) -> dict | None:
+    path = MODEL_FILES / f"{name}.json"
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
+
+
+@app.get("/api/forecast", tags=["forecasts"], summary="Today's inflow forecasts with 50/80/90% ranges")
 def forecast(station: Optional[Station] = None):
-    return {"status": "not_started", "message": "Forecasts start once the Phase 3 model is trained.",
-            "station": station, "forecasts": []}
+    doc = _model_file("forecast")
+    if doc is None:
+        raise HTTPException(404, "No forecasts yet: the daily job writes them once a model is trained.")
+    if station:
+        doc = {**doc, "stations": {station: doc["stations"].get(station)}}
+    return doc
 
 
-@app.get("/api/accuracy", tags=["coming soon"], summary="Live forecast accuracy (Phase 4)")
+@app.get("/api/accuracy", tags=["forecasts"], summary="Live forecast scores against reported inflows")
 def accuracy():
-    return {"status": "not_started", "message": "Scoring starts with the first live forecasts.", "scores": []}
+    doc = _model_file("accuracy")
+    if doc is None:
+        raise HTTPException(404, "No forecasts scored yet.")
+    return {**doc, "monitor": _model_file("monitor")}
 
 
 @app.get("/api/bundle/{name}", tags=["website"], summary="The website's data files, served live")
-def bundle(name: Literal["latest", "history", "climatology", "meta"]):
+def bundle(name: Literal["latest", "history", "climatology", "meta", "forecast", "accuracy", "monitor"]):
+    if name in ("forecast", "accuracy", "monitor"):
+        doc = _model_file(name)
+        if doc is None:
+            raise HTTPException(404, f"{name}.json has not been written yet")
+        return doc
     if name == "meta":
         return queries.meta(engine())
     with engine().connect() as c:

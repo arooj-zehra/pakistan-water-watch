@@ -33,13 +33,17 @@ export function load(name) {
   return cache.get(name);
 }
 
+// A name ending in '?' is optional: it resolves to null instead of failing
+// (forecast files only exist once the daily job has run the model).
+const loadMaybe = (name) => (name.endsWith('?') ? load(name.slice(0, -1)).catch(() => null) : load(name));
+
 export function useData(...names) {
   const key = names.join(',');
   const [state, setState] = useState({ data: null, error: null, loading: true });
   useEffect(() => {
     let alive = true;
     setState({ data: null, error: null, loading: true });
-    Promise.all(names.map(load))
+    Promise.all(names.map(loadMaybe))
       .then((values) => alive && setState({ data: values, error: null, loading: false }))
       .catch((error) => alive && setState({ data: null, error, loading: false }));
     return () => {
