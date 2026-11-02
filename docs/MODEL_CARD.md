@@ -22,7 +22,7 @@ Daily history rebuilt from news reports of the WAPDA/IRSA release, 2015 to today
 - Target: log(inflow on the target day) minus log(inflow today), so predicting zero is the persistence forecast.
 - Features: today's inflow and level, changes over 1 to 14 days, rolling means, how many of the last 14 days were observed, season, and catchment weather from ERA5 (positive degree-days, temperature, precipitation and snowfall over 3 to 30 days, ending the day before the forecast).
 - Intervals: conformalized quantile regression on the year before the test year (Romano et al., 2019).
-- Production version `v20261030` (commit `da231ea`), data through 2026-10-30.
+- Production version `v20261102` (commit `d9f7b32`), data through 2026-11-02.
 
 ## Backtest
 
@@ -44,11 +44,11 @@ Test years 2021, 2023, 2024 and 2025 pooled. Skill = 1 − MAE(model) / MAE(pers
 
 | Horizon | Rows | MAE model | MAE persistence | Skill | 50% cov. | 80% cov. | 90% cov. | Median 90% width |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 d | 379 | 3,154 | 4,822 | 35% | 50% | 81% | 93% | ±17% of today's inflow |
-| 3 d | 361 | 7,476 | 10,829 | 31% | 44% | 81% | 89% | ±33% of today's inflow |
-| 5 d | 347 | 11,050 | 14,118 | 22% | 48% | 77% | 90% | ±45% of today's inflow |
-| 7 d | 343 | 12,740 | 14,823 | 14% | 42% | 77% | 88% | ±49% of today's inflow |
-| 10 d | 337 | 12,024 | 16,925 | 29% | 53% | 80% | 91% | ±53% of today's inflow |
+| 1 d | 381 | 3,128 | 4,798 | 35% | 51% | 81% | 93% | ±17% of today's inflow |
+| 3 d | 363 | 7,444 | 10,773 | 31% | 44% | 81% | 89% | ±33% of today's inflow |
+| 5 d | 349 | 10,916 | 14,040 | 22% | 48% | 77% | 91% | ±45% of today's inflow |
+| 7 d | 345 | 12,670 | 14,743 | 14% | 42% | 77% | 88% | ±49% of today's inflow |
+| 10 d | 339 | 12,005 | 16,845 | 29% | 53% | 80% | 91% | ±53% of today's inflow |
 
 ![Interval calibration](img/reliability.png)
 

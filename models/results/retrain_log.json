@@ -9,5 +9,16 @@
   ],
   "candidate_mean_skill": 0.19883331408055274,
   "current_mean_skill": 0.19883331408055277
+ },
+ {
+  "at": "2026-11-02T18:37:34+00:00",
+  "candidate": "v20261102",
+  "current": "v20261030",
+  "promoted": true,
+  "reasons": [
+   "average backtest skill 19.9% vs current 19.9%"
+  ],
+  "candidate_mean_skill": 0.19883331408055274,
+  "current_mean_skill": 0.19883331408055277
  }
 ]
