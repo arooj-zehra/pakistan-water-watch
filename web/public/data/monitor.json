@@ -1,49 +1,61 @@
 {
- "generated_at": "2026-11-01T18:00:22+00:00",
- "status": "ok",
+ "generated_at": "2026-11-02T13:15:01+00:00",
+ "status": "watch",
  "alerts": [],
- "watch": [],
+ "watch": [
+  "tarbela: log_q0 PSI 0.63 (top quarter of 8 past years)"
+ ],
  "window_days": 60,
- "recent_scores": {},
+ "recent_scores": {
+  "3": {
+   "n": 2,
+   "mae_model": 1238,
+   "mae_persistence": 600,
+   "skill_vs_persistence": -1.0625,
+   "coverage50": 0.5,
+   "coverage80": 1.0,
+   "coverage90": 1.0
+  }
+ },
  "drift": {
   "tarbela": {
    "log_q0": {
-    "psi": 0.369,
+    "psi": 0.627,
     "past_years": 8,
-    "past_max": 0.775,
-    "past_p75": 0.507
+    "past_max": 0.911,
+    "past_p75": 0.471
    },
    "pdd7": {
-    "psi": 0.52,
+    "psi": 0.62,
     "past_years": 10,
-    "past_max": 1.78,
+    "past_max": 1.799,
     "past_p75": 1.372
    },
    "precip7": {
-    "psi": 0.147,
+    "psi": 0.106,
     "past_years": 10,
-    "past_max": 0.408,
-    "past_p75": 0.237
+    "past_max": 0.373,
+    "past_p75": 0.26
    }
   },
   "mangla": {
    "log_q0": {
-    "psi": 0.195,
+    "psi": 0.282,
     "past_years": 8,
-    "past_max": 3.282,
-    "past_p75": 1.909
+    "past_max": 3.314,
+    "past_p75": 1.969
    },
    "pdd7": {
-    "psi": 0.306,
+    "psi": 0.427,
     "past_years": 10,
-    "past_max": 1.861,
-    "past_p75": 0.645
+    "past_max": 1.936,
+    "past_p75": 0.725
    },
    "precip7": {
-    "psi": 0.175,
+    "psi": 0.069,
     "past_years": 10,
-    "past_max": 2.255,
-    "past_p75": 0.642
+    "past_max": 2.345,
+    "past_p75": 0.62
    }
   }
  },

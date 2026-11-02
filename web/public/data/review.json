@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-01T18:57:45+00:00",
+ "generated_at": "2026-11-02T13:12:26+00:00",
  "pending": [
   {
    "kind": "anomaly",
@@ -3144,7 +3144,7 @@
     "local",
     "seasonal"
    ],
-   "score": 12.0,
+   "score": 12.1,
    "context": {
     "dates": [
      "2022-07-05",
@@ -3805,7 +3805,7 @@
     "seasonal",
     "isolation"
    ],
-   "score": 17.6,
+   "score": 17.5,
    "context": {
     "dates": [
      "2022-02-03",
@@ -5861,7 +5861,7 @@
     "local",
     "seasonal"
    ],
-   "score": 7.2,
+   "score": 7.4,
    "context": {
     "dates": [
      "2020-05-29",
@@ -6598,8 +6598,7 @@
    "expected": 1323.65060676497,
    "checks": [
     "local",
-    "seasonal",
-    "isolation"
+    "seasonal"
    ],
    "score": 12.2,
    "context": {
@@ -8825,7 +8824,7 @@
     "local",
     "seasonal"
    ],
-   "score": 9.1,
+   "score": 9.0,
    "context": {
     "dates": [
      "2017-05-16",
@@ -9726,7 +9725,8 @@
    "expected": 19122.871293982098,
    "checks": [
     "local",
-    "seasonal"
+    "seasonal",
+    "isolation"
    ],
    "score": 9.9,
    "context": {
@@ -14010,7 +14010,7 @@
   "conflict": 49
  },
  "decided": 7,
- "station_days": 4549,
+ "station_days": 4551,
  "flagged_total": 126,
  "settings": {
   "window_days": 7,
