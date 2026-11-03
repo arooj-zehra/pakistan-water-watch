@@ -9,6 +9,9 @@ import { cusecs, day, stamp } from '../format.js';
 
 const REPO = 'https://github.com/arooj-zehra/pakistan-water-watch';
 const pct = (v) => (v == null ? '–' : `${Math.round(v * 100)}%`);
+// Below this many scored forecasts a horizon's result is mostly luck, so it isn't called better or worse
+const MIN_TO_JUDGE = 30;
+const caught = (t) => `${Math.round(t.coverage90 * t.n)} of ${t.n}`;
 const better = (v) => (v == null ? '–' : v >= 0 ? `${Math.round(v * 100)}% better` : `${Math.round(-v * 100)}% worse`);
 
 function Tip({ active, payload }) {
@@ -74,9 +77,16 @@ export default function Accuracy() {
       ) : (
         <>
           <p>
-            {acc.scored} of {acc.forecasts_issued} forecasts scored since {day(acc.first_issued)}. Overall the most likely
-            figure was off by {cusecs(acc.overall.mae_model)} cusecs on average, against {cusecs(acc.overall.mae_persistence)} for
-            no change, and the 9 in 10 range caught {pct(acc.overall.coverage90)} of real values.
+            {acc.scored} of {acc.forecasts_issued} forecasts scored since {day(acc.first_issued)}.{' '}
+            {acc.overall.n >= MIN_TO_JUDGE ? (
+              <>Overall the most likely figure was off by {cusecs(acc.overall.mae_model)} cusecs on average, against{' '}
+                {cusecs(acc.overall.mae_persistence)} for no change, and the 9 in 10 range caught{' '}
+                {pct(acc.overall.coverage90)} of real values.</>
+            ) : (
+              <>That is too few to judge yet: a single flat or stormy day can swing the averages either way. Each
+                horizon is rated once it has {MIN_TO_JUDGE} scored forecasts. So far the 9 in 10 range has caught{' '}
+                {caught(acc.overall)} real values.</>
+            )}
           </p>
           <div className="table-scroll">
             <table>
@@ -96,8 +106,9 @@ export default function Accuracy() {
                       <td>{t.n}</td>
                       <td>{t.n ? cusecs(t.mae_model) : '–'}</td>
                       <td>{t.n ? cusecs(t.mae_persistence) : '–'}</td>
-                      <td>{t.n ? better(t.skill_vs_persistence) : '–'}</td>
-                      <td>{t.n ? pct(t.coverage90) : '–'}</td>
+                      <td>{!t.n ? '–' : t.n >= MIN_TO_JUDGE ? better(t.skill_vs_persistence)
+                        : <span className="river">too few to judge</span>}</td>
+                      <td>{!t.n ? '–' : t.n >= MIN_TO_JUDGE ? pct(t.coverage90) : caught(t)}</td>
                       <td>{better(b.skill_vs_persistence)}, {pct(b.coverage90)} caught</td>
                     </tr>
                   );
@@ -105,7 +116,8 @@ export default function Accuracy() {
               </tbody>
             </table>
           </div>
-          <p className="chart-note">Averages are in cusecs. Early numbers rest on few forecasts and will move a lot; the
+          <p className="chart-note">Averages are in cusecs. A horizon is rated better or worse than no change once it
+            has {MIN_TO_JUDGE} scored forecasts; until then its averages are shown but mostly reflect luck. The
             "in testing" column is what four past years suggest to expect.</p>
 
           <h2>Recent forecasts against what came in</h2>
