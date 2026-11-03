@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-02T13:12:26+00:00",
+ "generated_at": "2026-11-03T12:41:12+00:00",
  "pending": [
   {
    "kind": "anomaly",
@@ -1249,7 +1249,7 @@
     "isolation",
     "balance"
    ],
-   "score": 233.4,
+   "score": 233.3,
    "context": {
     "dates": [
      "2024-06-08",
@@ -2480,7 +2480,7 @@
    "date": "2023-07-19",
    "field": "inflow_cusecs",
    "value": 146700.0,
-   "expected": 217376.35565994738,
+   "expected": 217376.3556599474,
    "checks": [
     "local",
     "seasonal",
@@ -3144,7 +3144,7 @@
     "local",
     "seasonal"
    ],
-   "score": 12.1,
+   "score": 12.2,
    "context": {
     "dates": [
      "2022-07-05",
@@ -3717,7 +3717,7 @@
    "date": "2022-02-24",
    "field": "inflow_cusecs",
    "value": 18500.0,
-   "expected": 12302.716299566586,
+   "expected": 12302.716299566584,
    "checks": [
     "local",
     "seasonal"
@@ -5198,7 +5198,7 @@
    "date": "2021-01-23",
    "field": "inflow_cusecs",
    "value": 7900.0,
-   "expected": 10207.42431231828,
+   "expected": 10207.424312318279,
    "checks": [
     "local",
     "seasonal"
@@ -5779,7 +5779,7 @@
     "isolation",
     "balance"
    ],
-   "score": 69.6,
+   "score": 69.5,
    "context": {
     "dates": [
      "2020-05-30",
@@ -6266,7 +6266,7 @@
    "date": "2020-01-21",
    "field": "outflow_cusecs",
    "value": 5000.0,
-   "expected": 1414.2135623730949,
+   "expected": 1414.2135623730946,
    "checks": [
     "local",
     "seasonal"
@@ -6598,7 +6598,8 @@
    "expected": 1323.65060676497,
    "checks": [
     "local",
-    "seasonal"
+    "seasonal",
+    "isolation"
    ],
    "score": 12.2,
    "context": {
@@ -9230,7 +9231,7 @@
    "date": "2017-04-06",
    "field": "inflow_cusecs",
    "value": 69000.0,
-   "expected": 46334.93959032799,
+   "expected": 46334.93959032798,
    "checks": [
     "local",
     "seasonal",
@@ -9725,8 +9726,7 @@
    "expected": 19122.871293982098,
    "checks": [
     "local",
-    "seasonal",
-    "isolation"
+    "seasonal"
    ],
    "score": 9.9,
    "context": {
@@ -14010,7 +14010,7 @@
   "conflict": 49
  },
  "decided": 7,
- "station_days": 4551,
+ "station_days": 4553,
  "flagged_total": 126,
  "settings": {
   "window_days": 7,
