@@ -103,21 +103,27 @@ flowchart LR
 **The daily job, step by step** (`.github/workflows/daily_ingest.yml`):
 
 ```mermaid
-flowchart TD
-    a["1. Fetch the last few days' IRSA/WAPDA stories<br/>from every outlet with a usable feed"] --> b
-    b["2. Parse each story: level, inflow, outflow, live storage per dam;<br/>date it (dateline, title or weekday for next-day reprints)"] --> c
-    c{"3. Validate<br/>plausible range, dead level,<br/>day-on-day jumps"}
-    c -- "fails" --> q["Quarantine table<br/>(never reaches the history)"]
-    c -- "passes" --> d["Observations table<br/>(best story per dam-day)"]
-    d --> e["4. Freshness check: newest figures at most 3 days old,<br/>otherwise open a GitHub issue"]
-    e --> f["5. Export the website's JSON files<br/>(reviewed corrections applied)"]
-    f --> g["6. Anomaly checks write the review queue"]
-    g --> h["7. Weather: append new ERA5 days, fetch the last 60 days<br/>and 16-day forecast, bias-correct against ERA5"]
-    h --> i["8. Forecast both dams 1-10 days ahead,<br/>store once, append to issued.csv"]
-    i --> j["9. Score every stored forecast whose day has been reported"]
-    j --> k{"10. Monitor"}
-    k -- "ok" --> l["Commit data and website files<br/>Vercel redeploys"]
-    k -- "alert" --> m["Open a model-alert issue<br/>(one at a time)"] --> l
+flowchart TB
+    subgraph ING["Ingest the news"]
+        direction LR
+        a["1 · Fetch the last few<br/>days' stories from<br/>every outlet"] --> b["2 · Parse each dam's<br/>level, inflow, outflow;<br/>date the story"]
+        b --> c{"3 · Validate"}
+        c -- "fails" --> q["Quarantine<br/>(never reaches<br/>the history)"]
+        c -- "passes" --> d["Observations<br/>(best story<br/>per dam-day)"]
+        d --> e["4 · Freshness check<br/>(issue if over<br/>3 days old)"]
+        e --> f["5 · Export website<br/>JSON (reviewed<br/>corrections applied)"]
+        f --> g["6 · Anomaly checks<br/>update the<br/>review queue"]
+    end
+    subgraph FC["Forecast, score and monitor"]
+        direction LR
+        h["7 · Weather: new ERA5<br/>days + 60-day recent<br/>and 16-day forecast"] --> i["8 · Forecast both dams<br/>1-10 days; store once,<br/>append issued.csv"]
+        i --> j["9 · Score forecasts<br/>whose day has<br/>been reported"]
+        j --> k{"10 · Monitor"}
+        k -- "ok" --> l["Commit data and<br/>website files;<br/>Vercel redeploys"]
+        k -- "alert" --> m["Open a model-alert<br/>issue (one at<br/>a time)"]
+        m --> l
+    end
+    ING --> FC
 ```
 
 ## Rebuilding the history from the news
