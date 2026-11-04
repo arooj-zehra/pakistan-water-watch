@@ -1,20 +1,18 @@
 {
- "generated_at": "2026-11-03T12:43:43+00:00",
- "status": "watch",
+ "generated_at": "2026-11-04T12:53:17+00:00",
+ "status": "ok",
  "alerts": [],
- "watch": [
-  "tarbela: log_q0 PSI 0.59 (top quarter of 8 past years)"
- ],
+ "watch": [],
  "window_days": 60,
  "recent_scores": {
   "1": {
-   "n": 2,
-   "mae_model": 2734,
-   "mae_persistence": 2750,
-   "skill_vs_persistence": 0.0058,
-   "coverage50": 0.0,
-   "coverage80": 0.0,
-   "coverage90": 0.0
+   "n": 4,
+   "mae_model": 1757,
+   "mae_persistence": 1800,
+   "skill_vs_persistence": 0.0238,
+   "coverage50": 0.5,
+   "coverage80": 0.5,
+   "coverage90": 0.5
   },
   "3": {
    "n": 2,
@@ -24,47 +22,56 @@
    "coverage50": 0.5,
    "coverage80": 1.0,
    "coverage90": 1.0
+  },
+  "5": {
+   "n": 2,
+   "mae_model": 1970,
+   "mae_persistence": 2300,
+   "skill_vs_persistence": 0.1433,
+   "coverage50": 0.5,
+   "coverage80": 1.0,
+   "coverage90": 1.0
   }
  },
  "drift": {
   "tarbela": {
    "log_q0": {
-    "psi": 0.587,
+    "psi": 0.528,
     "past_years": 8,
-    "past_max": 0.924,
-    "past_p75": 0.444
+    "past_max": 0.868,
+    "past_p75": 0.535
    },
    "pdd7": {
-    "psi": 0.525,
+    "psi": 0.532,
     "past_years": 10,
-    "past_max": 1.869,
-    "past_p75": 1.413
+    "past_max": 1.879,
+    "past_p75": 1.353
    },
    "precip7": {
-    "psi": 0.053,
+    "psi": 0.043,
     "past_years": 10,
-    "past_max": 0.429,
-    "past_p75": 0.281
+    "past_max": 0.454,
+    "past_p75": 0.284
    }
   },
   "mangla": {
    "log_q0": {
-    "psi": 0.352,
+    "psi": 0.371,
     "past_years": 8,
-    "past_max": 3.152,
-    "past_p75": 1.966
+    "past_max": 3.295,
+    "past_p75": 2.008
    },
    "pdd7": {
-    "psi": 0.521,
+    "psi": 0.479,
     "past_years": 10,
-    "past_max": 1.899,
-    "past_p75": 1.461
+    "past_max": 1.976,
+    "past_p75": 1.402
    },
    "precip7": {
-    "psi": 0.053,
+    "psi": 0.043,
     "past_years": 10,
-    "past_max": 2.396,
-    "past_p75": 0.826
+    "past_max": 1.618,
+    "past_p75": 0.884
    }
   }
  },
