@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-05T12:59:27+00:00",
+ "generated_at": "2026-11-06T12:46:23+00:00",
  "pending": [
   {
    "kind": "anomaly",
@@ -423,7 +423,7 @@
     "local",
     "seasonal"
    ],
-   "score": 9.2,
+   "score": 9.3,
    "context": {
     "dates": [
      "2026-02-25",
@@ -1250,7 +1250,7 @@
     "isolation",
     "balance"
    ],
-   "score": 233.3,
+   "score": 231.3,
    "context": {
     "dates": [
      "2024-06-08",
@@ -2651,7 +2651,7 @@
     "isolation",
     "balance"
    ],
-   "score": 51.7,
+   "score": 51.9,
    "context": {
     "dates": [
      "2023-06-02",
@@ -5286,7 +5286,7 @@
     "local",
     "seasonal"
    ],
-   "score": 14.9,
+   "score": 14.8,
    "context": {
     "dates": [
      "2020-12-23",
@@ -5780,7 +5780,7 @@
     "isolation",
     "balance"
    ],
-   "score": 69.5,
+   "score": 68.8,
    "context": {
     "dates": [
      "2020-05-30",
@@ -7423,7 +7423,7 @@
     "local",
     "seasonal"
    ],
-   "score": 8.4,
+   "score": 8.3,
    "context": {
     "dates": [
      "2018-07-12",
@@ -8495,7 +8495,7 @@
     "local",
     "seasonal"
    ],
-   "score": 10.5,
+   "score": 10.4,
    "context": {
     "dates": [
      "2017-10-11",
@@ -14010,7 +14010,7 @@
   "conflict": 49
  },
  "decided": 7,
- "station_days": 4557,
+ "station_days": 4559,
  "flagged_total": 126,
  "settings": {
   "window_days": 7,

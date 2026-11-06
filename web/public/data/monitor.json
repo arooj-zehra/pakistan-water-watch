@@ -1,29 +1,29 @@
 {
- "generated_at": "2026-11-05T13:01:59+00:00",
+ "generated_at": "2026-11-06T12:48:56+00:00",
  "status": "watch",
  "alerts": [],
  "watch": [
-  "tarbela: log_q0 PSI 1.82 (top quarter of 8 past years)"
+  "tarbela: log_q0 PSI 1.64 (top quarter of 8 past years)"
  ],
  "window_days": 60,
  "recent_scores": {
   "1": {
-   "n": 6,
-   "mae_model": 1475,
-   "mae_persistence": 1550,
-   "skill_vs_persistence": 0.0483,
+   "n": 8,
+   "mae_model": 1391,
+   "mae_persistence": 1450,
+   "skill_vs_persistence": 0.0404,
    "coverage50": 0.5,
-   "coverage80": 0.6667,
-   "coverage90": 0.6667
+   "coverage80": 0.625,
+   "coverage90": 0.625
   },
   "3": {
-   "n": 4,
-   "mae_model": 1559,
-   "mae_persistence": 1225,
-   "skill_vs_persistence": -0.2727,
+   "n": 6,
+   "mae_model": 1526,
+   "mae_persistence": 1467,
+   "skill_vs_persistence": -0.0403,
    "coverage50": 0.5,
-   "coverage80": 0.75,
-   "coverage90": 1.0
+   "coverage80": 0.6667,
+   "coverage90": 0.8333
   },
   "5": {
    "n": 2,
@@ -33,47 +33,56 @@
    "coverage50": 0.5,
    "coverage80": 1.0,
    "coverage90": 1.0
+  },
+  "7": {
+   "n": 2,
+   "mae_model": 2685,
+   "mae_persistence": 2000,
+   "skill_vs_persistence": -0.3425,
+   "coverage50": 0.5,
+   "coverage80": 1.0,
+   "coverage90": 1.0
   }
  },
  "drift": {
   "tarbela": {
    "log_q0": {
-    "psi": 1.824,
+    "psi": 1.639,
     "past_years": 8,
-    "past_max": 1.859,
-    "past_p75": 0.479
+    "past_max": 1.886,
+    "past_p75": 0.567
    },
    "pdd7": {
-    "psi": 0.424,
+    "psi": 0.2,
     "past_years": 10,
-    "past_max": 1.892,
-    "past_p75": 1.374
+    "past_max": 3.264,
+    "past_p75": 1.399
    },
    "precip7": {
-    "psi": 0.026,
+    "psi": 0.028,
     "past_years": 10,
-    "past_max": 0.492,
-    "past_p75": 0.32
+    "past_max": 0.52,
+    "past_p75": 0.331
    }
   },
   "mangla": {
    "log_q0": {
-    "psi": 0.462,
+    "psi": 0.547,
     "past_years": 8,
-    "past_max": 3.364,
-    "past_p75": 2.087
+    "past_max": 3.292,
+    "past_p75": 2.094
    },
    "pdd7": {
-    "psi": 0.368,
+    "psi": 0.442,
     "past_years": 10,
-    "past_max": 2.142,
-    "past_p75": 0.608
+    "past_max": 1.976,
+    "past_p75": 0.559
    },
    "precip7": {
-    "psi": 0.061,
+    "psi": 0.045,
     "past_years": 10,
-    "past_max": 1.623,
-    "past_p75": 0.932
+    "past_max": 1.629,
+    "past_p75": 0.936
    }
   }
  },
