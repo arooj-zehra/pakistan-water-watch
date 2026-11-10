@@ -1,9 +1,9 @@
 {
- "generated_at": "2026-11-09T13:43:40+00:00",
+ "generated_at": "2026-11-10T13:21:40+00:00",
  "status": "watch",
  "alerts": [],
  "watch": [
-  "tarbela: log_q0 PSI 1.64 (top quarter of 8 past years)"
+  "tarbela: log_q0 PSI 1.62 (top quarter of 8 past years)"
  ],
  "window_days": 60,
  "recent_scores": {
@@ -26,63 +26,63 @@
    "coverage90": 0.8333
   },
   "5": {
-   "n": 2,
-   "mae_model": 1970,
-   "mae_persistence": 2300,
-   "skill_vs_persistence": 0.1433,
-   "coverage50": 0.5,
-   "coverage80": 1.0,
-   "coverage90": 1.0
+   "n": 4,
+   "mae_model": 2470,
+   "mae_persistence": 2625,
+   "skill_vs_persistence": 0.0589,
+   "coverage50": 0.25,
+   "coverage80": 0.75,
+   "coverage90": 0.75
   },
   "7": {
-   "n": 2,
-   "mae_model": 2685,
-   "mae_persistence": 2000,
-   "skill_vs_persistence": -0.3425,
+   "n": 4,
+   "mae_model": 3438,
+   "mae_persistence": 2575,
+   "skill_vs_persistence": -0.335,
    "coverage50": 0.5,
-   "coverage80": 1.0,
+   "coverage80": 0.75,
    "coverage90": 1.0
   }
  },
  "drift": {
   "tarbela": {
    "log_q0": {
-    "psi": 1.639,
+    "psi": 1.625,
     "past_years": 8,
-    "past_max": 1.886,
-    "past_p75": 0.567
+    "past_max": 3.351,
+    "past_p75": 0.376
    },
    "pdd7": {
-    "psi": 0.2,
+    "psi": 0.498,
     "past_years": 10,
-    "past_max": 3.264,
-    "past_p75": 1.399
+    "past_max": 2.349,
+    "past_p75": 1.302
    },
    "precip7": {
-    "psi": 0.022,
+    "psi": 0.008,
     "past_years": 10,
-    "past_max": 0.52,
-    "past_p75": 0.331
+    "past_max": 1.796,
+    "past_p75": 0.429
    }
   },
   "mangla": {
    "log_q0": {
-    "psi": 0.547,
+    "psi": 0.586,
     "past_years": 8,
-    "past_max": 3.292,
-    "past_p75": 2.094
+    "past_max": 3.765,
+    "past_p75": 2.022
    },
    "pdd7": {
-    "psi": 0.442,
+    "psi": 0.25,
     "past_years": 10,
-    "past_max": 1.976,
-    "past_p75": 0.559
+    "past_max": 2.287,
+    "past_p75": 1.376
    },
    "precip7": {
-    "psi": 0.045,
+    "psi": 0.065,
     "past_years": 10,
-    "past_max": 1.629,
-    "past_p75": 0.936
+    "past_max": 3.498,
+    "past_p75": 1.267
    }
   }
  },
