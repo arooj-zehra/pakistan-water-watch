@@ -6153,3 +6153,4 @@ date,point_id,tmax_c,tmin_c,tmean_c,precip_mm,snowfall_cm,model
 2026-11-04,skardu,7.9,-4.1,3.6,4.1,0.0,era5
 2026-11-05,skardu,5.1,-11.8,-2.2,1.0,0.0,era5
 2026-11-06,skardu,5.3,-10.0,0.8,0.8,0.0,era5
+2026-11-07,skardu,0.8,-11.7,-7.2,0.0,0.0,era5
