@@ -6154,3 +6154,4 @@ date,point_id,tmax_c,tmin_c,tmean_c,precip_mm,snowfall_cm,model
 2026-11-05,naran,10.7,1.0,5.9,0.8,0.0,era5
 2026-11-06,naran,13.7,1.1,6.9,0.5,0.0,era5
 2026-11-07,naran,15.8,0.4,7.3,0.0,0.0,era5
+2026-11-08,naran,16.3,1.0,7.6,0.0,0.0,era5

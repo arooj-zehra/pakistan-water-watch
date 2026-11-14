@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-13T12:55:05+00:00",
+ "generated_at": "2026-11-14T12:01:22+00:00",
  "status": "watch",
  "alerts": [],
  "watch": [
@@ -63,7 +63,7 @@
     "past_p75": 0.462
    },
    "pdd7": {
-    "psi": 0.448,
+    "psi": 0.487,
     "past_years": 10,
     "past_max": 3.315,
     "past_p75": 1.318
