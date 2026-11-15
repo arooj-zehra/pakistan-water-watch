@@ -1,6 +1,6 @@
 {
  "model_version": "v20261102",
- "issued_at": "2026-11-14T12:01:15+00:00",
+ "issued_at": "2026-11-15T12:36:26+00:00",
  "horizons": [
   1,
   3,
@@ -16,82 +16,82 @@
  "units": "cusecs",
  "weather_adjustments": {
   "gilgit": {
-   "tmax_c": -4.28,
-   "tmin_c": -4.34,
-   "tmean_c": -4.24,
+   "tmax_c": -4.33,
+   "tmin_c": -4.39,
+   "tmean_c": -4.3,
    "precip_mm": 1.36,
    "snowfall_cm": 1.0,
-   "overlap_days": 54
+   "overlap_days": 53
   },
   "skardu": {
-   "tmax_c": -2.98,
-   "tmin_c": -6.38,
-   "tmean_c": -4.59,
-   "precip_mm": 1.18,
+   "tmax_c": -3.14,
+   "tmin_c": -6.55,
+   "tmean_c": -4.76,
+   "precip_mm": 1.12,
    "snowfall_cm": 1.0,
    "overlap_days": 55
   },
   "astore": {
-   "tmax_c": -0.39,
-   "tmin_c": 1.17,
-   "tmean_c": -0.14,
-   "precip_mm": 1.46,
+   "tmax_c": -0.44,
+   "tmin_c": 1.1,
+   "tmean_c": -0.2,
+   "precip_mm": 1.36,
    "snowfall_cm": 0.5,
    "overlap_days": 55
   },
   "hunza": {
-   "tmax_c": -1.19,
-   "tmin_c": -4.46,
-   "tmean_c": -2.97,
-   "precip_mm": 0.77,
+   "tmax_c": -1.34,
+   "tmin_c": -4.67,
+   "tmean_c": -3.14,
+   "precip_mm": 0.76,
    "snowfall_cm": 0.5,
    "overlap_days": 55
   },
   "leh": {
-   "tmax_c": 1.0,
-   "tmin_c": -3.02,
-   "tmean_c": -1.12,
-   "precip_mm": 1.92,
+   "tmax_c": 0.9,
+   "tmin_c": -3.31,
+   "tmean_c": -1.31,
+   "precip_mm": 1.9,
    "snowfall_cm": 0.62,
    "overlap_days": 55
   },
   "srinagar": {
-   "tmax_c": 0.74,
-   "tmin_c": 1.25,
-   "tmean_c": 0.55,
-   "precip_mm": 1.74,
+   "tmax_c": 0.81,
+   "tmin_c": 1.23,
+   "tmean_c": 0.57,
+   "precip_mm": 1.65,
    "snowfall_cm": 1.0,
    "overlap_days": 55
   },
   "pahalgam": {
-   "tmax_c": 0.43,
-   "tmin_c": 0.65,
-   "tmean_c": 0.3,
-   "precip_mm": 1.14,
+   "tmax_c": 0.41,
+   "tmin_c": 0.61,
+   "tmean_c": 0.26,
+   "precip_mm": 1.13,
    "snowfall_cm": 1.0,
    "overlap_days": 55
   },
   "muzaffarabad": {
-   "tmax_c": 0.43,
-   "tmin_c": 0.35,
-   "tmean_c": 0.99,
+   "tmax_c": 0.47,
+   "tmin_c": 0.36,
+   "tmean_c": 1.01,
    "precip_mm": 0.59,
    "snowfall_cm": 1.0,
    "overlap_days": 55
   },
   "naran": {
-   "tmax_c": 0.79,
-   "tmin_c": 1.14,
-   "tmean_c": 1.14,
-   "precip_mm": 1.34,
+   "tmax_c": 0.81,
+   "tmin_c": 1.1,
+   "tmean_c": 1.11,
+   "precip_mm": 1.38,
    "snowfall_cm": 1.0,
    "overlap_days": 55
   },
   "kel": {
-   "tmax_c": 0.35,
-   "tmin_c": 2.65,
-   "tmean_c": 0.95,
-   "precip_mm": 0.93,
+   "tmax_c": 0.34,
+   "tmin_c": 2.58,
+   "tmean_c": 0.92,
+   "precip_mm": 0.87,
    "snowfall_cm": 1.0,
    "overlap_days": 55
   }
@@ -101,20 +101,20 @@
    "issue_date": "2026-11-13",
    "inflow_today": 25900,
    "observed_today": true,
-   "data_age_days": 1,
+   "data_age_days": 2,
    "weather_through": "2026-11-13",
    "warnings": [],
    "forecasts": [
     {
      "h": 1,
      "target_date": "2026-11-14",
-     "p05": 21964,
-     "p10": 23677,
-     "p25": 24537,
-     "p50": 25630,
-     "p75": 26307,
-     "p90": 28217,
-     "p95": 29048,
+     "p05": 21897,
+     "p10": 23542,
+     "p25": 24519,
+     "p50": 25612,
+     "p75": 26342,
+     "p90": 28095,
+     "p95": 29125,
      "drivers": [
       {
        "feature": "doy",
@@ -132,18 +132,18 @@
     {
      "h": 3,
      "target_date": "2026-11-16",
-     "p05": 19097,
-     "p10": 20431,
-     "p25": 22180,
-     "p50": 24158,
-     "p75": 25536,
-     "p90": 28843,
-     "p95": 32536,
+     "p05": 19150,
+     "p10": 20394,
+     "p25": 21964,
+     "p50": 24248,
+     "p75": 25559,
+     "p90": 28900,
+     "p95": 32293,
      "drivers": [
       {
        "feature": "precip3",
        "label": "rain and snow over 3 days",
-       "effect_pct": -4.3
+       "effect_pct": -3.9
       },
       {
        "feature": "doy",
@@ -161,81 +161,81 @@
     {
      "h": 5,
      "target_date": "2026-11-18",
-     "p05": 17895,
-     "p10": 19423,
-     "p25": 21683,
-     "p50": 21932,
-     "p75": 24291,
-     "p90": 28828,
-     "p95": 33537,
+     "p05": 17790,
+     "p10": 19374,
+     "p25": 21670,
+     "p50": 22087,
+     "p75": 24297,
+     "p90": 28812,
+     "p95": 33436,
      "drivers": [
-      {
-       "feature": "precip3",
-       "label": "rain and snow over 3 days",
-       "effect_pct": -6.0
-      },
       {
        "feature": "doy",
        "label": "the time of year",
        "effect_pct": -5.9
       },
       {
+       "feature": "precip3",
+       "label": "rain and snow over 3 days",
+       "effect_pct": -5.5
+      },
+      {
        "feature": "pdd14",
        "label": "warmth over two weeks (melt)",
-       "effect_pct": 1.4
+       "effect_pct": 1.3
       }
      ],
-     "explanation": "Biggest influences: rain and snow over 3 days (\u22126%), the time of year (\u22126%), warmth over two weeks (melt) (+1%)"
+     "explanation": "Biggest influences: the time of year (\u22126%), rain and snow over 3 days (\u22126%), warmth over two weeks (melt) (+1%)"
     },
     {
      "h": 7,
      "target_date": "2026-11-20",
-     "p05": 16880,
-     "p10": 18453,
-     "p25": 19777,
-     "p50": 21726,
-     "p75": 24996,
-     "p90": 28551,
-     "p95": 34878,
+     "p05": 16795,
+     "p10": 18296,
+     "p25": 19772,
+     "p50": 21760,
+     "p75": 24981,
+     "p90": 28441,
+     "p95": 34428,
      "drivers": [
       {
        "feature": "doy",
        "label": "the time of year",
-       "effect_pct": -8.7
+       "effect_pct": -8.8
       },
       {
        "feature": "precip3",
        "label": "rain and snow over 3 days",
-       "effect_pct": -3.7
+       "effect_pct": -3.3
       },
       {
        "feature": "log_q0",
        "label": "today's inflow",
-       "effect_pct": -1.8
+       "effect_pct": -1.9
       }
      ],
-     "explanation": "Biggest influences: the time of year (\u22129%), rain and snow over 3 days (\u22124%), today's inflow (\u22122%)"
+     "explanation": "Biggest influences: the time of year (\u22129%), rain and snow over 3 days (\u22123%), today's inflow (\u22122%)"
     },
     {
      "h": 10,
      "target_date": "2026-11-23",
-     "p05": 17274,
-     "p10": 18440,
-     "p25": 19408,
-     "p50": 21549,
-     "p75": 24317,
-     "p90": 27132,
-     "p95": 34547,
+     "p05": 17147,
+     "p10": 17997,
+     "p25": 19287,
+     "p50": 21508,
+     "p75": 24196,
+     "p90": 27170,
+     "p95": 34645,
      "drivers": [
       {
        "feature": "doy",
        "label": "the time of year",
-       "effect_pct": -12.5
+       "effect_pct": -12.4
       },
       {
        "feature": "precip3",
        "label": "rain and snow over 3 days",
-       "effect_pct": -3.2
+       "effect_pct": -3.1
       },
       {
        "feature": "pdd14",
@@ -251,20 +251,20 @@
    "issue_date": "2026-11-13",
    "inflow_today": 3800,
    "observed_today": true,
-   "data_age_days": 1,
+   "data_age_days": 2,
    "weather_through": "2026-11-13",
    "warnings": [],
    "forecasts": [
     {
      "h": 1,
      "target_date": "2026-11-14",
-     "p05": 3192,
-     "p10": 3411,
+     "p05": 3186,
+     "p10": 3387,
      "p25": 3804,
      "p50": 3899,
      "p75": 4497,
-     "p90": 5769,
-     "p95": 5781,
+     "p90": 5829,
+     "p95": 5829,
      "drivers": [
       {
        "feature": "log_q0",
@@ -278,17 +278,17 @@
      "h": 3,
      "target_date": "2026-11-16",
      "p05": 2828,
-     "p10": 3127,
-     "p25": 3632,
-     "p50": 4099,
-     "p75": 4961,
-     "p90": 5770,
+     "p10": 3123,
+     "p25": 3663,
+     "p50": 4103,
+     "p75": 4939,
+     "p90": 5844,
      "p95": 6983,
      "drivers": [
       {
        "feature": "log_q0",
        "label": "today's inflow",
-       "effect_pct": 7.8
+       "effect_pct": 7.7
       },
       {
        "feature": "rm30",
@@ -306,13 +306,13 @@
     {
      "h": 5,
      "target_date": "2026-11-18",
-     "p05": 2346,
+     "p05": 2316,
      "p10": 2845,
-     "p25": 3528,
-     "p50": 4495,
-     "p75": 5296,
-     "p90": 5928,
-     "p95": 6595,
+     "p25": 3537,
+     "p50": 4477,
+     "p75": 5285,
+     "p90": 5923,
+     "p95": 6491,
      "drivers": [
       {
        "feature": "log_q0",
@@ -327,18 +327,18 @@
       {
        "feature": "doy",
        "label": "the time of year",
-       "effect_pct": -3.4
+       "effect_pct": -3.5
       }
      ],
-     "explanation": "Biggest influences: today's inflow (+14%), the 30-day average (+7%), the time of year (\u22123%)"
+     "explanation": "Biggest influences: today's inflow (+14%), the 30-day average (+7%), the time of year (\u22124%)"
     },
     {
      "h": 7,
      "target_date": "2026-11-20",
      "p05": 2339,
      "p10": 2828,
-     "p25": 3565,
-     "p50": 4902,
+     "p25": 3564,
+     "p50": 4867,
      "p75": 5483,
      "p90": 6487,
      "p95": 9110,
@@ -346,17 +346,17 @@
       {
        "feature": "log_q0",
        "label": "today's inflow",
-       "effect_pct": 20.3
+       "effect_pct": 20.4
       },
       {
        "feature": "doy",
        "label": "the time of year",
-       "effect_pct": -5.7
+       "effect_pct": -5.8
       },
       {
        "feature": "rm30",
        "label": "the 30-day average",
-       "effect_pct": 5.2
+       "effect_pct": 5.0
       }
      ],
      "explanation": "Biggest influences: today's inflow (+20%), the time of year (\u22126%), the 30-day average (+5%)"
@@ -366,9 +366,9 @@
      "target_date": "2026-11-23",
      "p05": 1970,
      "p10": 2798,
-     "p25": 3421,
-     "p50": 4109,
-     "p75": 5143,
+     "p25": 3425,
+     "p50": 4115,
+     "p75": 5124,
      "p90": 5813,
      "p95": 6241,
      "drivers": [
