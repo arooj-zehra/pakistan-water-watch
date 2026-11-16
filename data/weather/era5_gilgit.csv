@@ -6154,3 +6154,6 @@ date,point_id,tmax_c,tmin_c,tmean_c,precip_mm,snowfall_cm,model
 2026-11-05,gilgit,10.5,2.0,6.1,7.6,0.0,era5
 2026-11-06,gilgit,11.4,1.4,7.2,0.1,0.0,era5
 2026-11-07,gilgit,8.6,-5.0,2.1,0.0,0.0,era5
+2026-11-08,gilgit,10.6,-1.2,4.3,0.0,0.0,era5
+2026-11-09,gilgit,8.8,-7.8,2.4,0.0,0.0,era5
+2026-11-10,gilgit,13.1,3.1,8.0,0.1,0.0,era5

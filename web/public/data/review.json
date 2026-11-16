@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-15T12:34:04+00:00",
+ "generated_at": "2026-11-16T13:25:14+00:00",
  "pending": [
   {
    "kind": "anomaly",
@@ -2595,7 +2595,7 @@
    "date": "2023-07-19",
    "field": "inflow_cusecs",
    "value": 146700.0,
-   "expected": 217376.35565994738,
+   "expected": 217376.3556599474,
    "checks": [
     "local",
     "seasonal",
@@ -3832,7 +3832,7 @@
    "date": "2022-02-24",
    "field": "inflow_cusecs",
    "value": 18500.0,
-   "expected": 12302.716299566586,
+   "expected": 12302.716299566584,
    "checks": [
     "local",
     "seasonal"
@@ -5313,7 +5313,7 @@
    "date": "2021-01-23",
    "field": "inflow_cusecs",
    "value": 7900.0,
-   "expected": 10207.42431231828,
+   "expected": 10207.424312318279,
    "checks": [
     "local",
     "seasonal"
@@ -6381,7 +6381,7 @@
    "date": "2020-01-21",
    "field": "outflow_cusecs",
    "value": 5000.0,
-   "expected": 1414.2135623730949,
+   "expected": 1414.2135623730946,
    "checks": [
     "local",
     "seasonal"
@@ -9345,7 +9345,7 @@
    "date": "2017-04-06",
    "field": "inflow_cusecs",
    "value": 69000.0,
-   "expected": 46334.93959032799,
+   "expected": 46334.93959032798,
    "checks": [
     "local",
     "seasonal",
