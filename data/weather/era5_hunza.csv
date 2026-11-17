@@ -6157,3 +6157,4 @@ date,point_id,tmax_c,tmin_c,tmean_c,precip_mm,snowfall_cm,model
 2026-11-08,hunza,0.5,-9.0,-5.1,0.0,0.0,era5
 2026-11-09,hunza,-0.6,-15.0,-6.9,0.0,0.0,era5
 2026-11-10,hunza,5.4,-5.8,-0.6,0.0,0.0,era5
+2026-11-11,hunza,5.3,-7.2,-0.7,2.0,0.49,era5
