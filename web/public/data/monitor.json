@@ -1,9 +1,10 @@
 {
- "generated_at": "2026-11-17T14:13:13+00:00",
+ "generated_at": "2026-11-18T13:45:40+00:00",
  "status": "watch",
  "alerts": [],
  "watch": [
-  "tarbela: log_q0 PSI 0.63 (top quarter of 8 past years)"
+  "tarbela: log_q0 PSI 0.63 (top quarter of 8 past years)",
+  "mangla: pdd7 PSI 2.18 (top quarter of 10 past years)"
  ],
  "window_days": 60,
  "recent_scores": {
@@ -82,7 +83,7 @@
     "past_p75": 1.984
    },
    "pdd7": {
-    "psi": 1.09,
+    "psi": 2.178,
     "past_years": 10,
     "past_max": 3.337,
     "past_p75": 1.478

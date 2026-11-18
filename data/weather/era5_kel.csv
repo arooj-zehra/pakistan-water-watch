@@ -6158,3 +6158,4 @@ date,point_id,tmax_c,tmin_c,tmean_c,precip_mm,snowfall_cm,model
 2026-11-09,kel,16.0,1.4,8.0,0.0,0.0,era5
 2026-11-10,kel,14.2,2.6,7.7,3.2,0.0,era5
 2026-11-11,kel,12.9,3.8,7.8,2.2,0.0,era5
+2026-11-12,kel,8.9,3.3,6.1,25.4,0.0,era5
