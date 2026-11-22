@@ -1,6 +1,6 @@
 {
  "model_version": "v20261102",
- "issued_at": "2026-11-21T13:17:43+00:00",
+ "issued_at": "2026-11-22T13:10:13+00:00",
  "horizons": [
   1,
   3,
@@ -16,82 +16,82 @@
  "units": "cusecs",
  "weather_adjustments": {
   "gilgit": {
-   "tmax_c": -5.2,
-   "tmin_c": -5.16,
-   "tmean_c": -5.03,
+   "tmax_c": -5.29,
+   "tmin_c": -5.27,
+   "tmean_c": -5.11,
    "precip_mm": 1.78,
    "snowfall_cm": 1.0,
-   "overlap_days": 55
+   "overlap_days": 54
   },
   "skardu": {
-   "tmax_c": -3.46,
-   "tmin_c": -6.82,
-   "tmean_c": -5.05,
+   "tmax_c": -3.55,
+   "tmin_c": -6.84,
+   "tmean_c": -5.13,
    "precip_mm": 0.92,
    "snowfall_cm": 2.0,
    "overlap_days": 55
   },
   "astore": {
-   "tmax_c": -0.43,
+   "tmax_c": -0.5,
    "tmin_c": 1.15,
-   "tmean_c": -0.13,
-   "precip_mm": 0.88,
+   "tmean_c": -0.15,
+   "precip_mm": 0.87,
    "snowfall_cm": 0.5,
    "overlap_days": 55
   },
   "hunza": {
-   "tmax_c": -1.77,
+   "tmax_c": -1.91,
    "tmin_c": -4.96,
-   "tmean_c": -3.48,
+   "tmean_c": -3.54,
    "precip_mm": 0.94,
    "snowfall_cm": 0.75,
    "overlap_days": 55
   },
   "leh": {
-   "tmax_c": 0.52,
-   "tmin_c": -4.09,
-   "tmean_c": -1.77,
-   "precip_mm": 1.97,
+   "tmax_c": 0.39,
+   "tmin_c": -4.25,
+   "tmean_c": -1.91,
+   "precip_mm": 1.87,
    "snowfall_cm": 0.79,
    "overlap_days": 55
   },
   "srinagar": {
-   "tmax_c": 1.0,
-   "tmin_c": 1.3,
-   "tmean_c": 0.69,
+   "tmax_c": 1.05,
+   "tmin_c": 1.32,
+   "tmean_c": 0.71,
    "precip_mm": 1.51,
    "snowfall_cm": 1.0,
    "overlap_days": 55
   },
   "pahalgam": {
-   "tmax_c": 0.37,
+   "tmax_c": 0.38,
    "tmin_c": 0.43,
-   "tmean_c": 0.13,
-   "precip_mm": 0.78,
+   "tmean_c": 0.09,
+   "precip_mm": 0.77,
    "snowfall_cm": 0.5,
    "overlap_days": 55
   },
   "muzaffarabad": {
-   "tmax_c": 0.47,
-   "tmin_c": 0.53,
-   "tmean_c": 1.12,
+   "tmax_c": 0.44,
+   "tmin_c": 0.58,
+   "tmean_c": 1.14,
    "precip_mm": 0.64,
    "snowfall_cm": 1.0,
    "overlap_days": 55
   },
   "naran": {
-   "tmax_c": 0.8,
-   "tmin_c": 1.4,
-   "tmean_c": 1.21,
-   "precip_mm": 1.04,
+   "tmax_c": 0.78,
+   "tmin_c": 1.43,
+   "tmean_c": 1.23,
+   "precip_mm": 1.03,
    "snowfall_cm": 1.0,
    "overlap_days": 55
   },
   "kel": {
-   "tmax_c": 0.24,
-   "tmin_c": 2.29,
-   "tmean_c": 0.76,
-   "precip_mm": 0.85,
+   "tmax_c": 0.14,
+   "tmin_c": 2.26,
+   "tmean_c": 0.71,
+   "precip_mm": 0.84,
    "snowfall_cm": 1.0,
    "overlap_days": 55
   }
@@ -101,10 +101,10 @@
    "issue_date": "2026-11-13",
    "inflow_today": 25900,
    "observed_today": true,
-   "data_age_days": 8,
+   "data_age_days": 9,
    "weather_through": "2026-11-13",
    "warnings": [
-    "The newest inflow figure is 8 days old, so these forecasts start from 2026-11-13."
+    "The newest inflow figure is 9 days old, so these forecasts start from 2026-11-13."
    ],
    "forecasts": [
     {
@@ -253,10 +253,10 @@
    "issue_date": "2026-11-13",
    "inflow_today": 3800,
    "observed_today": true,
-   "data_age_days": 8,
+   "data_age_days": 9,
    "weather_through": "2026-11-13",
    "warnings": [
-    "The newest inflow figure is 8 days old, so these forecasts start from 2026-11-13."
+    "The newest inflow figure is 9 days old, so these forecasts start from 2026-11-13."
    ],
    "forecasts": [
     {
