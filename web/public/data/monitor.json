@@ -1,10 +1,9 @@
 {
- "generated_at": "2026-11-22T13:10:21+00:00",
+ "generated_at": "2026-11-23T15:46:15+00:00",
  "status": "watch",
  "alerts": [],
  "watch": [
-  "tarbela: log_q0 PSI 0.63 (top quarter of 8 past years)",
-  "mangla: pdd7 PSI 2.18 (top quarter of 10 past years)"
+  "tarbela: log_q0 PSI 1.66 (top quarter of 8 past years)"
  ],
  "window_days": 60,
  "recent_scores": {
@@ -45,10 +44,10 @@
    "coverage90": 0.8
   },
   "10": {
-   "n": 4,
-   "mae_model": 2327,
-   "mae_persistence": 2550,
-   "skill_vs_persistence": 0.0875,
+   "n": 6,
+   "mae_model": 2295,
+   "mae_persistence": 2633,
+   "skill_vs_persistence": 0.1284,
    "coverage50": 0.5,
    "coverage80": 0.5,
    "coverage90": 0.5
@@ -57,42 +56,42 @@
  "drift": {
   "tarbela": {
    "log_q0": {
-    "psi": 0.627,
+    "psi": 1.659,
     "past_years": 8,
-    "past_max": 3.339,
-    "past_p75": 0.462
+    "past_max": 2.34,
+    "past_p75": 0.304
    },
    "pdd7": {
-    "psi": 0.487,
+    "psi": 0.435,
     "past_years": 10,
-    "past_max": 3.315,
-    "past_p75": 1.318
+    "past_max": 0.756,
+    "past_p75": 0.546
    },
    "precip7": {
-    "psi": 0.017,
+    "psi": 0.067,
     "past_years": 10,
-    "past_max": 0.736,
-    "past_p75": 0.506
+    "past_max": 2.001,
+    "past_p75": 0.48
    }
   },
   "mangla": {
    "log_q0": {
-    "psi": 0.576,
+    "psi": 1.888,
     "past_years": 8,
-    "past_max": 3.874,
-    "past_p75": 1.984
+    "past_max": 4.634,
+    "past_p75": 1.976
    },
    "pdd7": {
-    "psi": 2.178,
+    "psi": 0.291,
     "past_years": 10,
-    "past_max": 3.337,
-    "past_p75": 1.478
+    "past_max": 1.58,
+    "past_p75": 0.534
    },
    "precip7": {
-    "psi": 0.045,
+    "psi": 0.117,
     "past_years": 10,
-    "past_max": 3.679,
-    "past_p75": 1.801
+    "past_max": 2.325,
+    "past_p75": 1.782
    }
   }
  },
