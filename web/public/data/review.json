@@ -1,22 +1,21 @@
 {
- "generated_at": "2026-11-23T15:45:45+00:00",
+ "generated_at": "2026-11-24T15:36:11+00:00",
  "pending": [
   {
    "kind": "anomaly",
-   "ref": "a2026-11-23-tarbela-level_ft",
+   "ref": "a2026-11-24-tarbela-level_ft",
    "station_id": "tarbela",
-   "date": "2026-11-23",
+   "date": "2026-11-24",
    "field": "level_ft",
-   "value": 1476.89,
-   "expected": 1489.4,
+   "value": 1475.86,
+   "expected": 1488.93,
    "checks": [
     "local",
     "seasonal"
    ],
-   "score": 18.8,
+   "score": 12.0,
    "context": {
     "dates": [
-     "2026-11-08",
      "2026-11-09",
      "2026-11-10",
      "2026-11-11",
@@ -31,10 +30,10 @@
      "2026-11-20",
      "2026-11-21",
      "2026-11-22",
-     "2026-11-23"
+     "2026-11-23",
+     "2026-11-24"
     ],
     "values": [
-     null,
      null,
      1492.2,
      1489.87,
@@ -49,111 +48,8 @@
      null,
      null,
      null,
-     1476.89
-    ]
-   }
-  },
-  {
-   "kind": "anomaly",
-   "ref": "a2026-11-23-mangla-level_ft",
-   "station_id": "mangla",
-   "date": "2026-11-23",
-   "field": "level_ft",
-   "value": 1177.75,
-   "expected": 1187.4250000000002,
-   "checks": [
-    "local",
-    "seasonal"
-   ],
-   "score": 7.5,
-   "context": {
-    "dates": [
-     "2026-11-08",
-     "2026-11-09",
-     "2026-11-10",
-     "2026-11-11",
-     "2026-11-12",
-     "2026-11-13",
-     "2026-11-14",
-     "2026-11-15",
-     "2026-11-16",
-     "2026-11-17",
-     "2026-11-18",
-     "2026-11-19",
-     "2026-11-20",
-     "2026-11-21",
-     "2026-11-22",
-     "2026-11-23"
-    ],
-    "values": [
-     null,
-     null,
-     1188.65,
-     1187.95,
-     1186.9,
-     1185.85,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     1177.75
-    ]
-   }
-  },
-  {
-   "kind": "anomaly",
-   "ref": "a2026-11-23-mangla-inflow_cusecs",
-   "station_id": "mangla",
-   "date": "2026-11-23",
-   "field": "inflow_cusecs",
-   "value": 6900.0,
-   "expected": 3947.1508711981137,
-   "checks": [
-    "local",
-    "seasonal"
-   ],
-   "score": 12.6,
-   "context": {
-    "dates": [
-     "2026-11-08",
-     "2026-11-09",
-     "2026-11-10",
-     "2026-11-11",
-     "2026-11-12",
-     "2026-11-13",
-     "2026-11-14",
-     "2026-11-15",
-     "2026-11-16",
-     "2026-11-17",
-     "2026-11-18",
-     "2026-11-19",
-     "2026-11-20",
-     "2026-11-21",
-     "2026-11-22",
-     "2026-11-23"
-    ],
-    "values": [
-     null,
-     null,
-     4400.0,
-     4100.0,
-     3800.0,
-     3800.0,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     6900.0
+     1476.89,
+     1475.86
     ]
    }
   },
@@ -200,7 +96,8 @@
      "2026-11-20",
      "2026-11-21",
      "2026-11-22",
-     "2026-11-23"
+     "2026-11-23",
+     "2026-11-24"
     ],
     "values": [
      40000.0,
@@ -231,6 +128,7 @@
      null,
      null,
      null,
+     42000.0,
      42000.0
     ]
    }
@@ -3459,7 +3357,7 @@
     "local",
     "seasonal"
    ],
-   "score": 12.6,
+   "score": 12.7,
    "context": {
     "dates": [
      "2022-07-05",
@@ -6913,7 +6811,8 @@
    "expected": 1323.65060676497,
    "checks": [
     "local",
-    "seasonal"
+    "seasonal",
+    "isolation"
    ],
    "score": 12.2,
    "context": {
@@ -14319,13 +14218,13 @@
   }
  ],
  "counts": {
-  "anomaly": 124,
+  "anomaly": 122,
   "quarantine": 11,
   "conflict": 49
  },
  "decided": 7,
- "station_days": 4569,
- "flagged_total": 131,
+ "station_days": 4571,
+ "flagged_total": 129,
  "settings": {
   "window_days": 7,
   "z_flag": 5.0,

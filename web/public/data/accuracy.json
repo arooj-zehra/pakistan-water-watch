@@ -1,26 +1,26 @@
 {
- "generated_at": "2026-11-23T15:46:15+00:00",
- "forecasts_issued": 110,
+ "generated_at": "2026-11-24T15:38:41+00:00",
+ "forecasts_issued": 120,
  "first_issued": "2026-10-30",
- "scored": 44,
+ "scored": 46,
  "overall": {
-  "n": 44,
-  "mae_model": 1937,
-  "mae_persistence": 1736,
-  "skill_vs_persistence": -0.1153,
-  "coverage50": 0.4773,
-  "coverage80": 0.6818,
-  "coverage90": 0.7727
+  "n": 46,
+  "mae_model": 1884,
+  "mae_persistence": 1700,
+  "skill_vs_persistence": -0.1085,
+  "coverage50": 0.4783,
+  "coverage80": 0.6739,
+  "coverage90": 0.7826
  },
  "by_horizon": {
   "1": {
-   "n": 14,
-   "mae_model": 1035,
-   "mae_persistence": 1021,
-   "skill_vs_persistence": -0.0133,
+   "n": 16,
+   "mae_model": 998,
+   "mae_persistence": 1006,
+   "skill_vs_persistence": 0.0085,
    "coverage50": 0.5,
-   "coverage80": 0.7857,
-   "coverage90": 0.7857
+   "coverage80": 0.75,
+   "coverage90": 0.8125
   },
   "3": {
    "n": 8,
@@ -61,22 +61,22 @@
  },
  "by_station": {
   "mangla": {
-   "n": 22,
-   "mae_model": 2172,
-   "mae_persistence": 1927,
-   "skill_vs_persistence": -0.1272,
-   "coverage50": 0.1818,
-   "coverage80": 0.4091,
-   "coverage90": 0.5909
+   "n": 23,
+   "mae_model": 2078,
+   "mae_persistence": 1843,
+   "skill_vs_persistence": -0.1273,
+   "coverage50": 0.2174,
+   "coverage80": 0.4348,
+   "coverage90": 0.6087
   },
   "tarbela": {
-   "n": 22,
-   "mae_model": 1701,
-   "mae_persistence": 1545,
-   "skill_vs_persistence": -0.1004,
-   "coverage50": 0.7727,
-   "coverage80": 0.9545,
-   "coverage90": 0.9545
+   "n": 23,
+   "mae_model": 1691,
+   "mae_persistence": 1557,
+   "skill_vs_persistence": -0.0861,
+   "coverage50": 0.7391,
+   "coverage80": 0.913,
+   "coverage90": 0.9565
   }
  },
  "by_model_version": {
@@ -90,13 +90,13 @@
    "coverage90": 0.75
   },
   "v20261102": {
-   "n": 32,
-   "mae_model": 1865,
-   "mae_persistence": 1625,
-   "skill_vs_persistence": -0.1476,
+   "n": 34,
+   "mae_model": 1798,
+   "mae_persistence": 1582,
+   "skill_vs_persistence": -0.1365,
    "coverage50": 0.5,
-   "coverage80": 0.6875,
-   "coverage90": 0.7812
+   "coverage80": 0.6765,
+   "coverage90": 0.7941
   }
  },
  "recent": [
@@ -802,6 +802,38 @@
    "p95": 34409,
    "persistence": 25900,
    "actual": 23400,
+   "model_version": "v20261102"
+  },
+  {
+   "station": "mangla",
+   "h": 1,
+   "issued_on": "2026-11-23",
+   "target_date": "2026-11-24",
+   "p05": 5651,
+   "p10": 5691,
+   "p25": 6412,
+   "p50": 6896,
+   "p75": 6954,
+   "p90": 7649,
+   "p95": 8528,
+   "persistence": 6900,
+   "actual": 6900,
+   "model_version": "v20261102"
+  },
+  {
+   "station": "tarbela",
+   "h": 1,
+   "issued_on": "2026-11-23",
+   "target_date": "2026-11-24",
+   "p05": 20949,
+   "p10": 21682,
+   "p25": 22402,
+   "p50": 23069,
+   "p75": 23256,
+   "p90": 24831,
+   "p95": 26528,
+   "persistence": 23400,
+   "actual": 21600,
    "model_version": "v20261102"
   }
  ],
