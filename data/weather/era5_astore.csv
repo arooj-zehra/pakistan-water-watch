@@ -6168,3 +6168,4 @@ date,point_id,tmax_c,tmin_c,tmean_c,precip_mm,snowfall_cm,model
 2026-11-19,astore,-0.3,-7.9,-3.4,0.0,0.0,era5
 2026-11-20,astore,1.4,-6.3,-2.4,0.0,0.0,era5
 2026-11-21,astore,2.5,-5.2,-1.1,0.5,0.35,era5
+2026-11-22,astore,3.5,-6.7,-1.4,1.9,1.33,era5
